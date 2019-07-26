@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <!-- Title -->
+  <title>Escol@Verde - Temperature</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="../img/core-img/logo.png">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- Chart.js -->
+  <script src="../js/Chart.min.js"></script>
+  <!-- Firebase -->
+  <script src="../js/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div class="preloader d-flex align-items-center justify-content-center">
+    <div class="preloader-circle"></div>
+    <div class="preloader-img">
+      <img src="../img/core-img/logo.png" alt="">
+    </div>
+  </div>
+
+  <!-- ##### Header Area Start ##### -->
+  <header class="header-area">
+
+      <!-- ***** Top Header Area ***** -->
+      <div class="top-header-area">
+          <div class="container">
+              <div class="row">
+                  <div class="col-12">
+                      <div class="top-header-content d-flex align-items-center justify-content-between">
+                          <!-- Top Header Content -->
+                          <div class="top-header-meta">
+                              <a href="#" data-toggle="tooltip" data-placement="bottom" title="escolaverdeportinari@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email: escolaverdeportinari@gmail.com</span></a>
+                          </div>
+
+                          <!-- Top Header Content -->
+                          <div class="top-header-meta d-flex">
+                              <!-- Language Dropdown -->
+                              <div class="language-dropdown">
+                                  <div class="dropdown">
+                                      <button class="btn btn-secondary dropdown-toggle mr-30" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</button>
+                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="../temperatura.html">Português</a> <!-- Não mexer -->
+                                          <a class="dropdown-item" href="temperaturaEN.html">English</a>
+                                      </div>
+                                  </div>
+                              </div>
+                              <!-- Login -->
+                              <div class="login">
+                                  <a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- ***** Navbar Area ***** -->
+      <div class="alazea-main-menu">
+          <div class="classy-nav-container breakpoint-off">
+              <div class="container">
+                  <!-- Menu -->
+                  <nav class="classy-navbar justify-content-between" id="alazeaNav">
+
+                      <!-- Nav Brand -->
+                      <a href="inicioEN.html" class="nav-brand"><img src="../img/core-img/logo-80px.png" alt=""></a>
+
+                      <!-- Navbar Toggler -->
+                      <div class="classy-navbar-toggler">
+                          <span class="navbarToggler"><span></span><span></span><span></span></span>
+                      </div>
+
+                      <!-- Menu -->
+                      <div class="classy-menu">
+
+                          <!-- Close Button -->
+                          <div class="classycloseIcon">
+                              <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                          </div>
+
+                          <!-- Navbar Start -->
+                          <div class="classynav">
+                              <ul>
+                                  <li><a href="inicioEN.html">Home</a></li>
+                                  <li><a href="#">The project</a>
+                                      <ul class="dropdown">
+                                          <li><a href="apresentacaoEN.html">Introduction</a></li>
+                                          <li><a href="geracoesEN.html">Generations</a></li>
+                                          <li><a href="#">The Greenhouse</a>
+                                              <ul class="dropdown">
+                                                  <li><a href="estruturaEN.html">Structure</a></li>
+                                                  <li><a href="automacaoEN.html">Automation</a></li>
+                                              </ul>
+                                          <li><a href="galeriaEN.html">Gallery</a></li>
+                                          <li><a href="atualizaçõesEN.html">Patch Notes</a></li>
+                                      </ul>
+                                  </li>
+
+                                  <li><a href="../noticias/noticiasEN.html">News</a></li>
+                                  <li><a href="monitoreEN.html">Monitor</a>
+                                      <ul class="dropdown">
+                                          <li><a href="plantacaoEN.html">Plantation</a></li>
+                                          <li><a href="soloEN.html">Soil</a>
+                                                  <ul class="dropdown">
+                                                  <li><a href="umidadeEN.html">Humidity</a></li>
+                                              </ul>
+                                          </li>
+                                          <li><a href="atmosferaEN.html">Atmosphere</a>
+                                                  <ul class="dropdown">
+                                                  <li><a href="temperaturaEN.html">Temperature</a></li>
+                                                  <li><a href="umidadeEN.html">Humidity</a></li>
+                                                  <li><a href="luminosidadeEN.html">Luminosity</a></li>
+                                                  <li><a href="o2EN.html">O2</a></li>
+                                                  <li><a href="co2EN.html">CO2</a></li>
+                                                  <li><a href="coEN.html">CO</a></li>
+                                                  <li><a href="phEN.html">Rain's pH</a></li>
+                                              </ul>
+                                          </li>
+                                          <li><a href="#">Water Reservoir</a>
+                                                  <ul class="dropdown">
+                                                  <li><a href="reservatorios-principaisEN.html">Main Reservoir</a></li>
+                                                  <li><a href="reservatorios-secundariosEN.html">Secundary Reservoir</a></li>
+                                              </ul>
+                                          </li>
+                                          <li><a href="#">Energy</a>
+                                              <ul class="dropdown">
+                                                  <li><a href="bateriaEN.html">Battery</a></li>
+                                                  <li><a href="painel-solarEN.html">Solar panel</a></li>
+                                              </ul>
+                                          </li>
+                                      </ul>
+                                  </li>
+                                  <li><a href="agradecimentosEN.html">Acknowledgments</a></li>
+                                  <li><a href="contatoEN.html">Contact</a></li>
+                              </ul>
+
+                              <!-- Search Icon -->
+                              <div id="searchIcon">
+                                  <i class="fa fa-search" aria-hidden="true"></i>
+                              </div>
+
+                          </div>
+                          <!-- Navbar End -->
+                      </div>
+                  </nav>
+
+                  <!-- Search Form -->
+                  <div class="search-form">
+                      <form action="#" method="get">
+                          <input type="search" name="search" id="search" placeholder="Type keywords &amp; press enter...">
+                          <button type="submit" class="d-none"></button>
+                      </form>
+                      <!-- Close Icon -->
+                      <div class="closeIcon"><i class="fa fa-times" aria-hidden="true"></i></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </header>
+  <!-- ##### Header Area End ##### -->
+
+  <!-- ##### Breadcrumb Area Start ##### -->
+  <div class="breadcrumb-area">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(../img/background/estufaInterior.jpg);">
+      <h2>Temperature</h2>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="inicioEN.html"><i class="fa fa-home"></i> Home</a></li>
+              <li class="breadcrumb-item "><a href="atmosferaEN.html">Atmosphere</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Temperature</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ##### Breadcrumb Area End ##### -->
+
+  <!-- ##### Types do graph Start ##### -->
+  <section class="about-us-area">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-12 col-lg-9">
+          <!-- Section Heading -->
+          <div class="section-heading ">
+            <h2 class="text-center">The sensor</h2><br>
+            <p>All data on the ambient temperature were collected from the interior of the greenhouse. The sensor we are using is the <a href="https://www.arduinoecia.com.br/2015/02/sensor-of-temperature-and-dht22.html" target="_blank"> DHT22 </a>,
+               which has a decimal point accuracy for both temperature and atmospheric humidity.</p>
+          </div>
+          <h4 class="text-center">TIPOS DE GRÁFICOS</h4>
+          <div class="row ">
+            <!-- Single Graph Description Area -->
+            <div class="col-12 col-sm-4">
+              <div class="single-benefits-area text-center">
+                <h5>Daily</h5>
+                <p>The data are collected every exact 30 minutes in the interval closed from 00h00m to 23h30m. The first two charts fit into this category.</p>
+              </div>
+            </div>
+
+            <!-- Single Graph Description Area -->
+            <div class="col-12 col-sm-4">
+              <div class="single-benefits-area text-center">
+                <h5>Monthly</h5>
+                <p>The temperature in each day is calculated by the average of the 48 values collected on the respective day (24 hours).</p>
+              </div>
+            </div>
+
+            <!-- Single Graph Description Area -->
+            <div class="col-12 col-sm-4">
+              <div class="single-benefits-area text-center">
+                <h5>Yearly</h5>
+                <p>Divided in weeks - average temperature of 7 days - and shows all the data collected from the beginning of the collections. We consider the first week of each month as the first week started on Sunday in a given month.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-3">
+          <img src="../img/monitore-atmosfera/temperatura-DHT22.jpg" alt="">
+        </div>
+      </div>
+
+    </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="border-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ##### Types do graph End ##### -->
+
+  <!-- ##### Temperature Area Start ##### -->
+  <section class="our-services-area bg-gray section-padding-100-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <!-- Section Heading -->
+          <div class="section-heading text-center">
+          <h2><i class="fa fa-line-chart"></i>&nbsp; GRAPHICS</h2>
+            <p>It does not represent the temperature in the outer area of the college, but the temperature inside the stove.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row align-items-center justify-content-between">
+
+          <!-- Gráfico hoje -->
+          <div class="col-12 col-lg-12">
+          <div class="alazea-service-area mb-100">
+            <h4 class="text-center">Today</h4>
+            <div class="graph-day">
+              <canvas id="temp-chart-day" height="75"></canvas>
+
+              <script>
+                var database;
+                var tempDayValuesC = [10, 10, 10]; //temperature in celcius
+                var tempDayValuesF = [10, 10, 10]; //temperature in fahrenheit
+                var tempDayValuesK = [10, 10, 10]; //temperature in kelvin
+                var data;
+                var count = 0;
+                var lastCount = 0;
+
+                var config = {
+                  apiKey: "AIzaSyBeTQnufXiBSfgHhFOiSLeT-RSI9NQUzEY",
+                  authDomain: "escolaverde-portinari.firebaseapp.com",
+                  databaseURL: "https://escolaverde-portinari.firebaseio.com",
+                  projectId: "escolaverde-portinari",
+                  storageBucket: "escolaverde-portinari.appspot.com",
+                  messagingSenderId: "787796894461"
+                };
+                firebase.initializeApp(config);
+
+                // Create references
+                const dbRefObjectDay = firebase.database().ref('Sensors').child('Temperature').child('Day');
+
+                // Syn objects
+                dbRefObjectDay.on('value', snap => {
+                  //console.log(snap.val());
+                });
+
+                do {
+
+                  dbRefObjectDay.once('value', function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                      var childKey = childSnapshot.key;
+                      var childData = childSnapshot.val();
+
+                      tempDayValuesC[count] = childData;
+                      tempDayValuesF[count] = (childData * 1.8 + 32);
+                      tempDayValuesK[count] = childData + 273;
+                      count++;
+
+
+
+                      var tempDay = document.getElementById('temp-chart-day');
+
+                      var dayTempChart = new Chart(tempDay, {
+                        type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                        data: {
+                          labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                            '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                            '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                            '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                            '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                            '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                          ],
+                          datasets: [{
+                            label: "Celcius",
+                            data: tempDayValuesC,
+                            borderWidth: 3,
+                            borderColor: 'rgba(20,255,20,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }, {
+                            label: "Fahrenheit",
+                            data: tempDayValuesF,
+                            borderWidth: 3,
+                            borderColor: 'rgba(255,20,20,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }, {
+                            label: "Kelvin",
+                            data: tempDayValuesK,
+                            borderWidth: 3,
+                            borderColor: 'rgba(20,20,255,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }]
+                        },
+                        options: {}
+                      });
+                    })
+                  })
+                } while (count != lastCount)
+              </script>
+            </div>
+          </div>
+        </div>
+        <!-- Gráfico ontem -->
+        <div class="col-12 col-lg-12">
+          <div class="alazea-service-area mb-100">
+            <h4 class="text-center">Yesterday</h4>
+            <div class="graph-yest">
+              <canvas id="temp-chart-yest" height="75"></canvas>
+
+              <script>
+                var database;
+                var tempYestValuesC = []; //temperature in celcius
+                var tempYestValuesF = []; //temperature in fahrenheit
+                var tempYestValuesK = []; //temperature in kelvin
+                var data;
+                var countYest = 0;
+                var lastCountYest = 0;
+
+
+                // Create references
+                const dbRefObjectYest = firebase.database().ref('Sensors').child('Temperature').child('Yesterday');
+
+                // Syn objects
+                dbRefObjectYest.on('value', snap => {
+                  console.log(snap.val());
+                });
+
+                do {
+                  lastCountYest = countYest;
+
+                  dbRefObjectYest.once('value', function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                      console.log(childSnapshot.keys);
+                      var childKey = childSnapshot.key;
+                      var childData = childSnapshot.val();
+
+                      tempYestValuesC[countYest] = childData;
+                      tempYestValuesF[countYest] = (childData * 1.8 + 32);
+                      tempYestValuesK[countYest] = childData + 273;
+
+                      countYest++;
+
+
+                      var tempYest = document.getElementById('temp-chart-yest');
+
+                      var yestTempChart = new Chart(tempYest, {
+                        type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                        data: {
+                          labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                            '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                            '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                            '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                            '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                            '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                          ],
+                          datasets: [{
+                            label: "Celcius",
+                            data: tempYestValuesC,
+                            borderWidth: 3,
+                            borderColor: 'rgba(20,255,20,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }, {
+                            label: "Fahrenheit",
+                            data: tempYestValuesF,
+                            borderWidth: 3,
+                            borderColor: 'rgba(255,20,20,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }, {
+                            label: "Kelvin",
+                            data: tempYestValuesK,
+                            borderWidth: 3,
+                            borderColor: 'rgba(20,20,255,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }]
+                        },
+                        options: {}
+                      });
+                    })
+                  })
+                } while (countYest != lastCountYest)
+              </script>
+            </div>
+          </div>
+        </div>
+        <!-- Gráfico mensal -->
+        <div class="col-12 col-lg-12">
+          <div class="alazea-service-area mb-100">
+            <h4 class="text-center">Current month</h4>
+            <div class="graph-month">
+              <canvas id="temp-chart-month" height="75"></canvas>
+
+              <script>
+                var database;
+                var tempMonthValuesC = []; //temperature in celcius
+                var tempMonthValuesF = []; //temperature in fahrenheit
+                var tempMonthValuesK = []; //temperature in kelvin
+                var data;
+                var countMonth = 0;
+                var lastCountMonth = 0;
+
+
+                // Create references
+                const dbRefObjectMonth = firebase.database().ref('Sensors').child('Temperature').child('Month');
+
+                // Syn objects
+                dbRefObjectMonth.on('value', snap => {
+                  console.log(snap.val());
+                });
+
+                do {
+                  lastCountMonth = countMonth;
+
+                  dbRefObjectMonth.once('value', function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                      console.log(childSnapshot.keys);
+                      var childKey = childSnapshot.key;
+                      var childData = childSnapshot.val();
+
+                      tempMonthValuesC[countMonth] = childData;
+                      tempMonthValuesF[countMonth] = (childData * 1.8 + 32);
+                      tempMonthValuesK[countMonth] = childData + 273;
+
+                      countMonth++;
+
+
+                      var tempMonth = document.getElementById('temp-chart-month');
+
+                      var monthTempChart = new Chart(tempMonth, {
+                        type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                        data: {
+                          labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+                            '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+                            '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'
+                          ],
+                          datasets: [{
+                            label: "Celcius",
+                            data: tempMonthValuesC,
+                            borderWidth: 3,
+                            borderColor: 'rgba(20,255,20,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }, {
+                            label: "Fahrenheit",
+                            data: tempMonthValuesF,
+                            borderWidth: 3,
+                            borderColor: 'rgba(255,20,20,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }, {
+                            label: "Kelvin",
+                            data: tempMonthValuesK,
+                            borderWidth: 3,
+                            borderColor: 'rgba(20,20,255,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }]
+                        },
+                        options: {}
+                      });
+                    })
+                  })
+                } while (countMonth != lastCountMonth)
+              </script>
+            </div>
+          </div>
+        </div>
+        <!-- Gráfico anual -->
+        <div class="col-12 col-lg-12">
+          <div class="alazea-service-area mb-100">
+            <h4 class="text-center">Yearly</h4>
+            <div class="graph-years">
+              <canvas id="temp-chart-years" height="75"></canvas>
+
+              <script>
+                var database;
+                var tempYearValuesC = []; //temperature in celcius
+                var tempYearValuesF = []; //temperature in fahrenheit
+                var tempYearValuesK = []; //temperature in kelvin
+                var data;
+                var countYear = 0;
+                var lastCountYear = 0;
+
+                // Create references
+                const dbRefObjectYear = firebase.database().ref('Sensors').child('Temperature').child('Years');
+
+                // Syn objects
+                dbRefObjectYear.on('value', snap => {
+                  console.log(snap.val());
+                });
+
+                do {
+
+                  dbRefObjectYear.once('value', function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                      console.log(childSnapshot.keys);
+                      var childKey = childSnapshot.key;
+                      var childData = childSnapshot.val();
+
+                      tempYearValuesC[countYear] = childData;
+                      tempYearValuesF[countYear] = (childData * 1.8 + 32);
+                      tempYearValuesK[countYear] = childData + 273;
+
+                      countYear++;
+
+
+                      var tempYear = document.getElementById('temp-chart-years');
+
+                      var yearTempChart = new Chart(tempYear, {
+                        type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                        data: {
+                          labels: ['2018-dez1', '2018-jan2', '2018-jan3', '2018-jan4',
+                            '2018-fev1', '2018-fev2', '2018-fev3', '2018-fev4'
+                          ],
+                          datasets: [{
+                            label: "Celcius",
+                            data: tempYearValuesC,
+                            borderWidth: 3,
+                            borderColor: 'rgba(20,255,20,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }, {
+                            label: "Fahrenheit",
+                            data: tempYearValuesF,
+                            borderWidth: 3,
+                            borderColor: 'rgba(255,20,20,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }, {
+                            label: "Kelvin",
+                            data: tempYearValuesK,
+                            borderWidth: 3,
+                            borderColor: 'rgba(20,20,255,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }]
+                        },
+                        options: {}
+                      });
+                    })
+                  })
+                } while (countYear != lastCountYear)
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ##### Temperature Area End ##### -->
+  <!-- ##### Temperatura Area Start ##### -->
+  <section class="our-services-area section-padding-100-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <!-- Section Heading -->
+          <div class="section-heading text-center">
+            <h2>About temperature</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="row align-items-center justify-content-between">
+        <div class="col-12 col-lg-9">
+          <div class="alazea-service-area mb-100">
+            <p>Every body has temperature and it can be defined as the average kinetic energy of the molecules of this body. As in the vacuum
+                there is no matter, there is no temperature.</p>
+            <p>In addition, the concept of cold and warm is variable and depends on the temperature difference between
+                the bodies that are being analyzed, since the heat is transferred naturamente of the body of greater temperature to the one of smaller.
+              When we lose heat to another body, we feel the sensation of cold; this is because body temperature was higher
+            higher than the temperature of the other body. A body at 250 ° C can be considered cold to another body at 350 ° C.</p>
+           <p>In order to establish a way of measuring temperature, mankind has created different temperature scales. Between them:
+              celcius, fahrenheit and kelvin. In order to define 0 of the celcius scale, the melting point of the water at sea level was used.
+              On the Kelvin scale, temperature 0 is the temperature at which matter stops vibrating. In the fahrenheit scale, temperature 0 was
+              defined by a given column of mercury in a solution of water, ice and ammonium salt, and temperature 100 has been defined
+                by the height of the same column of mercury in the human body. (note: although there is degree celcius (ºC) and degree fahrenheit (ºF), there is no kelvin degree (K))</p>
+          </div>
+        </div>
+        <div class="col-12 col-lg-3">
+          <p>Imagens</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ##### Humidity Area End ##### -->
+  <!-- ##### Testimonial Area Start ##### -->
+  <section class="testimonial-area section-padding-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <!-- Section Heading -->
+          <div class="section-heading text-center">
+            <h2>Use in class</h2>
+          </div>
+          <div class="testimonials-slides owl-carousel">
+
+            <!-- Single Testimonial Slide -->
+            <div class="single-testimonial-slide">
+              <div class="row align-items-center">
+                <div class="col-12 col-md-4">
+                  <div class="testimonial-thumb">
+                    <img src="../img/monitore-atmosfera/temperatura-aula1.jpg" alt="">
+                  </div>
+                </div>
+                <div class="col-12 col-md-8">
+                  <div class="testimonial-content">
+                    <!-- Section Heading -->
+                    <div class="section-heading">
+                      <h4>Annual change</h4>
+                    </div>
+                    <p>From the annual graph of annual temperature variation it is possible to observe how the average temperature decreases and increases in the course
+                       of the year. From this analysis it is possible to discuss how the different seasons affect the average temperature. Besides that,
+                       it is possible to correlate with the translation movement of the Earth around the Sun and the different angles of inclination of the rays
+                       over the earth's surface.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Single Testimonial Slide -->
+            <div class="single-testimonial-slide">
+              <div class="row align-items-center">
+                <div class="col-12 col-md-4">
+                  <div class="testimonial-thumb">
+                    <img src="../img/monitore-atmosfera/temperatura-aula2.jpg" alt="">
+                  </div>
+                </div>
+                <div class="col-12 col-md-8">
+                  <div class="testimonial-content">
+                    <!-- Section Heading -->
+                    <div class="section-heading">
+                      <h4>Daily change</h4>
+                    </div>
+                    <p>From the chart "Yesterday" and "Today" it is possible to analyze the variation of the temperature in the period of one day. This phenomenon
+                       can initiate discussions about the earth's rotational motion and the degree of inclination of the sun's rays. Besides that,
+                      it is possible to discuss the phenomenon of energy transport by irradiation from the Sun to Earth and its conversion to thermal energy
+                      when reaching the earth's surface.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Single Testimonial Slide -->
+            <div class="single-testimonial-slide">
+              <div class="row align-items-center">
+                <div class="col-12 col-md-4">
+                  <div class="testimonial-thumb">
+                    <img src="../img/monitore-atmosfera/temperatura-aula3.png" alt="">
+                  </div>
+                </div>
+                <div class="col-12 col-md-8">
+                  <div class="testimonial-content">
+                    <!-- Section Heading -->
+                    <div class="section-heading">
+                      <h4>Temperature in greenhouses</h4>
+                    </div>
+                    <p>From the presentation of the temperature in a greenhouse, it is possible to discuss about the increase of the wavelength
+                     when the electromagnetic rays hit the ground and are reflected as infrared light, which prevents some rays from leaving
+                   of the greenhouse and as a consequence make the environment inside the greenhouse with a higher temperature than the outside. It's important to highlight
+                 that the same effect of temperature increase occurs on a global scale naturally by the "greenhouse effect", but is aggravated by the
+                 release of CO2 and CH4 (which prevents less energetic electromagnetic waves from escaping from the earth).</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ##### Testimonial Area End ##### -->
+
+
+  <!-- ##### Footer Area Start ##### -->
+  <footer class="footer-area bg-img" style="background-image: url(../img/bg-img/3.jpg);">
+      <!-- Main Footer Area -->
+      <div class="main-footer-area">
+          <div class="container">
+              <div class="row">
+                  <!-- Single Footer Widget -->
+                  <div class="col-12 col-sm-6 col-lg-4">
+                      <div class="single-footer-widget">
+                          <div class="footer-logo mb-30">
+                              <a href="#"><img src="../img/core-img/logo.png" alt=""></a>
+                          </div>
+                          <p>Contact us and follow our work in the social medias!</p>
+                          <div class="social-info">
+                              <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                              <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                              <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                              <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                              <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Single Footer Widget -->
+                  <div class="col-12 col-sm-6 col-lg-4">
+                      <div class="single-footer-widget">
+                          <div class="widget-title">
+                              <h5>SUPPORT</h5>
+                          </div>
+
+                          <!-- Single Best Seller Products -->
+                          <div class="single-best-seller-product d-flex align-items-center">
+                              <div class="product-thumbnail">
+                                  <a href="../shop-details.html"><img src="../img/icons/CIC-100px.png" alt=""></a>
+                              </div>
+                              <div class="product-info">
+                                  <a href="../shop-details.html">CIC Robotics</a>
+                                  <p><i class="fa fa-heart-o" aria-hidden="true"></i></p>
+                              </div>
+                          </div>
+
+                          <!-- Single Best Seller Products -->
+                          <div class="single-best-seller-product d-flex align-items-center">
+                              <div class="product-thumbnail">
+                                  <a href="../shop-details.html"><img src="../img/icons/Portinari-100px.png" alt=""></a>
+                              </div>
+                              <div class="product-info">
+                                  <a href="../shop-details.html">Cândido Porinari</a>
+                                  <p><i class="fa fa-heart-o" aria-hidden="true"></i></p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Single Footer Widget -->
+                  <div class="col-12 col-sm-6 col-lg-4">
+                      <div class="single-footer-widget">
+                         <div class="widget-title">
+                             <h5>Contact</h5>
+                         </div>
+
+                         <div class="contact-information">
+                             <p><span>Adress:</span> R. Adelaíde Fernandes da Costa 487, Salvador</p>
+                             <p><span>Email:</span> escolaverdeportinari@gmail.com</p>
+                             <p><span>Visiting:</span> Seg-Sex: 10h-11h</p>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+      <!-- Footer Bottom Area -->
+      <div class="footer-bottom-area">
+          <div class="container">
+              <div class="row">
+                  <div class="col-12">
+                      <div class="border-line"></div>
+                  </div>
+                  <!-- Copywrite Text -->
+                  <div class="col-12 col-md-6">
+                      <div class="copywrite-text">
+                          <p>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</p>
+                      </div>
+                  </div>
+                  <!-- Footer Nav -->
+                  <div class="col-12 col-md-6">
+                      <div class="footer-nav">
+                          <nav>
+                              <ul>
+                                  <li><a href="inicioEN.html">Home</a></li>
+                                  <li><a href="apresentacaoEN.html">The Project</a></li>
+                                  <li><a href="noticiasEN.html">News</a></li>
+                                  <li><a href="monitoreEN.html">Monitor</a></li>
+                                  <li><a href="agradecimentosEN.html">Acknowledgments</a></li>
+                                  <li><a href="contatoEN.html">Contact</a></li>
+                              </ul>
+                          </nav>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+  <!-- ##### Footer Area End ##### -->
+
+  <!-- ##### All Javascript Files ##### -->
+  <!-- jQuery-2.2.4 js -->
+  <script src="../js/jquery/jquery-2.2.4.min.js"></script>
+  <!-- Popper js -->
+  <script src="../js/bootstrap/popper.min.js"></script>
+  <!-- Bootstrap js -->
+  <script src="../js/bootstrap/bootstrap.min.js"></script>
+  <!-- All Plugins js -->
+  <script src="../js/plugins/plugins.js"></script>
+  <!-- Active js -->
+  <script src="../js/active.js"></script>
+
+</body>
+
+</html>

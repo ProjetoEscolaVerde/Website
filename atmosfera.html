@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Atmosfera - Escol@Verde</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/logo.png">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+     <!-- Chart.js -->
+     <script src="js/Chart.min.js"></script>
+    <!-- Firebase -->
+    <script src="js/firebase.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-circle"></div>
+        <div class="preloader-img">
+            <img src="img/core-img/logo.png" alt="">
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+
+        <!-- ***** Top Header Area ***** -->
+        <div class="top-header-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="top-header-content d-flex align-items-center justify-content-between">
+                            <!-- Top Header Content -->
+                            <div class="top-header-meta">
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="infodeercreative@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email: escolaverdeportinari@gmail.com</span></a>
+                            </div>
+
+                            <!-- Top Header Content -->
+                            <div class="top-header-meta d-flex">
+                                <!-- Language Dropdown -->
+                                <div class="language-dropdown">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle mr-30" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Língua</button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Português</a>
+                                            <a class="dropdown-item" href="#">English</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Login -->
+                                <div class="login">
+                                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ***** Navbar Area ***** -->
+        <div class="alazea-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="alazeaNav">
+
+                        <!-- Nav Brand -->
+                        <a href="inicio.html" class="nav-brand"><img src="img/core-img/logo-80px.png" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                             <!-- Navbar Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="inicio.html">Início</a></li>
+                                    <li><a href="about.html">O projeto</a>
+                                        <ul class="dropdown">
+                                            <li><a href="inicio.html">Apresentação</a></li>
+                                            <li><a href="about.html">Gerações</a></li>
+                                            <li><a href="about.html">A Estufa</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="inicio.html">Estrutura</a></li>
+                                                    <li><a href="about.html">Automação</a></li>
+                                                </ul>
+                                            <li><a href="galeria.html">Galeria</a></li>
+                                            <li><a href="atualizações.html">Atualizações</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li><a href="shop.html">Notícias</a></li>
+                                    <li><a href="#">Monitore</a>
+                                        <ul class="dropdown">
+                                            <li><a href="inicio.html">Plantação</a></li>
+                                            <li><a href="about.html">Solo</a>
+                                                    <ul class="dropdown">
+                                                    <li><a href="shop.html">Umidade</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="atmosfera.html">Atmosfera</a>
+                                                    <ul class="dropdown">
+                                                    <li><a href="temperatura.html">Temperatura</a></li>
+                                                    <li><a href="atmosfera.html">Umidade</a></li>
+                                                    <li><a href="atmosfera.html">Luminosidade</a></li>
+                                                    <li><a href="atmosfera.html">O2</a></li>
+                                                    <li><a href="atmosfera.html">CO2</a></li>
+                                                    <li><a href="atmosfera.html">CO</a></li>
+                                                    <li><a href="atmosfera.html">Ph da chuva</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="shop.html">Reservatórios de água</a>
+                                                    <ul class="dropdown">
+                                                    <li><a href="shop.html">Principais</a></li>
+                                                    <li><a href="shop-details.html">Secundários</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="portfolio.html">Energia</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="portfolio.html">Bateria</a></li>
+                                                    <li><a href="single-portfolio.html">Painel solar</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="portfolio.html">Agradecimentos</a></li>
+                                    <li><a href="contact.html">Contato</a></li>
+                                </ul>
+
+                                <!-- Search Icon -->
+                                <div id="searchIcon">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </div>
+
+                            </div>
+                            <!-- Navbar End -->
+                        </div>
+                    </nav>
+
+                    <!-- Search Form -->
+                    <div class="search-form">
+                        <form action="#" method="get">
+                            <input type="search" name="search" id="search" placeholder="Type keywords &amp; press enter...">
+                            <button type="submit" class="d-none"></button>
+                        </form>
+                        <!-- Close Icon -->
+                        <div class="closeIcon"><i class="fa fa-times" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="breadcrumb-area">
+        <!-- Top Breadcrumb Area -->
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+            <h2>Atmosfera</h2>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i> Início</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Atmosfera</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Types do graph Start ##### -->
+    <section class="about-us-area">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-12 col-lg-12">
+                    <!-- Section Heading -->
+                    <div class="section-heading ">
+                        <h2 class="text-center">Monitoramento da atmosfera</h2><br>
+                        <p>Diversos sensores foram instalados no interior da estufa para monitorar a composição e temperatura da atmosfera. Todos os dados coletados serão adicionados dinâmicamente no banco de dados do Firebase e disponibilizados em três tipos de gráfico:</p>
+                    </div>
+                        <div class="row ">
+                            <!-- Single Graph Description Area -->
+                            <div class="col-12 col-sm-4">
+                                <div class="single-benefits-area text-center">
+                                    <h5>Diário</h5>
+                                    <p>Os dados são coletados a cada exatos 30 minutos no intervalo fechado de 00h00m até 23h30m.</p>
+                                </div>
+                            </div>
+
+                            <!-- Single Graph Description Area -->
+                            <div class="col-12 col-sm-4">
+                                <div class="single-benefits-area text-center">
+                                    <h5>Mensal</h5>
+                                    <p>Possui *período* de um dia - média de 48 dados coletados em um dia (24 horas).</p>
+                                </div>
+                            </div>
+
+                            <!-- Single Graph Description Area -->
+                            <div class="col-12 col-sm-4">
+                                <div class="single-benefits-area text-center">
+                                    <h5>Anual</h5>
+                                    <p>Possui *período* de uma semana - média de 7 dias - e mostra todos os dados coletados deste o início das coletas.</p>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="border-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Types do graph End ##### -->
+
+    <!-- ##### Temperature Area Start ##### -->
+    <section class="our-services-area bg-gray section-padding-100-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Section Heading -->
+                    <div class="section-heading text-center">
+                        <h2>Temperatura</h2>
+                        <p>Não representa a temperatura na área externa do colégio, mas a temperatura no interior da estufa.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center justify-content-between">
+                <div class="col-12 col-lg-12">
+                    <!-- Graph Temp Day -->
+                    <div class="alazea-service-area mb-100">
+                        <h4 class="text-center">Dia</h4>
+                        <div class="graph-day">
+                            <canvas id="temp-chart-day" height="75"></canvas>
+
+                            <script>
+                                var database;
+                                var tempDayValuesC=[10,10,10];//temperature in celcius
+                                var tempDayValuesF=[10,10,10];//temperature in fahrenheit
+                                var tempDayValuesK=[10,10,10];//temperature in kelvin
+                                var data;
+                                var count=0;
+                                var lastCount=0;
+
+                                var config = {
+                                    apiKey: "AIzaSyBeTQnufXiBSfgHhFOiSLeT-RSI9NQUzEY",
+                                    authDomain: "escolaverde-portinari.firebaseapp.com",
+                                    databaseURL: "https://escolaverde-portinari.firebaseio.com",
+                                    projectId: "escolaverde-portinari",
+                                    storageBucket: "escolaverde-portinari.appspot.com",
+                                    messagingSenderId: "787796894461"
+                                  };
+                                firebase.initializeApp(config);
+
+                                // Create references
+                                const dbRefObjectDay = firebase.database().ref('Sensors').child('Temperature').child('Day');
+
+                                // Syn objects
+                                dbRefObjectDay.on('value', snap => {
+                                    //console.log(snap.val());
+                                });
+
+                                do{
+
+                                    dbRefObjectDay.once('value', function(snapshot){
+                                    snapshot.forEach(function(childSnapshot){
+                                        var childKey = childSnapshot.key;
+                                        var childData = childSnapshot.val();
+
+                                    tempDayValuesC[count]=childData;
+                                    tempDayValuesF[count]=(childData*1.8+32);
+                                    tempDayValuesK[count]=childData+273;
+                                    count++;
+
+
+
+                                        var tempDay = document.getElementById('temp-chart-day');
+
+                                         var dayTempChart = new Chart(tempDay,{
+                                            type:'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                                            data:{
+                                                labels:['00h00','00h30','01h00','01h30','02h00','02h30','03h00','03h30',
+                                                        '04h00','04h30','05h00','05h30','06h00','06h30','07h00','07h30',
+                                                        '08h00','08h30','09h00','09h30','10h00','10h30','11h00','11h30',
+                                                        '12h00','12h30','13h00','13h30','14h00','14h30','15h00','15h30',
+                                                        '16h00','16h30','17h00','17h30','18h00','18h30','19h00','19h30',
+                                                        '20h00','20h30','21h00','21h30','22h00','22h30','23h00','23h30',],
+                                                datasets:[{
+                                                    label:"Celcius",
+                                                    data:tempDayValuesC,
+                                                    borderWidth:3,
+                                                    borderColor: 'rgba(20,255,20,0.85)',
+                                                    backgroundColor: 'transparent',
+                                                    fill:false,
+                                                },{
+                                                    label:"Fahrenheit",
+                                                    data:tempDayValuesF,
+                                                    borderWidth:3,
+                                                    borderColor: 'rgba(255,20,20,0.85)',
+                                                    backgroundColor: 'transparent',
+                                                    fill:false,
+                                                },{
+                                                    label:"Kelvin",
+                                                    data:tempDayValuesK,
+                                                    borderWidth:3,
+                                                    borderColor: 'rgba(20,20,255,0.85)',
+                                                    backgroundColor: 'transparent',
+                                                    fill:false,
+                                                }]
+                                            },
+                                            options:{}
+                                        });
+                                    })
+                                    })
+                                 }while(count!=lastCount)
+                            </script>
+                            </div>
+                    </div>
+                    </div>
+                    <!-- Graph Temp Month -->
+                     <div class="col-12 col-lg-12">
+                        <div class="alazea-service-area mb-100">
+                        <h4 class="text-center">Mês</h4>
+                        <div class="graph-month">
+                            <canvas id="temp-chart-month" height="75"></canvas>
+
+                            <script>
+                                var database;
+                                var tempMonthValuesC=[];//temperature in celcius
+                                var tempMonthValuesF=[];//temperature in fahrenheit
+                                var tempMonthValuesK=[];//temperature in kelvin
+                                var data;
+                                var countMonth=0;
+                                var lastCountMonth=0;
+
+
+                                // Create references
+                                const dbRefObjectMonth = firebase.database().ref('Sensors').child('Temperature').child('Month');
+
+                                // Syn objects
+                                dbRefObjectMonth.on('value', snap => {
+                                    console.log(snap.val());
+                                });
+
+                                do{
+                                    lastCountMonth=countMonth;
+
+                                    dbRefObjectMonth.once('value', function(snapshot){
+                                    snapshot.forEach(function(childSnapshot){
+                                        console.log(childSnapshot.keys);
+                                        var childKey = childSnapshot.key;
+                                        var childData = childSnapshot.val();
+
+                                    tempMonthValuesC[countMonth]=childData;
+                                    tempMonthValuesF[countMonth]=(childData*1.8+32);
+                                    tempMonthValuesK[countMonth]=childData+273;
+
+                                    countMonth++;
+
+
+                                        var tempMonth = document.getElementById('temp-chart-month');
+
+                                         var monthTempChart = new Chart(tempMonth,{
+                                            type:'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                                            data:{
+                                                labels:['1','2','3','4','5','6','7','8','9','10',
+                                                '11','12','13','14','15','16','17','18','19','20',
+                                                '21','22','23','24','25','26','27','28','29','30','31'],
+                                                datasets:[{
+                                                    label:"Celcius",
+                                                    data:tempMonthValuesC,
+                                                    borderWidth:3,
+                                                    borderColor: 'rgba(20,255,20,0.85)',
+                                                    backgroundColor: 'transparent',
+                                                    fill:false,
+                                                },{
+                                                    label:"Fahrenheit",
+                                                    data:tempMonthValuesF,
+                                                    borderWidth:3,
+                                                    borderColor: 'rgba(255,20,20,0.85)',
+                                                    backgroundColor: 'transparent',
+                                                    fill:false,
+                                                },{
+                                                    label:"Kelvin",
+                                                    data:tempMonthValuesK,
+                                                    borderWidth:3,
+                                                    borderColor: 'rgba(20,20,255,0.85)',
+                                                    backgroundColor: 'transparent',
+                                                    fill:false,
+                                                }]
+                                            },
+                                            options:{}
+                                        });
+                                    })
+                                    })
+                                 }while(countMonth!=lastCountMonth)
+                            </script>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Graph Temp Year -->
+                     <div class="col-12 col-lg-12">
+                        <div class="alazea-service-area mb-100">
+                        <h4 class="text-center">Anos</h4>
+                        <div class="graph-years">
+                            <canvas id="temp-chart-years" height="75"></canvas>
+
+                            <script>
+                                var database;
+                                var tempYearValuesC=[];//temperature in celcius
+                                var tempYearValuesF=[];//temperature in fahrenheit
+                                var tempYearValuesK=[];//temperature in kelvin
+                                var data;
+                                var countYear=0;
+                                var lastCountYear=0;
+
+                                // Create references
+                                const dbRefObjectYear = firebase.database().ref('Sensors').child('Temperature').child('Years');
+
+                                // Syn objects
+                                dbRefObjectYear.on('value', snap => {
+                                    console.log(snap.val());
+                                });
+
+                                do{
+
+                                    dbRefObjectYear.once('value', function(snapshot){
+                                    snapshot.forEach(function(childSnapshot){
+                                        console.log(childSnapshot.keys);
+                                        var childKey = childSnapshot.key;
+                                        var childData = childSnapshot.val();
+
+                                    tempYearValuesC[countYear]=childData;
+                                    tempYearValuesF[countYear]=(childData*1.8+32);
+                                    tempYearValuesK[countYear]=childData+273;
+
+                                    countYear++;
+
+
+                                        var tempYear = document.getElementById('temp-chart-years');
+
+                                         var yearTempChart = new Chart(tempYear,{
+                                            type:'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                                            data:{
+                                                labels:['2018-jan1','2018-jan2','2018-jan3','2018-jan4',
+                                                        '2018-fev1','2018-fev2','2018-fev3','2018-fev4'],
+                                                datasets:[{
+                                                    label:"Celcius",
+                                                    data:tempYearValuesC,
+                                                    borderWidth:3,
+                                                    borderColor: 'rgba(20,255,20,0.85)',
+                                                    backgroundColor: 'transparent',
+                                                    fill:false,
+                                                },{
+                                                    label:"Fahrenheit",
+                                                    data:tempYearValuesF,
+                                                    borderWidth:3,
+                                                    borderColor: 'rgba(255,20,20,0.85)',
+                                                    backgroundColor: 'transparent',
+                                                    fill:false,
+                                                },{
+                                                    label:"Kelvin",
+                                                    data:tempYearValuesK,
+                                                    borderWidth:3,
+                                                    borderColor: 'rgba(20,20,255,0.85)',
+                                                    backgroundColor: 'transparent',
+                                                    fill:false,
+                                                }]
+                                            },
+                                            options:{}
+                                        });
+                                    })
+                                    })
+                                 }while(countYear!=lastCountYear)
+                            </script>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Temperature Area End ##### -->
+    <!-- ##### Humidity Area Start ##### -->
+    <section class="our-services-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Section Heading -->
+                    <div class="section-heading text-center">
+                        <h2>Umidade</h2>
+                        <p>Não representa a Umidade na área externa do colégio, mas a Umidade no interior da estufa.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center justify-content-between">
+                <div class="col-12 col-lg-5">
+                    <div class="alazea-service-area mb-100">
+
+                        <!-- Single Service Area -->
+                        <div class="single-service-area d-flex align-items-center">
+                            <!-- Icon -->
+                            <div class="service-icon mr-30">
+                                <img src="img/core-img/s1.png" alt="">
+                            </div>
+                            <!-- Content -->
+                            <div class="service-content">
+                                <h5>Plants Care</h5>
+                                <p>In Aenean purus, pretium sito amet sapien denim moste consectet sedoni urna placerat sodales.service its.</p>
+                            </div>
+                        </div>
+
+                        <!-- Single Service Area -->
+                        <div class="single-service-area d-flex align-items-center">
+                            <!-- Icon -->
+                            <div class="service-icon mr-30">
+                                <img src="img/core-img/s2.png" alt="">
+                            </div>
+                            <!-- Content -->
+                            <div class="service-content">
+                                <h5>Pressure Washing</h5>
+                                <p>In Aenean purus, pretium sito amet sapien denim moste consectet sedoni urna placerat sodales.service its.</p>
+                            </div>
+                        </div>
+
+                        <!-- Single Service Area -->
+                        <div class="single-service-area d-flex align-items-center">
+                            <!-- Icon -->
+                            <div class="service-icon mr-30">
+                                <img src="img/core-img/s3.png" alt="">
+                            </div>
+                            <!-- Content -->
+                            <div class="service-content">
+                                <h5>Tree Service &amp; Trimming</h5>
+                                <p>In Aenean purus, pretium sito amet sapien denim moste consectet sedoni urna placerat sodales.service its.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6">
+                    <div class="alazea-video-area bg-overlay mb-100">
+                        <img src="img/bg-img/23.jpg" alt="">
+                        <a href="http://www.youtube.com/watch?v=7HKoqNJtMTQ" class="video-icon">
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Humidity Area End ##### -->
+
+    <!-- ##### Testimonial Area Start ##### -->
+    <section class="testimonial-area section-padding-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="testimonials-slides owl-carousel">
+
+                        <!-- Single Testimonial Slide -->
+                        <div class="single-testimonial-slide">
+                            <div class="row align-items-center">
+                                <div class="col-12 col-md-6">
+                                    <div class="testimonial-thumb">
+                                        <img src="img/bg-img/13.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="testimonial-content">
+                                        <!-- Section Heading -->
+                                        <div class="section-heading">
+                                            <h2>TESTIMONIAL</h2>
+                                            <p>Some kind words from clients about Alazea</p>
+                                        </div>
+                                        <p>“Alazea is a pleasure to work with. Their ideas are creative, they came up with imaginative solutions to some tricky issues, their landscaping and planting contacts are equally excellent we have a beautiful but also manageable garden as a result. Thank you!”</p>
+                                        <div class="testimonial-author-info">
+                                            <h6>Mr. Nick Jonas</h6>
+                                            <p>CEO of NAVATECH</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Single Testimonial Slide -->
+                        <div class="single-testimonial-slide">
+                            <div class="row align-items-center">
+                                <div class="col-12 col-md-6">
+                                    <div class="testimonial-thumb">
+                                        <img src="img/bg-img/14.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="testimonial-content">
+                                        <!-- Section Heading -->
+                                        <div class="section-heading">
+                                            <h2>TESTIMONIAL</h2>
+                                            <p>Some kind words from clients about Alazea</p>
+                                        </div>
+                                        <p>“Alazea is a pleasure to work with. Their ideas are creative, they came up with imaginative solutions to some tricky issues, their landscaping and planting contacts are equally excellent we have a beautiful but also manageable garden as a result. Thank you!”</p>
+                                        <div class="testimonial-author-info">
+                                            <h6>Mr. Nazrul Islam</h6>
+                                            <p>CEO of NAVATECH</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Single Testimonial Slide -->
+                        <div class="single-testimonial-slide">
+                            <div class="row align-items-center">
+                                <div class="col-12 col-md-6">
+                                    <div class="testimonial-thumb">
+                                        <img src="img/bg-img/15.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="testimonial-content">
+                                        <!-- Section Heading -->
+                                        <div class="section-heading">
+                                            <h2>TESTIMONIAL</h2>
+                                            <p>Some kind words from clients about Alazea</p>
+                                        </div>
+                                        <p>“Alazea is a pleasure to work with. Their ideas are creative, they came up with imaginative solutions to some tricky issues, their landscaping and planting contacts are equally excellent we have a beautiful but also manageable garden as a result. Thank you!”</p>
+                                        <div class="testimonial-author-info">
+                                            <h6>Mr. Jonas Nick</h6>
+                                            <p>CEO of NAVATECH</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Testimonial Area End ##### -->
+
+    <!-- ##### Cool Facts Area Start ##### -->
+    <section class="cool-facts-area bg-img section-padding-100-0" style="background-image: url(img/bg-img/cool-facts.png);">
+        <div class="container">
+            <div class="row">
+
+                <!-- Single Cool Facts Area -->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="single-cool-fact d-flex align-items-center justify-content-center mb-100">
+                        <div class="cf-icon">
+                            <img src="img/core-img/cf1.png" alt="">
+                        </div>
+                        <div class="cf-content">
+                            <h2><span class="counter">20</span></h2>
+                            <h6>AWARDS</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Cool Facts Area -->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="single-cool-fact d-flex align-items-center justify-content-center mb-100">
+                        <div class="cf-icon">
+                            <img src="img/core-img/cf2.png" alt="">
+                        </div>
+                        <div class="cf-content">
+                            <h2><span class="counter">70</span></h2>
+                            <h6>PROJECTS</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Cool Facts Area -->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="single-cool-fact d-flex align-items-center justify-content-center mb-100">
+                        <div class="cf-icon">
+                            <img src="img/core-img/cf3.png" alt="">
+                        </div>
+                        <div class="cf-content">
+                            <h2><span class="counter">30</span>+</h2>
+                            <h6>HAPPY CLIENTS</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Cool Facts Area -->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="single-cool-fact d-flex align-items-center justify-content-center mb-100">
+                        <div class="cf-icon">
+                            <img src="img/core-img/cf4.png" alt="">
+                        </div>
+                        <div class="cf-content">
+                            <h2><span class="counter">80</span>K+</h2>
+                            <h6>REVENUE</h6>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Side Image -->
+        <div class="side-img wow fadeInUp" data-wow-delay="500ms">
+            <img src="img/core-img/pot.png" alt="">
+        </div>
+    </section>
+    <!-- ##### Cool Facts Area End ##### -->
+
+    <!-- ##### Team Area Start ##### -->
+    <section class="team-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Section Heading -->
+                    <div class="section-heading text-center">
+                        <h2>OUR TEAM</h2>
+                        <p>A team of dedicated experienced professionals.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <!-- Single Team Member Area -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-team-member text-center mb-100">
+                        <!-- Team Member Thumb -->
+                        <div class="team-member-thumb">
+                            <img src="img/bg-img/team1.png" alt="">
+                            <!-- Social Info -->
+                            <div class="team-member-social-info">
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <!-- Team Member Info -->
+                        <div class="team-member-info mt-30">
+                            <h5>Joseph Corbin</h5>
+                            <p>CEO &amp; Founder</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Team Member Area -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-team-member text-center mb-100">
+                        <!-- Team Member Thumb -->
+                        <div class="team-member-thumb">
+                            <img src="img/bg-img/team2.png" alt="">
+                            <!-- Social Info -->
+                            <div class="team-member-social-info">
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <!-- Team Member Info -->
+                        <div class="team-member-info mt-30">
+                            <h5>Tasha Deserio</h5>
+                            <p>Garden Designer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Team Member Area -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-team-member text-center mb-100">
+                        <!-- Team Member Thumb -->
+                        <div class="team-member-thumb">
+                            <img src="img/bg-img/team3.png" alt="">
+                            <!-- Social Info -->
+                            <div class="team-member-social-info">
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <!-- Team Member Info -->
+                        <div class="team-member-info mt-30">
+                            <h5>Cody Baker</h5>
+                            <p>Plan Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Team Member Area -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-team-member text-center mb-100">
+                        <!-- Team Member Thumb -->
+                        <div class="team-member-thumb">
+                            <img src="img/bg-img/team4.png" alt="">
+                            <!-- Social Info -->
+                            <div class="team-member-social-info">
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <!-- Team Member Info -->
+                        <div class="team-member-info mt-30">
+                            <h5>Pearl Kansas</h5>
+                            <p>Marketer</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ##### Team Area End ##### -->
+
+   <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area bg-img" style="background-image: url(img/bg-img/3.jpg);">
+        <!-- Main Footer Area -->
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="single-footer-widget">
+                            <div class="footer-logo mb-30">
+                                <a href="#"><img src="img/core-img/logo.png" alt=""></a>
+                            </div>
+                            <p>Entre em contato e acompanhe nosso trabalho pelas redes sociais!</p>
+                            <div class="social-info">
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="single-footer-widget">
+                            <div class="widget-title">
+                                <h5>LINKS RÁPIDOS</h5>
+                            </div>
+                            <nav class="widget-nav">
+                                <ul>
+                                    <li><a href="#">Purchase</a></li>
+                                    <li><a href="#">FAQs</a></li>
+                                    <li><a href="#">Payment</a></li>
+                                    <li><a href="#">News</a></li>
+                                    <li><a href="#">Return</a></li>
+                                    <li><a href="#">Advertise</a></li>
+                                    <li><a href="#">Shipping</a></li>
+                                    <li><a href="#">Career</a></li>
+                                    <li><a href="#">Orders</a></li>
+                                    <li><a href="#">Policities</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="single-footer-widget">
+                            <div class="widget-title">
+                                <h5>APOIO</h5>
+                            </div>
+
+                            <!-- Single Best Seller Products -->
+                            <div class="single-best-seller-product d-flex align-items-center">
+                                <div class="product-thumbnail">
+                                    <a href="shop-details.html"><img src="img/icons/CIC-100px.png" alt=""></a>
+                                </div>
+                                <div class="product-info">
+                                    <a href="shop-details.html">CIC Robotics</a>
+                                    <p><i class="fa fa-heart-o" aria-hidden="true"></i></p>
+                                </div>
+                            </div>
+
+                            <!-- Single Best Seller Products -->
+                            <div class="single-best-seller-product d-flex align-items-center">
+                                <div class="product-thumbnail">
+                                    <a href="shop-details.html"><img src="img/icons/Portinari-100px.png" alt=""></a>
+                                </div>
+                                <div class="product-info">
+                                    <a href="shop-details.html">Cândido Porinari</a>
+                                    <p><i class="fa fa-heart-o" aria-hidden="true"></i></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="single-footer-widget">
+                            <div class="widget-title">
+                                <h5>Contato</h5>
+                            </div>
+
+                            <div class="contact-information">
+                                <p><span>Endereço:</span> R. Adelaíde Fernandes da Costa 487, Salvador</p>
+                                <p><span>Email:</span> escolaverdeportinari@gmail.com</p>
+                                <p><span>Visita:</span> Seg-Sex: 10h-11h</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom Area -->
+        <div class="footer-bottom-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="border-line"></div>
+                    </div>
+                    <!-- Copywrite Text -->
+                    <div class="col-12 col-md-6">
+                        <div class="copywrite-text">
+                            <p>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</p>
+                        </div>
+                    </div>
+                    <!-- Footer Nav -->
+                    <div class="col-12 col-md-6">
+                        <div class="footer-nav">
+                            <nav>
+                                <ul>
+                                    <li><a href="#">Início</a></li>
+                                    <li><a href="#">O projeto</a></li>
+                                    <li><a href="#">Notícias</a></li>
+                                    <li><a href="#">Monitore</a></li>
+                                    <li><a href="#">Agradecimentos</a></li>
+                                    <li><a href="#">Contato</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- ##### All Javascript Files ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+
+</body>
+
+</html>

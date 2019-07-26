@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <!-- Title -->
+  <title>Escol@Verde - Umidade</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="img/core-img/logo.png">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Chart.js -->
+  <script src="js/Chart.min.js"></script>
+  <!-- Firebase -->
+  <script src="js/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div class="preloader d-flex align-items-center justify-content-center">
+    <div class="preloader-circle"></div>
+    <div class="preloader-img">
+      <img src="img/core-img/logo.png" alt="">
+    </div>
+  </div>
+
+  <!-- ##### CABEÇARIO INICIO ##### -->
+  <header class="header-area">
+
+    <!-- ***** Top Header Area ***** -->
+    <div class="top-header-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="top-header-content d-flex align-items-center justify-content-between">
+              <!-- Top Header Content -->
+              <div class="top-header-meta">
+                <a href="#" data-toggle="tooltip" data-placement="bottom" title="escolaverdeportinari@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email: escolaverdeportinari@gmail.com</span></a>
+              </div>
+
+              <!-- Top Header Content -->
+              <div class="top-header-meta d-flex">
+                <!-- Language Dropdown -->
+                <div class="language-dropdown">
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle mr-30" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Língua</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="inicio.html">Português</a>
+                      <a class="dropdown-item" href="inicioEN.html">English</a>
+                    </div>
+                  </div>
+                </div>
+                <!-- Login -->
+                <div class="login">
+                  <a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ***** Navbar Area ***** -->
+    <div class="alazea-main-menu">
+      <div class="classy-nav-container breakpoint-off">
+        <div class="container">
+          <!-- Menu -->
+          <nav class="classy-navbar justify-content-between" id="alazeaNav">
+
+            <!-- Nav Brand -->
+            <a href="inicio.html" class="nav-brand"><img src="img/core-img/logo-80px.png" alt=""></a>
+
+            <!-- Navbar Toggler -->
+            <div class="classy-navbar-toggler">
+              <span class="navbarToggler"><span></span><span></span><span></span></span>
+            </div>
+
+            <!-- Menu -->
+            <div class="classy-menu">
+
+              <!-- Close Button -->
+              <div class="classycloseIcon">
+                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+              </div>
+
+              <!-- Navbar Start -->
+              <div class="classynav">
+                <ul>
+                  <li><a href="inicio.html">Início</a></li>
+                  <li><a href="#">O projeto</a>
+                    <ul class="dropdown">
+                      <li><a href="apresentacao.html">Apresentação</a></li>
+                      <li><a href="geracoes.html">Gerações</a></li>
+                      <li><a href="#">A Estufa</a>
+                        <ul class="dropdown">
+                          <li><a href="estrutura.html">Estrutura</a></li>
+                          <li><a href="automacao.html">Automação</a></li>
+                        </ul>
+                      <li><a href="galeria.html">Galeria</a></li>
+                      <li><a href="atualizações.html">Atualizações</a></li>
+                    </ul>
+                  </li>
+
+                  <li><a href="noticias/noticias.html">Notícias</a></li>
+                  <li><a href="monitore.html">Monitore</a>
+                    <ul class="dropdown">
+                      <li><a href="plantacao.html">Plantação</a></li>
+                      <li><a href="solo.html">Solo</a>
+                        <ul class="dropdown">
+                          <li><a href="umidade.html">Umidade</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="atmosfera.html">Atmosfera</a>
+                        <ul class="dropdown">
+                          <li><a href="temperatura.html">Temperatura</a></li>
+                          <li><a href="umidade.html">Umidade</a></li>
+                          <li><a href="luminosidade.html">Luminosidade</a></li>
+                          <li><a href="o2.html">O2</a></li>
+                          <li><a href="co2.html">CO2</a></li>
+                          <li><a href="co.html">CO</a></li>
+                          <li><a href="ph.html">pH da chuva</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="reservatorios-de-agua.html">Reservatórios de água</a>
+                        <ul class="dropdown">
+                          <li><a href="reservatorios-principais.html">Principais</a></li>
+                          <li><a href="reservatorios-secundarios.html">Secundários</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="energia.html">Energia</a>
+                        <ul class="dropdown">
+                          <li><a href="bateria.html">Bateria</a></li>
+                          <li><a href="painel-solar.html">Painel solar</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a href="agradecimentos.html">Agradecimentos</a></li>
+                  <li><a href="contato.html">Contato</a></li>
+                </ul>
+
+                <!-- Search Icon -->
+                <div id="searchIcon">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </div>
+
+              </div>
+              <!-- Navbar End -->
+            </div>
+          </nav>
+
+          <!-- Search Form -->
+          <div class="search-form">
+            <form action="#" method="get">
+              <input type="search" name="search" id="search" placeholder="Type keywords &amp; press enter...">
+              <button type="submit" class="d-none"></button>
+            </form>
+            <!-- Close Icon -->
+            <div class="closeIcon"><i class="fa fa-times" aria-hidden="true"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ##### CABEÇARIO FINAL ##### -->
+
+  <!-- ##### Breadcrumb Area Start ##### -->
+  <div class="breadcrumb-area">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+      <h2>Umidade</h2>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="inicio.html"><i class="fa fa-home"></i> Início</a></li>
+              <li class="breadcrumb-item "><a href="atmosfera.html">Atmosfera</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Umidade</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ##### Breadcrumb Area End ##### -->
+
+  <!-- ##### Types do graph Start ##### -->
+  <section class="about-us-area">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-12 col-lg-9">
+          <!-- Section Heading -->
+          <div class="section-heading ">
+            <h2 class="text-center">O sensor</h2><br>
+            <p>Todos os dados sobre a umidade atmosférica foram coletados do interior da estufa. O sensor que estamos utilizando é o módulo <a href="https://www.arduinoecia.com.br/2015/02/sensor-de-temperatura-e-umidade-dht22.html" target="_blank">DHT22</a>,
+              que possui precisão de uma casa decimal tanto para temperatura quanto para a humidade atmosférica.</p>
+          </div>
+        <h4 class="text-center">TIPOS DE GRÁFICOS</h4>
+          <div class="row ">
+            <!-- Single Graph Description Area -->
+            <div class="col-12 col-sm-4">
+              <div class="single-benefits-area text-center">
+                <h5>Diário</h5>
+                <p>Os dados são coletados a cada exatos 30 minutos no intervalo fechado de 00h00m até 23h30m. Os dois primeiros gráficos se encaixam nesta categoria.</p>
+              </div>
+            </div>
+
+            <!-- Single Graph Description Area -->
+            <div class="col-12 col-sm-4">
+              <div class="single-benefits-area text-center">
+                <h5>Mensal</h5>
+                <p>A temperatura em cada dia é calculada pela média dos 48 valores coletados no respectivo dia (24 horas).</p>
+              </div>
+            </div>
+
+            <!-- Single Graph Description Area -->
+            <div class="col-12 col-sm-4">
+              <div class="single-benefits-area text-center">
+                <h5>Anual</h5>
+                <p>Dividido em semanas - média da temperatura dos 7 dias - e mostra todos os dados coletados deste o início das coletas. Consideramos a primeira semana de cada mês como a primeira semana iniciada no domingo em determinado mês.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-3">
+          <img src="img/monitore-atmosfera/temperatura-DHT22.jpg" alt="">
+        </div>
+      </div>
+
+    </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="border-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ##### Types do graph End ##### -->
+
+  <!-- ##### Temperature Area Start ##### -->
+  <section class="our-services-area bg-gray section-padding-100-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <!-- Section Heading -->
+          <div class="section-heading text-center">
+            <h2><i class="fa fa-line-chart"></i>&nbsp; GRÁFICOS</h2>
+            <p>Não representa a umidade na área externa do colégio, mas a umidade no interior da estufa.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row align-items-center justify-content-between">
+
+          <!-- Gráfico hoje -->
+          <div class="col-12 col-lg-12">
+          <div class="alazea-service-area mb-100">
+            <h4 class="text-center">Hoje</h4>
+            <div class="graph-day">
+              <canvas id="umi-chart-day" height="75"></canvas>
+
+              <script>
+                var database;
+                var umiDayValues = []; //umidade em %
+                var data;
+                var count = 0;
+                var lastCount = 0;
+
+                var config = {
+                  apiKey: "AIzaSyBeTQnufXiBSfgHhFOiSLeT-RSI9NQUzEY",
+                  authDomain: "escolaverde-portinari.firebaseapp.com",
+                  databaseURL: "https://escolaverde-portinari.firebaseio.com",
+                  projectId: "escolaverde-portinari",
+                  storageBucket: "escolaverde-portinari.appspot.com",
+                  messagingSenderId: "787796894461"
+                };
+                firebase.initializeApp(config);
+
+                // Create references
+                const dbRefObjectDay = firebase.database().ref('Sensors').child('Humidity').child('Today');
+
+                // Syn objects
+                dbRefObjectDay.on('value', snap => {
+                  //console.log(snap.val());
+                });
+
+                do {
+
+                  dbRefObjectDay.once('value', function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                      var childKey = childSnapshot.key;
+                      var childData = childSnapshot.val();
+
+                      umiDayValues[count] = childData;
+                      count++;
+
+                      var umiDay = document.getElementById('umi-chart-day');
+
+                      var dayUmiChart = new Chart(umiDay, {
+                        type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                        data: {
+                          labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                            '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                            '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                            '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                            '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                            '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                          ],
+                          datasets: [{
+                            label: "Umidade(%)",
+                            data: umiDayValues,
+                            borderWidth: 3,
+                            borderColor: 'rgba(20,255,20,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }]
+                        },
+                        options: {}
+                      });
+                    })
+                  })
+                } while (count != lastCount)
+              </script>
+            </div>
+          </div>
+        </div>
+        <!-- Gráfico ontem -->
+        <div class="col-12 col-lg-12">
+          <div class="alazea-service-area mb-100">
+            <h4 class="text-center">Ontem</h4>
+            <div class="graph-yest">
+              <canvas id="umi-chart-yest" height="75"></canvas>
+
+              <script>
+                var database;
+                var umiYestValues = []; //umidade em %
+
+                var data;
+                var countYest = 0;
+                var lastCountYest = 0;
+
+
+                // Create references
+                const dbRefObjectYest = firebase.database().ref('Sensors').child('Humidity').child('Yesterday');
+
+                // Syn objects
+                dbRefObjectYest.on('value', snap => {
+                  console.log(snap.val());
+                });
+
+                do {
+                  lastCountYest = countYest;
+
+                  dbRefObjectYest.once('value', function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                      console.log(childSnapshot.keys);
+                      var childKey = childSnapshot.key;
+                      var childData = childSnapshot.val();
+
+                      umiYestValues[countYest] = childData;
+
+                      countYest++;
+
+
+                      var umiYest = document.getElementById('umi-chart-yest');
+
+                      var yestUmiChart = new Chart(umiYest, {
+                        type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                        data: {
+                          labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                            '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                            '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                            '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                            '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                            '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                          ],
+                          datasets: [{
+                            label: "Umidade (%)",
+                            data: umiYestValues,
+                            borderWidth: 3,
+                            borderColor: 'rgba(20,255,20,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }]
+                        },
+                        options: {}
+                      });
+                    })
+                  })
+                } while (countYest != lastCountYest)
+              </script>
+            </div>
+          </div>
+        </div>
+        <!-- Gráfico mensal -->
+        <div class="col-12 col-lg-12">
+          <div class="alazea-service-area mb-100">
+            <h4 class="text-center">Mês atual</h4>
+            <div class="graph-month">
+              <canvas id="umi-chart-month" height="75"></canvas>
+
+              <script>
+                var database;
+                var umiMonthValues = [];//umidade em %
+
+                var data;
+                var countMonth = 0;
+                var lastCountMonth = 0;
+
+
+                // Create references
+                const dbRefObjectMonth = firebase.database().ref('Sensors').child('Humidity').child('Month');
+
+                // Syn objects
+                dbRefObjectMonth.on('value', snap => {
+                  console.log(snap.val());
+                });
+
+                do {
+                  lastCountMonth = countMonth;
+
+                  dbRefObjectMonth.once('value', function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                      console.log(childSnapshot.keys);
+                      var childKey = childSnapshot.key;
+                      var childData = childSnapshot.val();
+
+                      umiMonthValues[countMonth] = childData;
+                      countMonth++;
+
+
+                      var umiMonth = document.getElementById('umi-chart-month');
+
+                      var monthUmiChart = new Chart(umiMonth, {
+                        type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                        data: {
+                          labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+                            '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+                            '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'
+                          ],
+                          datasets: [{
+                            label: "Umidade (%)",
+                            data: umiMonthValues,
+                            borderWidth: 3,
+                            borderColor: 'rgba(20,255,20,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }]
+                        },
+                        options: {}
+                      });
+                    })
+                  })
+                } while (countMonth != lastCountMonth)
+              </script>
+            </div>
+          </div>
+        </div>
+        <!-- Gráfico anual -->
+        <div class="col-12 col-lg-12">
+          <div class="alazea-service-area mb-100">
+            <h4 class="text-center">Anual</h4>
+            <div class="graph-years">
+              <canvas id="umi-chart-years" height="75"></canvas>
+
+              <script>
+                var database;
+                var umiYearValues = []; //umidade em %
+                var data;
+                var countYear = 0;
+                var lastCountYear = 0;
+
+                // Create references
+                const dbRefObjectYear = firebase.database().ref('Sensors').child('Humidity').child('Years');
+
+                // Syn objects
+                dbRefObjectYear.on('value', snap => {
+                  console.log(snap.val());
+                });
+
+                do {
+
+                  dbRefObjectYear.once('value', function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                      console.log(childSnapshot.keys);
+                      var childKey = childSnapshot.key;
+                      var childData = childSnapshot.val();
+
+                      umiYearValues[countYear] = childData;
+
+                      countYear++;
+
+
+                      var umiYear = document.getElementById('umi-chart-years');
+
+                      var yearUmiChart = new Chart(umiYear, {
+                        type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                        data: {
+                          labels: ['2018-dez1', '2018-jan2', '2018-jan3', '2018-jan4',
+                            '2018-fev1', '2018-fev2', '2018-fev3', '2018-fev4'
+                          ],
+                          datasets: [{
+                            label: "Umidade (%)",
+                            data: umiYearValues,
+                            borderWidth: 3,
+                            borderColor: 'rgba(20,255,20,0.85)',
+                            backgroundColor: 'transparent',
+                            fill: false,
+                          }]
+                        },
+                        options: {}
+                      });
+                    })
+                  })
+                } while (countYear != lastCountYear)
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ##### Temperature Area End ##### -->
+  <!-- ##### Humidity Area Start ##### -->
+  <section class="our-services-area section-padding-100-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <!-- Section Heading -->
+          <div class="section-heading text-center">
+            <h2>Sobre a umidade</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="row align-items-center justify-content-between">
+        <div class="col-12 col-lg-9">
+          <div class="alazea-service-area mb-100">
+            <p>A umidade é o nível de valor de água presente da atmosfera. Para medir umidade relativa do ar, utiliza-se a razão entre a pressão parcial de vapor de e sua pressão de vapor.
+            Em outras palavras, determina-se a quantidade de vapor de água presente em uma amostra da atmosfera (pressão parcial de vapor)
+           e divide-se pelo máximo de vapor que a atmosfera consegue reter àquela determinada temperatura (pressão de vapor). O resultado desta operação representa uma porcentagem desse valor máximo.</p>
+            <p>Quanto mais alta a umidade relativa do ar, maior a sensação térmica pois difuculta o processo de transpiração do indivíduo. Apesar disso,
+            a umidade alta ajuda a controlar a variação da temperatura. Pela baixa umidade em desertos, a variação de temperatura entre o dia e a noite é alta. Em áreas litorânias,
+          por outro lado, a variação de temperatura ao longo do dia é pequena devio à alta umidade pela evaporação das águas do mar.</p>
+           <p>Além disso, quanto menor a porcentagem de vapor de água na atmosfera, mais isolante esta se torna. Isso explica o efeito de estática mais forte em cidades
+           não litorâneas - São Paulo e Brasília - e mais fraco em cidades costeiras - Salvador. Este fenômeno ocorre </p>
+          </div>
+        </div>
+        <div class="col-12 col-lg-3">
+          <p>Imagens</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ##### Humidity Area End ##### -->
+
+  <!-- ##### Testimonial Area Start ##### -->
+  <section class="testimonial-area section-padding-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <!-- Section Heading -->
+          <div class="section-heading text-center">
+            <h2>Utilização nas aula</h2>
+          </div>
+          <div class="testimonials-slides owl-carousel">
+
+            <!-- Single Testimonial Slide -->
+            <div class="single-testimonial-slide">
+              <div class="row align-items-center">
+                <div class="col-12 col-md-4">
+                  <div class="testimonial-thumb">
+                    <img src="img/monitore-atmosfera/temperatura-aula1.jpg" alt="">
+                  </div>
+                </div>
+                <div class="col-12 col-md-8">
+                  <div class="testimonial-content">
+                    <!-- Section Heading -->
+                    <div class="section-heading">
+                      <h4>Variação anual</h4>
+                    </div>
+                    <p>A partir do gráfico anual de variação anual da temperatura é possível observar como a temperatura média diminui e aumenta no decorrer
+                      do ano. A partir desta análise é possível discutir como as diferentes estações do ano afeta a temperatura média. Além disso,
+                      é possível correlacionar com o movimento de translação da Terra ao redor do Sol e os diferentes ângulos de inclinação do raios
+                      luminosos sobre a superfície terrestre.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Single Testimonial Slide -->
+            <div class="single-testimonial-slide">
+              <div class="row align-items-center">
+                <div class="col-12 col-md-4">
+                  <div class="testimonial-thumb">
+                    <img src="img/monitore-atmosfera/temperatura-aula2.jpg" alt="">
+                  </div>
+                </div>
+                <div class="col-12 col-md-8">
+                  <div class="testimonial-content">
+                    <!-- Section Heading -->
+                    <div class="section-heading">
+                      <h4>Variação diária</h4>
+                    </div>
+                    <p>A partir do gráfico "Ontem" e "Hoje" é possível analisar a variação da temperatura no período de um dia. Este fenômeno
+                      pode iniciar discussões sobre o movimento de rotação da terra e o grau de inclinação dos raios solares. Além disso,
+                     é possível discutir o fenômeno de transporte de energia por irradiação do Sol até a Terra e sua conversão à energia térmica
+                     ao atingir a superfícia terrestre.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Single Testimonial Slide -->
+            <div class="single-testimonial-slide">
+              <div class="row align-items-center">
+                <div class="col-12 col-md-4">
+                  <div class="testimonial-thumb">
+                    <img src="img/monitore-atmosfera/temperatura-aula3.png" alt="">
+                  </div>
+                </div>
+                <div class="col-12 col-md-8">
+                  <div class="testimonial-content">
+                    <!-- Section Heading -->
+                    <div class="section-heading">
+                      <h4>Temperatura em estufas</h4>
+                    </div>
+                    <p>A partir da apresentação da temperatura em uma estufa, é possível discutir sobre a aumento do comprimento de onda
+                    quando os raios eletromagnéticos atingem o solo e são refletidos como luz infravermelha, o que impede que alguns raios saiam
+                  da estufa e como consequência torne o ambiente no interior da estufa com maior temperatura que o exterior. É importante destacar
+                que o mesmo efeito de aumento de temperatura ocorre em escala global naturalmente pelo "efeito estufa", mas é agravado pela
+                liberação principalmente de CO2 e CH4 (que impede que ondas eletromagnética menos energéticas escapem da terra).</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ##### Testimonial Area End ##### -->
+
+
+  <!-- ##### RODAPÉ INICIO ##### -->
+  <footer class="footer-area bg-img" style="background-image: url(img/bg-img/3.jpg);">
+    <!-- Main Footer Area -->
+    <div class="main-footer-area">
+      <div class="container">
+        <div class="row">
+          <!-- Single Footer Widget -->
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="single-footer-widget">
+              <div class="footer-logo mb-30">
+                <a href="#"><img src="img/core-img/logo.png" alt=""></a>
+              </div>
+              <p>Entre em contato e acompanhe nosso trabalho pelas redes sociais!</p>
+              <div class="social-info">
+                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Single Footer Widget -->
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="single-footer-widget">
+              <div class="widget-title">
+                <h5>APOIO</h5>
+              </div>
+
+              <!-- Single Best Seller Products -->
+              <div class="single-best-seller-product d-flex align-items-center">
+                <div class="product-thumbnail">
+                  <a href="shop-details.html"><img src="img/icons/CIC-100px.png" alt=""></a>
+                </div>
+                <div class="product-info">
+                  <a href="shop-details.html">CIC Robotics</a>
+                  <p><i class="fa fa-heart-o" aria-hidden="true"></i></p>
+                </div>
+              </div>
+
+              <!-- Single Best Seller Products -->
+              <div class="single-best-seller-product d-flex align-items-center">
+                <div class="product-thumbnail">
+                  <a href="shop-details.html"><img src="img/icons/Portinari-100px.png" alt=""></a>
+                </div>
+                <div class="product-info">
+                  <a href="shop-details.html">Cândido Porinari</a>
+                  <p><i class="fa fa-heart-o" aria-hidden="true"></i></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Single Footer Widget -->
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="single-footer-widget">
+              <div class="widget-title">
+                <h5>Contato</h5>
+              </div>
+
+              <div class="contact-information">
+                <p><span>Endereço:</span> R. Adelaíde Fernandes da Costa 487, Salvador</p>
+                <p><span>Email:</span> escolaverdeportinari@gmail.com</p>
+                <p><span>Visita:</span> Seg-Sex: 10h-11h</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom Area -->
+    <div class="footer-bottom-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="border-line"></div>
+          </div>
+          <!-- Copywrite Text -->
+          <div class="col-12 col-md-6">
+            <div class="copywrite-text">
+              <p>&copy;
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;<script>
+                  document.write(new Date().getFullYear());
+                </script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              </p>
+            </div>
+          </div>
+          <!-- Footer Nav -->
+          <div class="col-12 col-md-6">
+            <div class="footer-nav">
+              <nav>
+                <ul>
+                  <li><a href="inicio.html">Início</a></li>
+                  <li><a href="apresentacao.html">O projeto</a></li>
+                  <li><a href="noticias.html">Notícias</a></li>
+                  <li><a href="monitore.html">Monitore</a></li>
+                  <li><a href="agradecimentos.html">Agradecimentos</a></li>
+                  <li><a href="contato.html">Contato</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- ##### RODAPÉ FINAL ##### -->
+
+  <!-- ##### All Javascript Files ##### -->
+  <!-- jQuery-2.2.4 js -->
+  <script src="js/jquery/jquery-2.2.4.min.js"></script>
+  <!-- Popper js -->
+  <script src="js/bootstrap/popper.min.js"></script>
+  <!-- Bootstrap js -->
+  <script src="js/bootstrap/bootstrap.min.js"></script>
+  <!-- All Plugins js -->
+  <script src="js/plugins/plugins.js"></script>
+  <!-- Active js -->
+  <script src="js/active.js"></script>
+
+</body>
+
+</html>
