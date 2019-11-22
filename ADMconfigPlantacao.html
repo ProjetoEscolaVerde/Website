@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <!-- Title -->
+  <title>Escol@Verde - Plantação</title>
+  <!-- Favicon -->
+  <link rel="icon" href="img/core-img/logo.png">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- jQuery-3.3.1 js-->
+  <script src="js/jquery/jquery-3.3.1.js"></script>
+  <script src="js/jquery/initializeJquery.js"></script>
+  <!-- Chart.js -->
+  <script src="js/Chart.min.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBeTQnufXiBSfgHhFOiSLeT-RSI9NQUzEY",
+      authDomain: "escolaverde-portinari.firebaseapp.com",
+      databaseURL: "https://escolaverde-portinari.firebaseio.com",
+      projectId: "escolaverde-portinari",
+      storageBucket: "escolaverde-portinari.appspot.com",
+      messagingSenderId: "787796894461"
+    };
+    firebase.initializeApp(config);
+
+    //---------- AUTH FIREBASE ----------//
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {//----- USER CONNECTED -----//
+          user.providerData.forEach(function (profile) {
+          document.getElementById("bemVindoADM").innerHTML = 'Bem vindo administrador ' + profile.displayName + '.';
+        });
+      }
+      });
+      //---------- UPDATE VALUES FIREBASE ----------//
+      function updateSectorData(setor){
+            var configSectorRef = firebase.database().ref('ConfigSectors/Sector-'+setor);
+            configSectorRef.once('value', function (snapshot) {
+            var itemData = snapshot.val();
+            var cultura = itemData.Culture;if(cultura==null){cultura='-----';}
+            var plantado = itemData.Planted;if(plantado==null){plantado='--/--/----';}
+            var horaIrrig = itemData.Hour;if(horaIrrig==null){horaIrrig='--h--';}
+            var freqIrrig = itemData.Frequency;if(freqIrrig==null){freqIrrig='--.-';}
+            var adubo = itemData.Fertilizer;if(adubo==null){adubo='-----';}
+            var praga = itemData.Plague;if(praga==null){praga='---';}
+            var foto = itemData.Image;if(foto==null){foto='--/--/----';}
+
+            document.getElementById("cultura-s"+setor).innerHTML = '<i class="fa fa-leaf"></i> Cultura: ' + cultura;
+            document.getElementById("plantado-s"+setor).innerHTML = '<i class="fa fa-clock-o"></i> Plantado: ' + plantado;
+            document.getElementById("hora-s"+setor).innerHTML = '<i class="fa fa-tint"></i> Hora irrig.: ' + horaIrrig;
+            document.getElementById("freq-s"+setor).innerHTML = '<i class="fa fa-tint"></i> Freq irrig.: ' + freqIrrig;
+            document.getElementById("adubo-s"+setor).innerHTML = '<i class="fa fa-bitbucket"></i> Tipo de adubo: ' + adubo;
+            document.getElementById("praga-s"+setor).innerHTML = '<i class="fa fa-bug"></i> Praga? ' + praga;
+            document.getElementById("foto-s"+setor).innerHTML = '<i class="fa fa-picture-o"></i> Foto: ' + foto;
+          }, function(error) {
+            if (error) {
+              alert(setor +" do not exist");
+                var cultura = '-----';
+                var plantado = '--/--/----';
+                var horaIrrig = '--h--';
+                var freqIrrig = '--.-';
+                var adubo = '-----';
+                var praga = '---';
+                var foto = '--/--/----';
+
+                document.getElementById("cultura-s"+setor).innerHTML = '<i class="fa fa-leaf"></i> Cultura: ' + cultura;
+                document.getElementById("plantado-s"+setor).innerHTML = '<i class="fa fa-clock-o"></i> Plantado: ' + plantado;
+                document.getElementById("hora-s"+setor).innerHTML = '<i class="fa fa-tint"></i> Hora irrig.: ' + horaIrrig;
+                document.getElementById("freq-s"+setor).innerHTML = '<i class="fa fa-tint"></i> Freq irrig.: ' + freqIrrig;
+                document.getElementById("adubo-s"+setor).innerHTML = '<i class="fa fa-bitbucket"></i> Tipo de adubo: ' + adubo;
+                document.getElementById("praga-s"+setor).innerHTML = '<i class="fa fa-bug"></i> Praga? ' + praga;
+                document.getElementById("foto-s"+setor).innerHTML = '<i class="fa fa-picture-o"></i> Foto: ' + foto;
+            }
+          });
+        }
+
+      for(var i=1;i<=7;i++)//update all sectors data
+        updateSectorData(i);
+
+      var configSectorRef = firebase.database().ref('ConfigSectors');
+      configSectorRef.on('value', function(snapshot) {
+        for(var i=0;i<=7;i++){
+          var SectorRef = firebase.database().ref('ConfigSectors/Sector-'+i);
+          SectorRef.on('value', function(snapshot) {
+            //update all sectors data
+              updateSectorData(i);
+          });
+        }
+      });
+
+
+    </script>
+    <!-- LoginBar -->
+    <script src="loginBar.js"></script>
+</head>
+
+<body>
+  <!-- ##### PRELOADER INICIO ##### -->
+  <div class="preloader d-flex align-items-center justify-content-center">
+    <div class="preloader-circle"></div>
+    <div class="preloader-img">
+      <img src="img/core-img/logo.png" alt="">
+    </div>
+  </div>
+  <!-- ##### PRELOADER FINAL ##### -->
+
+  <!-- ##### CABEÇARIO INICIO + AbaLogin ##### -->
+  <div id="cabecario"></div>
+  <!-- ##### CABEÇARIO FINAL ##### -->
+
+  <!-- ##### TOP INICIO ##### -->
+  <div class="breadcrumb-area">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+      <h2>Configuração dos setores</h2>
+    </div>
+    <div class="container SeeAdm">
+      <div class="row">
+        <div class="col-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i> Início</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Administrador</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Config. Plantação</a></li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ##### TOP FINAL ##### -->
+
+  <!-- ##### CONFIGURAÇÕES INICIO ##### -->
+  <section class="about-us-area">
+    <div class="container SeeAdm">
+        <div class="row">
+          <div class="col-12">
+            <!-- Section Heading -->
+            <div class="section-heading text-center">
+              <h2>Opções para configuração dos setores</h2>
+              <p id="bemVindoADM">Bem vindo</p>
+              <p>Alterações nessa página são definitivas, altere com sabedoria.</p>
+              <h6 class="contactAlert">Alteração realizada!<h6>
+            </div>
+          </div>
+        </div>
+        <div class="section-heading">
+        <div class="row ">
+            <!-- ##### Setor 1 ##### -->
+            <div class="col-12 col-lg-4">
+            <!-- Section Heading -->
+              <h3><i class="fa fa-list-ul"></i>&nbsp;Setor 1</h3>
+              <h6 class="contactAlert updatedSector1">Alteração no setor 1 realizada!<h6>
+              <h6 id="cultura-s1"><i class="fa fa-leaf"></i>Cultura: -----</h6>
+              <h6 id="plantado-s1"><i class="fa fa-clock-o"></i> Plantado: --/--/----</h6>
+              <h6 id="hora-s1"><i class="fa fa-tint"></i> Hora irrig.: --h--</h6>
+              <h6 id="freq-s1"><i class="fa fa-tint"></i> Freq irrig.: --.-</h6>
+              <h6 id="adubo-s1"><i class="fa fa-bitbucket"></i> Tipo de adubo: -----</h6>
+              <h6 id="praga-s1"><i class="fa fa-bug"></i> Praga? ---</h6>
+              <h6 id="foto-s1"><i class="fa fa-picture-o"></i> Foto: --/--/----</h6>
+              <img src="img/monitore-plantação/setor1.jpg"></img>
+              <h5><i class="fa fa-cog"></i>&nbsp;Nova config.:</h5>
+
+              <form  method="post" class="updateSectorForm1" id="updateSectorForm1">
+                  <div class="row">
+                      <div class="col-12 ">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="cultura-setor1" name="cultura" placeholder="Cultura"  >
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="plantado-setor1" name="plantado" placeholder="Plantado(--/--/----)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="horaIrrig-setor1" name="horaIrrig"  placeholder="Horário de irrigação(--h--)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="freqIrrig-setor1" name="freqIrrig"  placeholder="Frequencia de irrigação(--.-)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="fertilizer-setor1" name="adubo"  placeholder="Tipo de adubo">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="praga-setor1" name="praga"  placeholder="Praga? Não / Nome da(s) praga(s)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="foto-setor1" name="foto" placeholder="Foto retirada em... (--/--/----)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <!--<button  value="Enviar" class="btn alazea-btn active" disabled>Enviar</button>-->
+                          <button type="submit" class="btn alazea-btn " value="setor1" >Atualizar</button>
+                      </div>
+                  </div>
+              </form>
+              <br> </br>
+            </div>
+            <!-- ##### Setor 2 ##### -->
+            <div class="col-12 col-lg-4">
+              <!-- Section Heading -->
+              <h3><i class="fa fa-list-ul"></i>&nbsp;Setor 2</h3>
+              <h6 class="contactAlert updatedSector2">Alteração no setor 2 realizada!<h6>
+
+              <h6 id="cultura-s2"><i class="fa fa-leaf"></i> Cultura: -----</h6>
+              <h6 id="plantado-s2"><i class="fa fa-clock-o"></i> Plantado: --/--/----</h6>
+              <h6 id="hora-s2"><i class="fa fa-tint"></i> Hora irrig.: --h--</h6>
+              <h6 id="freq-s2"><i class="fa fa-tint"></i> Freq irrig.: --.-</h6>
+              <h6 id="adubo-s2"><i class=" fa fa-bitbucket"></i> Tipo de adubo: -----</h6>
+              <h6 id="praga-s2"><i class="fa fa-bug"></i> Praga? -</h6>
+              <h6 id="foto-s2"><i class="fa fa-picture-o"></i> Foto: --/--/----</h6>
+              <img src="img/monitore-plantação/setor2.jpg"></img>
+              <h5><i class="fa fa-cog"></i>&nbsp;Nova config.:</h5>
+
+              <form  method="post" class="updateSectorForm2" id="updateSectorForm2">
+                  <div class="row">
+                      <div class="col-12 ">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="cultura-setor2" name="cultura" placeholder="Cultura"  >
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="plantado-setor2" name="plantado" placeholder="Plantado(--/--/----)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="horaIrrig-setor2" name="horaIrrig"  placeholder="Horário de irrigação(--h--)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="freqIrrig-setor2" name="freqIrrig"  placeholder="Frequencia de irrigação(--.-)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="fertilizer-setor2" name="adubo"  placeholder="Tipo de adubo">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="praga-setor2" name="praga"  placeholder="Praga? Não / Nome da(s) praga(s)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="foto-setor2" name="foto" placeholder="Foto retirada em... (--/--/----)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <!--<button  value="Enviar" class="btn alazea-btn active" disabled>Enviar</button>-->
+                          <button  type="submit" class="btn alazea-btn " value="setor2" >Atualizar</button>
+                      </div>
+                  </div>
+              </form>
+              <br> </br>
+            </div>
+            <!-- ##### Setor 3 ##### -->
+            <div class="col-12 col-lg-4">
+              <!-- Section Heading -->
+              <h3><i class="fa fa-list-ul"></i>&nbsp;Setor 3</h3>
+              <h6 class="contactAlert updatedSector3">Alteração no setor 3 realizada!<h6>
+
+              <h6 id="cultura-s3"><i class="fa fa-leaf"></i> Cultura: -----</h6>
+              <h6 id="plantado-s3"><i class="fa fa-clock-o"></i> Plantado: --/--/----</h6>
+              <h6 id="hora-s3"><i class="fa fa-tint"></i> Hora irrig.: --h--</h6>
+              <h6 id="freq-s3"><i class="fa fa-tint"></i> Freq irrig.: --.-</h6>
+              <h6 id="adubo-s3"><i class=" fa fa-bitbucket"></i> Tipo de adubo: -----</h6>
+              <h6 id="praga-s3"><i class="fa fa-bug"></i> Praga? -</h6>
+              <h6 id="foto-s3"><i class="fa fa-picture-o"></i> Foto: --/--/----</h6>
+              <img src="img/monitore-plantação/setor3.jpg"></img>
+              <h4><i class="fa fa-cog"></i>&nbsp;Nova config.:</h4>
+
+              <form  method="post" class="updateSectorForm3" id="updateSectorForm3">
+                  <div class="row">
+                      <div class="col-12 ">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="cultura-setor3" name="cultura" placeholder="Cultura"  >
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="plantado-setor3" name="plantado" placeholder="Plantado(--/--/----)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="horaIrrig-setor3" name="horaIrrig"  placeholder="Horário de irrigação(--h--)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="freqIrrig-setor3" name="freqIrrig"  placeholder="Frequencia de irrigação(--.-)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="fertilizer-setor3" name="adubo"  placeholder="Tipo de adubo">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="praga-setor3" name="praga"  placeholder="Praga? Não / Nome da(s) praga(s)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="foto-setor3" name="foto" placeholder="Foto retirada em... (--/--/----)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <!--<button  value="Enviar" class="btn alazea-btn active" disabled>Enviar</button>-->
+                          <button  type="submit"  class="btn alazea-btn " value="setor3" >Atualizar</button>
+                      </div>
+                  </div>
+              </form>
+              <br> </br>
+            </div>
+        </div>
+            <div class="row section-heading">
+            <!-- ##### Setor 4 ##### -->
+              <div class="col-12 col-lg-4">
+              <!-- Section Heading -->
+              <h3><i class="fa fa-list-ul"></i>&nbsp;Setor 4</h3>
+              <h6 class="contactAlert updatedSector4">Alteração no setor 4 realizada!<h6>
+
+              <h6 id="cultura-s4"><i class="fa fa-leaf"></i> Cultura: -----</h6>
+              <h6 id="plantado-s4"><i class="fa fa-clock-o"></i> Plantado: --/--/----</h6>
+              <h6 id="hora-s4"><i class="fa fa-tint"></i> Hora irrig.: --h--</h6>
+              <h6 id="freq-s4"><i class="fa fa-tint"></i> Freq irrig.: --.-</h6>
+              <h6 id="adubo-s4"><i class=" fa fa-bitbucket"></i> Tipo de adubo: -----</h6>
+              <h6 id="praga-s4"><i class="fa fa-bug"></i> Praga? -</h6>
+              <h6 id="foto-s4"><i class="fa fa-picture-o"></i> Foto: --/--/----</h6>
+              <img src="img/monitore-plantação/setor4.jpg"></img>
+              <h5><i class="fa fa-cog"></i>&nbsp;Nova config.:</h5>
+
+              <form  method="post" class="updateSectorForm4" id="updateSectorForm4">
+                  <div class="row">
+                      <div class="col-12 ">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="cultura-setor4" name="cultura" placeholder="Cultura"  >
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="plantado-setor4" name="plantado" placeholder="Plantado(--/--/----)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="horaIrrig-setor4" name="horaIrrig"  placeholder="Horário de irrigação(--h--)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="freqIrrig-setor4" name="freqIrrig"  placeholder="Frequencia de irrigação(--.-)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="fertilizer-setor4" name="adubo"  placeholder="Tipo de adubo">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="praga-setor4" name="praga"  placeholder="Praga? Não / Nome da(s) praga(s)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="foto-setor4" name="foto" placeholder="Foto retirada em... (--/--/----)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <!--<button  value="Enviar" class="btn alazea-btn active" disabled>Enviar</button>-->
+                          <button  type="submit" class="btn alazea-btn " value="setor4" >Atualizar</button>
+                      </div>
+                  </div>
+              </form>
+              <br> </br>
+            </div>
+            <!-- ##### Setor 5 ##### -->
+              <div class="col-12 col-lg-4">
+              <!-- Section Heading -->
+              <h3><i class="fa fa-list-ul"></i>&nbsp;Setor 5</h3>
+              <h6 class="contactAlert updatedSector5">Alteração no setor 5 realizada!<h6>
+
+              <h6 id="cultura-s5"><i class="fa fa-leaf"></i> Cultura: -----</h6>
+              <h6 id="plantado-s5"><i class="fa fa-clock-o"></i> Plantado: --/--/----</h6>
+              <h6 id="hora-s5"><i class="fa fa-tint"></i> Hora irrig.: --h--</h6>
+              <h6 id="freq-s5"><i class="fa fa-tint"></i> Freq irrig.: --.-</h6>
+              <h6 id="adubo-s5"><i class=" fa fa-bitbucket"></i> Tipo de adubo: -----</h6>
+              <h6 id="praga-s5"><i class="fa fa-bug"></i> Praga? -</h6>
+              <h6 id="foto-s5"><i class="fa fa-picture-o"></i> Foto: --/--/----</h6>
+              <img src="img/monitore-plantação/setor5.jpg"></img>
+              <h5><i class="fa fa-cog"></i>&nbsp;Nova config.:</h5>
+
+              <form  method="post" class="updateSectorForm5" id="updateSectorForm5">
+                  <div class="row">
+                      <div class="col-12 ">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="cultura-setor5" name="cultura" placeholder="Cultura"  >
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="plantado-setor5" name="plantado" placeholder="Plantado(--/--/----)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="horaIrrig-setor5" name="horaIrrig"  placeholder="Horário de irrigação(--h--)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="freqIrrig-setor5" name="freqIrrig"  placeholder="Frequencia de irrigação(--.-)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="fertilizer-setor5" name="adubo"  placeholder="Tipo de adubo">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="praga-setor5" name="praga"  placeholder="Praga? Não / Nome da(s) praga(s)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="foto-setor5" name="foto" placeholder="Foto retirada em... (--/--/----)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <!--<button  value="Enviar" class="btn alazea-btn active" disabled>Enviar</button>-->
+                          <button  type="submit" class="btn alazea-btn " value="setor5" >Atualizar</button>
+                      </div>
+                  </div>
+              </form>
+              <br> </br>
+            </div>
+            <!-- ##### Setor 6 ##### -->
+              <div class="col-12 col-lg-4">
+              <!-- Section Heading -->
+              <h3><i class="fa fa-list-ul"></i>&nbsp;Setor 6</h3>
+              <h6 class="contactAlert updatedSector6">Alteração no setor 6 realizada!<h6>
+
+              <h6 id="cultura-s6"><i class="fa fa-leaf"></i> Cultura: -----</h6>
+              <h6 id="plantado-s6"><i class="fa fa-clock-o"></i> Plantado: --/--/----</h6>
+              <h6 id="hora-s6"><i class="fa fa-tint"></i> Hora irrig.: --h--</h6>
+              <h6 id="freq-s6"><i class="fa fa-tint"></i> Freq irrig.: --.-</h6>
+              <h6 id="adubo-s6"><i class=" fa fa-bitbucket"></i> Tipo de adubo: -----</h6>
+              <h6 id="praga-s6"><i class="fa fa-bug"></i> Praga? -</h6>
+              <h6 id="foto-s6"><i class="fa fa-picture-o"></i> Foto: --/--/----</h6>
+              <img src="img/monitore-plantação/setor6.jpg"></img>
+              <h5><i class="fa fa-cog"></i>&nbsp;Nova config.:</h5>
+
+              <form  method="post" class="updateSectorForm6" id="updateSectorForm6">
+                  <div class="row">
+                      <div class="col-12 ">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="cultura-setor6" name="cultura" placeholder="Cultura"  >
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="plantado-setor6" name="plantado" placeholder="Plantado(--/--/----)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="horaIrrig-setor6" name="horaIrrig"  placeholder="Horário de irrigação(--h--)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="freqIrrig-setor6" name="freqIrrig"  placeholder="Frequencia de irrigação(--.-)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="fertilizer-setor6" name="adubo"  placeholder="Tipo de adubo">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control"  id="praga-setor6" name="praga"  placeholder="Praga? Não / Nome da(s) praga(s)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="foto-setor6" name="foto" placeholder="Foto retirada em... (--/--/----)">
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <!--<button  value="Enviar" class="btn alazea-btn active" disabled>Enviar</button>-->
+                          <button  type="submit" class="btn alazea-btn " value="setor6" >Atualizar</button>
+                      </div>
+                  </div>
+              </form>
+              <br> </br>
+            </div>
+        </div>
+          <div class="row section-heading">
+              <!-- ##### Setor 7 ##### -->
+                <div class="col-12 col-lg-4">
+                <!-- Section Heading -->
+                <h3><i class="fa fa-list-ul"></i>&nbsp;Setor 7</h3>
+                <h6 class="contactAlert updatedSector7">Alteração no setor 7 realizada!<h6>
+
+                <h6 id="cultura-s7"><i class="fa fa-leaf"></i> Cultura: -----</h6>
+                <h6 id="plantado-s7"><i class="fa fa-clock-o"></i> Plantado: --/--/----</h6>
+                <h6 id="hora-s7"><i class="fa fa-tint"></i> Hora irrig.: --h--</h6>
+                <h6 id="freq-s7"><i class="fa fa-tint"></i> Freq irrig.: --.-</h6>
+                <h6 id="adubo-s7"><i class=" fa fa-bitbucket"></i> Tipo de adubo: -----</h6>
+                <h6 id="praga-s7"><i class="fa fa-bug"></i> Praga? -</h6>
+                <h6 id="foto-s7"><i class="fa fa-picture-o"></i> Foto: --/--/----</h6>
+                <img src="img/monitore-plantação/setor7.jpg"></img>
+                <h5><i class="fa fa-cog"></i>&nbsp;Nova config.:</h5>
+
+                <form  method="post" class="updateSectorForm7" id="updateSectorForm7">
+                    <div class="row">
+                        <div class="col-12 ">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="cultura-setor7" name="cultura" placeholder="Cultura"  >
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="plantado-setor7" name="plantado" placeholder="Plantado(--/--/----)">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control"  id="horaIrrig-setor7" name="horaIrrig"  placeholder="Horário de irrigação(--h--)">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control"  id="freqIrrig-setor7" name="freqIrrig"  placeholder="Frequencia de irrigação(--.-)">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control"  id="fertilizer-setor7" name="adubo"  placeholder="Tipo de adubo">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control"  id="praga-setor7" name="praga"  placeholder="Praga? Não / Nome da(s) praga(s)">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="foto-setor7" name="foto" placeholder="Foto retirada em... (--/--/----)">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <!--<button  value="Enviar" class="btn alazea-btn active" disabled>Enviar</button>-->
+                            <button  type="submit" class="btn alazea-btn " value="setor7" >Atualizar</button>
+                        </div>
+                    </div>
+                </form>
+                <br> </br>
+              </div>
+          </div>
+      </div>
+      <script src="sendNewConfiguration.js"></script><!-- Resgata os valores dos formulários -->
+  </section>
+  <!-- ##### CONFIGURAÇÕES FINAL ##### -->
+
+  <!-- ##### OBSERVAÇÕES INICIO ##### -->
+  <section class="our-services-area section-padding-100-0">
+    <div class="container SeeAdm">
+      <div class="row">
+        <div class="col-12">
+          <!-- Section Heading -->
+          <div class="section-heading text-center">
+            <h2>Observações</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="row align-items-center justify-content-between">
+        <div class="col-12">
+          <div class="alazea-service-area mb-100">
+            <p>Quando for alterar é necessário seguir as informações dentro dos parêntesis. Se colocar um espaço a mais ou escrever de outra forma provavelmente resultará em erro.
+              Por exemplo: sempre tem que escrever a hora de irrigação com a notação 10h30. Quando for definir a frequência também tem que colocar como 00.33, ou 01.00 (como é sistema americano não pode usar vírgula para colocar as casa decimais dos números).
+            </p>
+            <p>A hora de irrigação define o primeiro horário que a irrigação irá acontecer. A frequência define a quantidade de irrigações que acontecerá a partir daquele horário.
+            Se definir a hora como 10h00 e a frequência como 2, irá irrigar as 10h00 e também às 17h00. O intervalo de tempo entre as irrigações em um dia é (24-(horário inicial)/frequência). Ou seja,
+          se o horário de início for 10h30 (10.50) e a freqûencia for 3, o cálculo será (24-10.5)/3, que é igual a 4.5. Dessa forma, a irrigação irá ocorrer a cada 4h30. (10h30,15h00,19h30).</p>
+          <p>Se a frequência de irrigação for definida como 0.5, a irrigação acontecerá na hora marcada dia sim,não,sim,não. Se a frequência de irrigação for definida como 0.3, a irrigação acontecerá na hora marcada dia sim,não,não,sim.</p>
+          <p>É possível deletar um valor/palavra ao escrever "x" ou "X" na caixa que altera o respectivo dado.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ##### OBSERVAÇÕES FINAL ##### -->
+
+  <!-- ##### RODAPÉ INICIO ##### -->
+  <div id="rodape"></div>
+  <!-- ##### RODAPÉ FINAL ##### -->
+
+  <!-- ##### All Javascript Files ##### -->
+  <!-- Popper js -->
+  <script src="js/bootstrap/popper.min.js"></script>
+  <!-- Bootstrap js -->
+  <script src="js/bootstrap/bootstrap.min.js"></script>
+  <!-- All Plugins js -->
+  <script src="js/plugins/plugins.js"></script>
+  <!-- Active js -->
+  <script src="js/active.js"></script>
+
+</body>
+
+</html>

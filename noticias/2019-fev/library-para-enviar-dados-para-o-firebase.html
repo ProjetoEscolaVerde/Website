@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Escol@Verde - Noticia</title>
+    <!-- Favicon -->
+    <link rel="icon" href="../../img/core-img/logo.png">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="../../style.css">
+    <!-- jQuery-3.3.1 js-->
+    <script src="../../js/jquery/jquery-3.3.1.js"></script>
+    <script src="../../js/jquery/initializeJquery-noticia.js"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBeTQnufXiBSfgHhFOiSLeT-RSI9NQUzEY",
+        authDomain: "escolaverde-portinari.firebaseapp.com",
+        databaseURL: "https://escolaverde-portinari.firebaseio.com",
+        projectId: "escolaverde-portinari",
+        storageBucket: "escolaverde-portinari.appspot.com",
+        messagingSenderId: "787796894461"
+      };
+      firebase.initializeApp(config);
+
+      firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {//----- USER CONNECTED -----//
+            user.providerData.forEach(function (profile) {
+            document.getElementById("textComment").innerHTML = 'Deixe um comentário ' + profile.displayName + '!';
+          });
+        }
+        });
+      </script>
+
+      <!-- LoginBar -->
+      <script src="../../loginBar.js"></script>
+
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-circle"></div>
+        <div class="preloader-img">
+            <img src="../../img/core-img/logo.png" alt="">
+        </div>
+    </div>
+
+    <!-- ##### CABEÇARIO INICIO + AbaLogin ##### -->
+    <div id="cabecario"></div>
+    <!-- ##### CABEÇARIO FINAL ##### -->
+
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="breadcrumb-area">
+        <!-- Top Breadcrumb Area -->
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(../../img/bg-img/24.jpg);">
+            <h2>Notícia</h2>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="../../inicio.html"><i class="fa fa-home"></i> Início</a></li>
+                            <li class="breadcrumb-item"><a href="../noticias.html">Notícias</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Notícia</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Blog Content Area Start ##### -->
+    <section class="blog-content-area section-padding-0-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Blog Posts Area -->
+                <div class="col-12 col-md-8">
+                    <div class="blog-posts-area">
+
+                        <!-- Post Details Area -->
+                        <div class="single-post-details-area">
+                            <div class="post-content">
+                                <h4 class="post-title">Library para enviar dados para o firebase</h4>
+                                <div class="post-meta mb-30">
+                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 06 fev 2019</a>
+                                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Breno Queiroz</a>
+                                </div>
+                                <div class="post-thumbnail mb-30">
+                                    <img src="../../img/news/4-TemperaturaHojeOntem.PNG" alt="">
+                                </div>
+                                <p>Finalmente a library para enviar dados de qualquer tipo de sensor para o firebase está funcionando! O envio de informações dos sensores para
+                                  o firebase depende de duas libraries. A primeira é utilizada no Arduino Mega e segundo no NodeMCU. Tentamos deixar a library da forma mais fácil
+                                  de utilizar mas por causa disso ela depende da utilização de um arduino e um nodeMCU para funcionar normalmente (Não é possível utilizá-la com somente uma placa).
+                                </p>
+                                <h4>Library send</h4>
+                                <p>A primeira library, que é utilizada no Arduino Mega, funciona da seguinte forma: Primeiramente é necessário utilizar ".addSensor" para cada sensor que for utilizar
+                                  (é possível definir o nome do sensor adicionado para facilitar o uso). Após adicionar cada sensor na library é necessário executar um ".updateValue" para cada sensor.
+                                  Nós estamos executando o update a cada minuto de forma que seja calculado a cada 30 minutos a média dos valores enviados. Finalmente, ao executar ".run" e for detectado
+                                  que chegou no final do ciclo de 30 minutos os valores das médias são enviados pelo serial para o NodeMCU.
+                                </p>
+                                <blockquote>
+                                <div class="post-thumbnail mb-30">
+                                    <img src="../../img/news/4-CodeSend.PNG" alt="">
+                                    <div class="text-center"><p>Código compilado no Arduino Mega durante os primeiros testes.</p></div>
+                                </div>
+                                </blockquote>
+
+                                <h4>Library read</h4>
+                                <p>A segundo library, que é utilizada no NodeMCU, funciona da seguinte forma: Primeiramente, assim como a primeira library, é são adicionados os sensores na library juntamente como o endereço onde serão armazenados os valores no firebase.
+                                  É necessário adicionar os sensores na mesma sequência que eles foram adicionados no código do Arduino Mega para evitar erros. Após isso, no loop, ao utilizar o "run" a
+                                  library detecta se existe alguma informação na porta serial. Se existir, ela adiciona o valor da média no endereço indicado no banco de dados do firebase + "/Today".
+                                  No final do dia é calculada a média dos valores do dia e este resultado é adicionado no banco de dados com o respectivo dia. Além disso, todos os valores em Today são copiados para Yesterday, no diretório, e em seguida os valores em Today são deletados.
+                                  Finalmente, em todo domingo é calculado a média de todos os valores da semana e o resultado é adicionado em Year.
+                                </p>
+                                <blockquote>
+                                  <div class="post-thumbnail mb-30">
+                                      <img src="../../img/news/4-CodeRead.PNG" alt="">
+                                      <div class="text-center"><p>Código compilado no NodeMCU durante os primeiros testes.</p></div>
+                                  </div>
+                                  </blockquote>
+
+                                <div class="row mb-30">
+                                    <div class="col-lg-6">
+                                          <img src="../../img/news/4-SensoresFirebase.PNG" alt="">
+                                          <div class="text-center"><p>Dados dos sensores no firebase.</p></div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="../../img/news/4-TemperaturaFirebase.PNG" alt="">
+                                          <div class="text-center"><p>Dados do sensor de temperatura no firabase.</p></div>
+                                    </div>
+                                </div>
+
+                                <h4>Envio de informações serial</h4>
+                                <p>No inicio da transmissão de dados, a library do Arduino Mega envia informações de hora e data. Após isso, as média dos valores coletados durante os 30 minutos são enviados para o NodeMCU.
+                                Todos os dados são enviados em bytes, então cada float de dado é transformado em 4 bytes na library.
+                                No início de cada transmissão de dados dos sensores, são enviado dois bytes (254 e 253) para informar o NodeMCU que é o início de uma sequência de bytes. Em seguida são enviados dois bytes iguais com o código do sensor para distinguir os dados recebidos na library do NodeMCU.
+                                No final de cada transmissão de dados pelo serial é enviado um byte de confirmação com a soma dos valores de todos os outros bytes. Nós estamos enviando este byte de confirmação
+                                para certificar que nenhum dado corrompido seja enviado para o banco de dados no firebase.
+                                </p>
+                                  <div class="row mb-30">
+                                  <div class="col-lg-12">
+                                  <img src="../../img/news/4-LibraryTrocaInformacoes.PNG" alt="">
+                                  <div class="text-center"><p>Envio dos bytes a primeira library para a segunda.</p></div>
+                                  </div>
+                                </div>
+                                <h4>Monitoramento dos dados pelo monitor serial</h4>
+                                <p>De forma a facilitar o monitoramento do que está acontecendo na transmissão dos dados e o andamento dos envios de informações do NodeMCU para o firebase,
+                                  cada library envia para o monitor serial do arduino todas as informações necessárias. No ínicio do recebimento de dados é informado a hora do ciclo. Após isso
+                                  é informado o nome do sensor que os dados estão sendo recebidos, o valor recebido e o diretório que será modificado no firebase. Para facilitar a leitura,
+                                  sempre que a library for escrever um valor no endereço do firebase aparece "SET" no início e sempre que ela estiver lendo um valor do firebase aparece "GET" no início.
+                                  O valor que será escrito no firebase ou foi recebido do firebase é informado no serial.
+                                </p>
+                                <div class="post-thumbnail mb-30">
+                                    <img src="../../img/news/4-LibraryMonitorSerial.PNG" alt="">
+                                    <div class="text-center"><p>Prints no monitor serial do arduino.</p></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Post Tags & Share -->
+                        <div class="post-tags-share d-flex justify-content-between align-items-center">
+                            <!-- Tags -->
+                            <ol class="popular-tags d-flex align-items-center flex-wrap">
+                                <li><span>Tag:</span></li>
+                                <li><a href="#">Automação</a></li>
+                                <li><a href="#">Website</a></li>
+                                <li><a href="#">Sensores</a></li>
+                            </ol>
+                            <!-- Share -->
+                            <div class="post-share">
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+
+
+
+
+                        <!-- Comentários -->
+                        <!-- Comment Area Start -->
+                        <div class="comment_area clearfix">
+                            <h4 class="headline" id="numComments">0 Comentários</h4>
+                           <ol id="pastComments">
+                                <!-- Comentarios -->
+
+                            </ol>
+                        </div>
+                        <form id="newcomment">
+                        </form>
+                      <script>
+                      var titleNews=location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+                      titleNews=titleNews.substring(0, titleNews.length - 5);//remove .html part
+
+                      var countComments=0;
+
+                        function showpastcomments() {
+                          var comments = document.getElementById('pastComments');
+                          var numberComments = document.getElementById('numComments');
+                          comments.innerHTML="";
+
+                          countComments=0;
+
+                          //Get comments whose from page equals this page's pathname.
+                          var commentsRef = firebase.database().ref('News/'+titleNews+"/").orderByChild('frompage');
+                          commentsRef.once('value', function (snapshot) {
+                            snapshot.forEach(function (itemSnapshot) {
+                              countComments++;
+                              //Get the object for one snapshot
+                              var itemData = itemSnapshot.val();
+                              var comment = itemData.Comment;
+                              var name = itemData.Name;
+                              var image = itemData.Image;
+                              var when = new Date(itemData.Time).toLocaleDateString("pt-br");
+                                console.log(name);
+                                console.log(comment);
+                                console.log(when);
+
+                                comments.innerHTML += "<li class='single_comment_area'>"+
+                                                          "<div class='comment-wrapper d-flex'>"+
+                                                          "<!-- Comment Meta -->"+
+                                                        "<div class='comment-author'>"+
+                                                              "<img src='"+image +"' alt=''>"+
+                                                          "</div>"+
+                                                          "<!-- Comment Content -->"+
+                                                          "<div class='comment-content'>"+
+                                                              "<div class='d-flex align-items-center justify-content-between'>"+
+                                                                  "<h5>"+name+"</h5>"+
+                                                                  "<span class='comment-date'>"+when+"</span>"+
+                                                              "</div>"+
+                                                              "<p>"+comment+"</p>"+
+                                                          "</div>"+
+                                                      "</div>"+
+                                                  "</li>";
+                              numberComments.innerHTML=countComments+" Comentários";
+
+                              })
+                            })
+                           }
+                       showpastcomments();
+                      </script>
+                        <!-- Leave A Comment -->
+                        <div class="NoUserLogin">
+                          <div class="leave-comment-area clearfix">
+                            <h4 class="headline">Faça login para deixar um comentário!</h4>
+                            <button  onclick="callGoogleSignIn()" class="btn alazea-btn " >Fazer login</button>
+                            <script>
+                              function callGoogleSignIn(){
+                                  var provider = new firebase.auth.GoogleAuthProvider();
+                                  firebase.auth().signInWithRedirect(provider);
+                                }
+                            </script>
+                          </div>
+                        </div>
+                      <div class="YesUserLogin">
+                        <div class="leave-comment-area clearfix">
+                            <div class="comment-form">
+                                <h4 class="headline" id="textComment">Deixe um comentário ...</h4>
+                                <h6 class="contactAlert">Seu comentário foi enviado.<h6>
+                                <div class="contact-form-area">
+                                    <!-- Comment Form -->
+                                    <form  method="post" id="contactForm">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <textarea class="form-control"  id="comment" name="mensagem" cols="30" rows="10" placeholder="Mensagem"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <!--<button  value="Enviar" class="btn alazea-btn active" disabled>Enviar</button>-->
+                                                <button  onclick="showpastcomments()"type="submit" class="btn alazea-btn " >Enviar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <script src="../../sendComment.js"></script>
+                        <script>
+                        var titleNews=location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+                        titleNews=titleNews.substring(0, titleNews.length - 5);//remove .html part
+                        newsInfo(titleNews);
+
+                        firebase.auth().onAuthStateChanged(function(user) {
+                            if (user) {//----- USER CONNECTED -----//
+                              console.log("User sign in");
+                              user.providerData.forEach(function (profile) {
+                               userInfo(profile.displayName,profile.email,profile.photoURL);
+                            });
+                          }
+                        });
+                      </script>
+                      </div>
+                    </div>
+                </div>
+
+                <!-- Blog Sidebar Area -->
+                <div class="col-12 col-sm-9 col-md-4">
+                    <div class="post-sidebar-area">
+
+                        <!-- ##### Single Widget Area ##### -->
+                        <div class="single-widget-area">
+                            <form action="#" method="get" class="search-form">
+                                <input type="search" name="search" id="widgetSearch" placeholder="Pesquisar...">
+                                <button type="submit"><i class="icon_search"></i></button>
+                            </form>
+                        </div>
+
+                        <!-- ##### Single Widget Area ##### -->
+                        <div class="single-widget-area">
+                            <!-- Author Widget -->
+                            <div class="author-widget">
+                                <div class="author-thumb-name d-flex align-items-center">
+                                    <div class="author-thumb">
+                                        <img src="../../img/equipe/brenoQ1.jpg" alt="">
+                                    </div>
+                                    <div class="author-name">
+                                        <h5>Breno Queiroz</h5>
+                                        <p>Programador</p>
+                                    </div>
+                                </div>
+                                <p>O carbono foi preso. O que ele disse? "Eu tenho direito a quatro ligações, senão quebro essa cadeia!"</p>
+                                <div class="social-info">
+                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ##### Single Widget Area ##### -->
+                        <div class="single-widget-area">
+                            <!-- Title -->
+                            <div class="widget-title">
+                                <h4>Postagens recentes</h4>
+                            </div>
+
+                            <!-- Single Latest Posts
+                            <div class="single-latest-post d-flex align-items-center">
+                                <div class="post-thumb">
+                                    <img src="../../img/bg-img/30.jpg" alt="">
+                                </div>
+                                <div class="post-content">
+                                    <a href="#" class="post-title">
+                                        <h6>New Harris Bugg design for Bridgewater</h6>
+                                    </a>
+                                    <a href="#" class="post-date">20 Jun 2018</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ##### Single Widget Area ##### -->
+                        <div class="single-widget-area">
+                            <!-- Title -->
+                            <div class="widget-title">
+                                <h4>Tags</h4>
+                            </div>
+                            <!-- Tags -->
+                            <ol class="popular-tags d-flex flex-wrap">
+                                <li><a href="#">AUTOMAÇÃO</a></li>
+                                <li><a href="#">PLANTAÇÃO</a></li>
+                                <li><a href="#">ESTRUTURA</a></li>
+                                <li><a href="#">SENSORES</a></li>
+                                <li><a href="#">EVENTOS</a></li>
+                                <li><a href="#">WEBSITE</a></li>
+                                <li><a href="#">DESIGN</a></li>
+                            </ol>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Blog Content Area End ##### -->
+
+    <!-- ##### RODAPÉ INICIO ##### -->
+    <div id="rodape"></div>
+    <!-- ##### RODAPÉ FINAL ##### -->
+
+    <!-- ##### All Javascript Files ##### -->
+    <!-- Popper js -->
+    <script src="../../js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="../../js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="../../js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="../../js/active.js"></script>
+</body>
+
+</html>

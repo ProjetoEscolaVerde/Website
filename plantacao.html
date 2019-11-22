@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <!-- Title -->
+  <title>Escol@Verde - Plantação</title>
+  <!-- Favicon -->
+  <link rel="icon" href="img/core-img/logo.png">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- jQuery-3.3.1 js-->
+  <script src="js/jquery/jquery-3.3.1.js"></script>
+  <script src="js/jquery/initializeJquery.js"></script>
+  <!-- Chart.js -->
+  <script src="js/Chart.min.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBeTQnufXiBSfgHhFOiSLeT-RSI9NQUzEY",
+      authDomain: "escolaverde-portinari.firebaseapp.com",
+      databaseURL: "https://escolaverde-portinari.firebaseio.com",
+      projectId: "escolaverde-portinari",
+      storageBucket: "escolaverde-portinari.appspot.com",
+      messagingSenderId: "787796894461"
+    };
+    firebase.initializeApp(config);
+
+    //---------- UPDATE VALUES FIREBASE ----------//
+    function updateSectorData(setor){
+          var configSectorRef = firebase.database().ref('ConfigSectors/Sector-'+setor);
+          configSectorRef.once('value', function (snapshot) {
+          var itemData = snapshot.val();
+          var cultura = itemData.Culture;if(cultura==null){cultura='-----';}
+          var plantado = itemData.Planted;if(plantado==null){plantado='--/--/----';}
+          var horaIrrig = itemData.Hour;if(horaIrrig==null){horaIrrig='--h--';}
+          var freqIrrig = itemData.Frequency;if(freqIrrig==null){freqIrrig='--.-';}
+          var adubo = itemData.Fertilizer;if(adubo==null){adubo='-----';}
+          var praga = itemData.Plague;if(praga==null){praga='---';}
+          var foto = itemData.Image;if(foto==null){foto='--/--/----';}
+
+          document.getElementById("cultura-s"+setor).innerHTML = '<i class="fa fa-leaf"></i> Cultura:' + cultura;
+          document.getElementById("plantado-s"+setor).innerHTML = '<i class="fa fa-clock-o"></i> Plantado: ' + plantado;
+          document.getElementById("hora-s"+setor).innerHTML = '<i class="fa fa-tint"></i> Hora irrig.: ' + horaIrrig;
+          document.getElementById("freq-s"+setor).innerHTML = '<i class="fa fa-tint"></i> Freq irrig.: ' + freqIrrig;
+          document.getElementById("adubo-s"+setor).innerHTML = '<i class="fa fa-bitbucket"></i> Tipo de adubo: ' + adubo;
+          document.getElementById("praga-s"+setor).innerHTML = '<i class="fa fa-bug"></i> Praga? ' + praga;
+          document.getElementById("foto-s"+setor).innerHTML = '<i class="fa fa-picture-o"></i> Foto: ' + foto;
+        }, function(error) {
+          if (error) {
+            alert(setor +" do not exist");
+              var cultura = '-----';
+              var plantado = '--/--/----';
+              var horaIrrig = '--h--';
+              var freqIrrig = '--.-';
+              var adubo = '-----';
+              var praga = '---';
+              var foto = '--/--/----';
+
+              document.getElementById("cultura-s"+setor).innerHTML = '<i class="fa fa-leaf"></i> Cultura: ' + cultura;
+              document.getElementById("plantado-s"+setor).innerHTML = '<i class="fa fa-clock-o"></i> Plantado: ' + plantado;
+              document.getElementById("hora-s"+setor).innerHTML = '<i class="fa fa-tint"></i> Hora irrig.: ' + horaIrrig;
+              document.getElementById("freq-s"+setor).innerHTML = '<i class="fa fa-tint"></i> Freq irrig.: ' + freqIrrig;
+              document.getElementById("adubo-s"+setor).innerHTML = '<i class="fa fa-bitbucket"></i> Tipo de adubo: ' + adubo;
+              document.getElementById("praga-s"+setor).innerHTML = '<i class="fa fa-bug"></i> Praga? ' + praga;
+              document.getElementById("foto-s"+setor).innerHTML = '<i class="fa fa-picture-o"></i> Foto: ' + foto;
+          }
+        });
+      }
+
+    for(var i=1;i<=7;i++)//update all sectors data
+      updateSectorData(i);
+
+    var configSectorRef = firebase.database().ref('ConfigSectors');
+    configSectorRef.on('value', function(snapshot) {
+      for(var i=1;i<=7;i++){
+        var SectorRef = firebase.database().ref('ConfigSectors/Sector-'+i);
+        SectorRef.on('value', function(snapshot) {
+          //update all sectors data
+            updateSectorData(i);
+        });
+      }
+    });
+
+    </script>
+    <!-- LoginBar -->
+    <script src="loginBar.js"></script>
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div class="preloader d-flex align-items-center justify-content-center">
+    <div class="preloader-circle"></div>
+    <div class="preloader-img">
+      <img src="img/core-img/logo.png" alt="">
+    </div>
+  </div>
+
+  <!-- ##### CABEÇARIO INICIO + PreLoader + AbaLogin ##### -->
+  <div id="cabecario">
+  </div>
+  <!-- ##### CABEÇARIO FINAL ##### -->
+
+  <!-- ##### Breadcrumb Area Start ##### -->
+  <div class="breadcrumb-area">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+      <h2>Plantação</h2>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i> Início</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Plantação</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ##### Breadcrumb Area End ##### -->
+
+  <!-- ##### Types do graph Start ##### -->
+  <section class="about-us-area">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-12 col-lg-9">
+          <!-- Section Heading -->
+          <div class="section-heading ">
+            <h2 class="text-center">Setores</h2><br>
+            <p>Atualmente contamos com um total de 7 setores para platação. Em cada uma pretendemos plantar um tipo de cultura diferente.
+            Apesar de ainda não estar em funcionamento no momento, cada setores será irrigado automaticamente de acordo com a plantação em cada local,
+          podendo variar as configurações individuais de cada setor para o horário de irrigação, frequência de irrigação e quatidade de água. Essas configurações
+        dependem de qual cultura está sendo plantada.</p>
+          </div>
+          </div>
+        <div class="col-12 col-lg-3">
+          <img src="img/estrutura/interior.jpg" alt="">
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="border-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ##### Types do graph End ##### -->
+
+  <!-- ##### Setor Area Start ##### -->
+  <section class="our-services-area bg-gray section-padding-100-0">
+  <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <!-- Section Heading -->
+          <div class="section-heading text-center">
+            <h2>Situação dos setores</h2>
+            <p>Os dados não são alteradas todos os dias.</p>
+          </div>
+        </div>
+      </div>
+      <div class="section-heading">
+        <div class="row ">
+            <!-- ##### Setor 1 ##### -->
+            <div class="col-12 col-lg-4">
+            <!-- Section Heading -->
+              <h3><i class="fa fa-list-ul"></i>&nbsp;Setor 1</h3>
+              <h6 class="contactAlert updatedSector1">Alteração no setor 1 realizada!<h6>
+              <h6 id="cultura-s1"><i class="fa fa-leaf"></i>Cultura: -----</h6>
+              <h6 id="plantado-s1"><i class="fa fa-clock-o"></i> Plantado: --/--/----</h6>
+              <h6 id="hora-s1"><i class="fa fa-tint"></i> Hora irrig.: --h--</h6>
+              <h6 id="freq-s1"><i class="fa fa-tint"></i> Freq irrig.: --.-</h6>
+              <h6 id="adubo-s1"><i class="fa fa-bitbucket"></i> Tipo de adubo: -----</h6>
+              <h6 id="praga-s1"><i class="fa fa-bug"></i> Praga? ---</h6>
+              <h6 id="foto-s1"><i class="fa fa-picture-o"></i> Foto: --/--/----</h6>
+              <img src="img/monitore-plantação/setor1.jpg"></img>
+              <br> </br>
+            </div>
+            <!-- ##### Setor 2 ##### -->
+            <div class="col-12 col-lg-4">
+              <!-- Section Heading -->
+              <h3><i class="fa fa-list-ul"></i>&nbsp;Setor 2</h3>
+              <h6 class="contactAlert updatedSector2">Alteração no setor 2 realizada!<h6>
+
+              <h6 id="cultura-s2"><i class="fa fa-leaf"></i> Cultura: -----</h6>
+              <h6 id="plantado-s2"><i class="fa fa-clock-o"></i> Plantado: --/--/----</h6>
+              <h6 id="hora-s2"><i class="fa fa-tint"></i> Hora irrig.: --h--</h6>
+              <h6 id="freq-s2"><i class="fa fa-tint"></i> Freq irrig.: --.-</h6>
+              <h6 id="adubo-s2"><i class=" fa fa-bitbucket"></i> Tipo de adubo: -----</h6>
+              <h6 id="praga-s2"><i class="fa fa-bug"></i> Praga? -</h6>
+              <h6 id="foto-s2"><i class="fa fa-picture-o"></i> Foto: --/--/----</h6>
+              <img src="img/monitore-plantação/setor2.jpg"></img>
+              <br> </br>
+            </div>
+            <!-- ##### Setor 3 ##### -->
+            <div class="col-12 col-lg-4">
+              <!-- Section Heading -->
+              <h3><i class="fa fa-list-ul"></i>&nbsp;Setor 3</h3>
+              <h6 class="contactAlert updatedSector3">Alteração no setor 3 realizada!<h6>
+
+              <h6 id="cultura-s3"><i class="fa fa-leaf"></i> Cultura: -----</h6>
+              <h6 id="plantado-s3"><i class="fa fa-clock-o"></i> Plantado: --/--/----</h6>
+              <h6 id="hora-s3"><i class="fa fa-tint"></i> Hora irrig.: --h--</h6>
+              <h6 id="freq-s3"><i class="fa fa-tint"></i> Freq irrig.: --.-</h6>
+              <h6 id="adubo-s3"><i class=" fa fa-bitbucket"></i> Tipo de adubo: -----</h6>
+              <h6 id="praga-s3"><i class="fa fa-bug"></i> Praga? -</h6>
+              <h6 id="foto-s3"><i class="fa fa-picture-o"></i> Foto: --/--/----</h6>
+              <img src="img/monitore-plantação/setor3.jpg"></img>
+              <br> </br>
+            </div>
+        </div>
+            <div class="row section-heading">
+            <!-- ##### Setor 4 ##### -->
+              <div class="col-12 col-lg-4">
+              <!-- Section Heading -->
+              <h3><i class="fa fa-list-ul"></i>&nbsp;Setor 4</h3>
+              <h6 class="contactAlert updatedSector4">Alteração no setor 4 realizada!<h6>
+
+              <h6 id="cultura-s4"><i class="fa fa-leaf"></i> Cultura: -----</h6>
+              <h6 id="plantado-s4"><i class="fa fa-clock-o"></i> Plantado: --/--/----</h6>
+              <h6 id="hora-s4"><i class="fa fa-tint"></i> Hora irrig.: --h--</h6>
+              <h6 id="freq-s4"><i class="fa fa-tint"></i> Freq irrig.: --.-</h6>
+              <h6 id="adubo-s4"><i class=" fa fa-bitbucket"></i> Tipo de adubo: -----</h6>
+              <h6 id="praga-s4"><i class="fa fa-bug"></i> Praga? -</h6>
+              <h6 id="foto-s4"><i class="fa fa-picture-o"></i> Foto: --/--/----</h6>
+              <img src="img/monitore-plantação/setor4.jpg"></img>
+              <br> </br>
+            </div>
+            <!-- ##### Setor 5 ##### -->
+              <div class="col-12 col-lg-4">
+              <!-- Section Heading -->
+              <h3><i class="fa fa-list-ul"></i>&nbsp;Setor 5</h3>
+              <h6 class="contactAlert updatedSector5">Alteração no setor 5 realizada!<h6>
+
+              <h6 id="cultura-s5"><i class="fa fa-leaf"></i> Cultura: -----</h6>
+              <h6 id="plantado-s5"><i class="fa fa-clock-o"></i> Plantado: --/--/----</h6>
+              <h6 id="hora-s5"><i class="fa fa-tint"></i> Hora irrig.: --h--</h6>
+              <h6 id="freq-s5"><i class="fa fa-tint"></i> Freq irrig.: --.-</h6>
+              <h6 id="adubo-s5"><i class=" fa fa-bitbucket"></i> Tipo de adubo: -----</h6>
+              <h6 id="praga-s5"><i class="fa fa-bug"></i> Praga? -</h6>
+              <h6 id="foto-s5"><i class="fa fa-picture-o"></i> Foto: --/--/----</h6>
+              <img src="img/monitore-plantação/setor5.jpg"></img>
+              <br> </br>
+            </div>
+            <!-- ##### Setor 6 ##### -->
+              <div class="col-12 col-lg-4">
+              <!-- Section Heading -->
+              <h3><i class="fa fa-list-ul"></i>&nbsp;Setor 6</h3>
+              <h6 class="contactAlert updatedSector6">Alteração no setor 6 realizada!<h6>
+
+              <h6 id="cultura-s6"><i class="fa fa-leaf"></i> Cultura: -----</h6>
+              <h6 id="plantado-s6"><i class="fa fa-clock-o"></i> Plantado: --/--/----</h6>
+              <h6 id="hora-s6"><i class="fa fa-tint"></i> Hora irrig.: --h--</h6>
+              <h6 id="freq-s6"><i class="fa fa-tint"></i> Freq irrig.: --.-</h6>
+              <h6 id="adubo-s6"><i class=" fa fa-bitbucket"></i> Tipo de adubo: -----</h6>
+              <h6 id="praga-s6"><i class="fa fa-bug"></i> Praga? -</h6>
+              <h6 id="foto-s6"><i class="fa fa-picture-o"></i> Foto: --/--/----</h6>
+              <img src="img/monitore-plantação/setor6.jpg"></img>
+              <br> </br>
+            </div>
+        </div>
+          <div class="row section-heading">
+              <!-- ##### Setor 7 ##### -->
+                <div class="col-12 col-lg-4">
+                <!-- Section Heading -->
+                <h3><i class="fa fa-list-ul"></i>&nbsp;Setor 7</h3>
+                <h6 class="contactAlert updatedSector7">Alteração no setor 7 realizada!<h6>
+
+                <h6 id="cultura-s7"><i class="fa fa-leaf"></i> Cultura: -----</h6>
+                <h6 id="plantado-s7"><i class="fa fa-clock-o"></i> Plantado: --/--/----</h6>
+                <h6 id="hora-s7"><i class="fa fa-tint"></i> Hora irrig.: --h--</h6>
+                <h6 id="freq-s7"><i class="fa fa-tint"></i> Freq irrig.: --.-</h6>
+                <h6 id="adubo-s7"><i class=" fa fa-bitbucket"></i> Tipo de adubo: -----</h6>
+                <h6 id="praga-s7"><i class="fa fa-bug"></i> Praga? -</h6>
+                <h6 id="foto-s7"><i class="fa fa-picture-o"></i> Foto: --/--/----</h6>
+                <img src="img/monitore-plantação/setor7.jpg"></img>
+                <br> </br>
+              </div>
+          </div>
+    </div>
+  </section>
+  <!-- ##### CO Area End ##### -->
+  <!-- ##### CO Area Start ##### -->
+  <section class="our-services-area section-padding-100-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <!-- Section Heading -->
+          <div class="section-heading text-center">
+            <h2>Observações</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="row align-items-center justify-content-between">
+        <div class="col-12 col-lg-9">
+          <div class="alazea-service-area mb-100">
+            <p>Usamos borra de café, casca de ovo e casca de banana, além de minhocas e humos da nossa composteira, para adubar o solo dos setores de forma orgânica.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ##### RODAPÉ INICIO ##### -->
+  <div id="rodape"></div>
+  <!-- ##### RODAPÉ FINAL ##### -->
+
+  <!-- ##### All Javascript Files ##### -->
+  <!-- Popper js -->
+  <script src="js/bootstrap/popper.min.js"></script>
+  <!-- Bootstrap js -->
+  <script src="js/bootstrap/bootstrap.min.js"></script>
+  <!-- All Plugins js -->
+  <script src="js/plugins/plugins.js"></script>
+  <!-- Active js -->
+  <script src="js/active.js"></script>
+
+</body>
+
+</html>

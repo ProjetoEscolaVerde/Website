@@ -10,19 +10,35 @@
 
   <!-- Title -->
   <title>Escol@Verde - Umidade</title>
-
   <!-- Favicon -->
   <link rel="icon" href="img/core-img/logo.png">
 
   <!-- Core Stylesheet -->
   <link rel="stylesheet" href="style.css">
-
+  <!-- jQuery-3.3.1 js-->
+  <script src="js/jquery/jquery-3.3.1.js"></script>
+  <script src="js/jquery/initializeJquery.js"></script>
   <!-- Chart.js -->
   <script src="js/Chart.min.js"></script>
   <!-- Firebase -->
-  <script src="js/firebase.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBeTQnufXiBSfgHhFOiSLeT-RSI9NQUzEY",
+      authDomain: "escolaverde-portinari.firebaseapp.com",
+      databaseURL: "https://escolaverde-portinari.firebaseio.com",
+      projectId: "escolaverde-portinari",
+      storageBucket: "escolaverde-portinari.appspot.com",
+      messagingSenderId: "787796894461"
+    };
+    firebase.initializeApp(config);
 
+    </script>
+    <!-- LoginBar -->
+    <script src="loginBar.js"></script>
 </head>
 
 <body>
@@ -55,7 +71,7 @@
                   <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle mr-30" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Língua</button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="inicio.html">Português</a>
+                      <a class="dropdown-item" href="index.html">Português</a>
                       <a class="dropdown-item" href="inicioEN.html">English</a>
                     </div>
                   </div>
@@ -79,7 +95,7 @@
           <nav class="classy-navbar justify-content-between" id="alazeaNav">
 
             <!-- Nav Brand -->
-            <a href="inicio.html" class="nav-brand"><img src="img/core-img/logo-80px.png" alt=""></a>
+            <a href="index.html" class="nav-brand"><img src="img/core-img/logo-80px.png" alt=""></a>
 
             <!-- Navbar Toggler -->
             <div class="classy-navbar-toggler">
@@ -97,7 +113,7 @@
               <!-- Navbar Start -->
               <div class="classynav">
                 <ul>
-                  <li><a href="inicio.html">Início</a></li>
+                  <li><a href="index.html">Início</a></li>
                   <li><a href="#">O projeto</a>
                     <ul class="dropdown">
                       <li><a href="apresentacao.html">Apresentação</a></li>
@@ -118,7 +134,7 @@
                       <li><a href="plantacao.html">Plantação</a></li>
                       <li><a href="solo.html">Solo</a>
                         <ul class="dropdown">
-                          <li><a href="umidade.html">Umidade</a></li>
+                          <li><a href="umidade-do-solo.html">Umidade</a></li>
                         </ul>
                       </li>
                       <li><a href="atmosfera.html">Atmosfera</a>
@@ -187,7 +203,7 @@
         <div class="col-12">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="inicio.html"><i class="fa fa-home"></i> Início</a></li>
+              <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i> Início</a></li>
               <li class="breadcrumb-item "><a href="atmosfera.html">Atmosfera</a></li>
               <li class="breadcrumb-item active" aria-current="page">Umidade</li>
             </ol>
@@ -269,186 +285,174 @@
 
       <div class="row align-items-center justify-content-between">
 
-          <!-- Gráfico hoje -->
+        <!-- Gráfico diário -->
+        <div class="col-12 col-lg-12">
+          <h4 class="text-center">Hoje</h4>
+          <div class="graph-sensor">
+            <canvas id="chart-today" height="70"></canvas>
+
+            <script>
+              var database;
+              var valuesToday = [];
+              var data;
+              var cont=0;
+
+
+
+              // Create references
+              const dbRefObjectSensorToday = firebase.database().ref('Sensors').child('Humidity').child('Today');
+              // Syn objects
+              dbRefObjectSensorToday.on('value', snap => {
+                //console.log(snap.val());
+              });
+              if(cont==0){
+                cont=1;
+
+
+                dbRefObjectSensorToday.once('value', function(snapshot) {
+                  snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    var childData = childSnapshot.val();
+                    var hour = childKey[0]+childKey[1];
+                    var min = childKey[3]+childKey[4];
+                    var number=hour*2+(min/30);
+                    //console.log(number);
+                    valuesToday[number] = childData;
+                    cont=0;
+
+
+                    var sensor = document.getElementById('chart-today');
+                    var sensorChart = new Chart(sensor, {
+                      type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                      data: {
+                        labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                          '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                          '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                          '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                          '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                          '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                        ],
+                        datasets: [{
+                          label: "Umidade (%)",
+                          data: valuesToday,
+                          borderWidth: 3,
+                          borderColor: 'rgba(20,255,20,0.85)',
+                          backgroundColor: 'transparent',
+                          fill: false,
+                        },
+                      ]
+                      },
+                      options: {}
+                    });
+                  })
+                })
+              }
+            </script>
+          </div>
+        </div>
+
+        <!-- Gráfico Ontem -->
+        <div class="col-12 col-lg-12">
+          <h4 class="text-center">Ontem</h4>
+          <div class="graph-sensor">
+            <canvas id="chart-yest" height="70"></canvas>
+
+            <script>
+              var database;
+              var valuesYest = [];
+              var data;
+              var cont=0;
+
+
+
+              // Create references
+              const dbRefObjectSensorYest = firebase.database().ref('Sensors').child('Humidity').child('Yesterday');
+              // Syn objects
+              dbRefObjectSensorYest.on('value', snap => {
+                //console.log(snap.val());
+              });
+              if(cont==0){
+                cont=1;
+
+
+                dbRefObjectSensorYest.once('value', function(snapshot) {
+                  snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    var childData = childSnapshot.val();
+                    var hour = childKey[0]+childKey[1];
+                    var min = childKey[3]+childKey[4];
+                    var number=hour*2+(min/30);
+                    //console.log(number);
+                    valuesYest[number] = childData;
+                    cont=0;
+
+
+                    var sensor = document.getElementById('chart-yest');
+                    var sensorChart = new Chart(sensor, {
+                      type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                      data: {
+                        labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                          '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                          '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                          '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                          '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                          '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                        ],
+                        datasets: [{
+                          label: "Umidade (%)",
+                          data: valuesYest,
+                          borderWidth: 3,
+                          borderColor: 'rgba(20,255,20,0.85)',
+                          backgroundColor: 'transparent',
+                          fill: false,
+                        },
+                      ]
+                      },
+                      options: {}
+                    });
+                  })
+                })
+              }
+            </script>
+            </div>
+          </div>
+
+          <!-- Gráfico mês -->
           <div class="col-12 col-lg-12">
-          <div class="alazea-service-area mb-100">
-            <h4 class="text-center">Hoje</h4>
-            <div class="graph-day">
-              <canvas id="umi-chart-day" height="75"></canvas>
+            <h4 class="text-center">Mês atual</h4>
+            <div class="graph-sensor">
+              <canvas id="chart-month" height="70"></canvas>
 
               <script>
                 var database;
-                var umiDayValues = []; //umidade em %
+                var valuesMonth = [];
                 var data;
-                var count = 0;
-                var lastCount = 0;
+                var cont=0;
 
-                var config = {
-                  apiKey: "AIzaSyBeTQnufXiBSfgHhFOiSLeT-RSI9NQUzEY",
-                  authDomain: "escolaverde-portinari.firebaseapp.com",
-                  databaseURL: "https://escolaverde-portinari.firebaseio.com",
-                  projectId: "escolaverde-portinari",
-                  storageBucket: "escolaverde-portinari.appspot.com",
-                  messagingSenderId: "787796894461"
-                };
-                firebase.initializeApp(config);
+
 
                 // Create references
-                const dbRefObjectDay = firebase.database().ref('Sensors').child('Humidity').child('Today');
-
+                const dbRefObjectSensorMonth = firebase.database().ref('Sensors').child('Humidity').child('Month');
                 // Syn objects
-                dbRefObjectDay.on('value', snap => {
+                dbRefObjectSensorMonth.on('value', snap => {
                   //console.log(snap.val());
                 });
 
-                do {
+                if(cont==0){
+                  cont=1;
 
-                  dbRefObjectDay.once('value', function(snapshot) {
+
+                  dbRefObjectSensorMonth.once('value', function(snapshot) {
                     snapshot.forEach(function(childSnapshot) {
                       var childKey = childSnapshot.key;
                       var childData = childSnapshot.val();
-
-                      umiDayValues[count] = childData;
-                      count++;
-
-                      var umiDay = document.getElementById('umi-chart-day');
-
-                      var dayUmiChart = new Chart(umiDay, {
-                        type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
-                        data: {
-                          labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
-                            '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
-                            '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
-                            '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
-                            '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
-                            '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
-                          ],
-                          datasets: [{
-                            label: "Umidade(%)",
-                            data: umiDayValues,
-                            borderWidth: 3,
-                            borderColor: 'rgba(20,255,20,0.85)',
-                            backgroundColor: 'transparent',
-                            fill: false,
-                          }]
-                        },
-                        options: {}
-                      });
-                    })
-                  })
-                } while (count != lastCount)
-              </script>
-            </div>
-          </div>
-        </div>
-        <!-- Gráfico ontem -->
-        <div class="col-12 col-lg-12">
-          <div class="alazea-service-area mb-100">
-            <h4 class="text-center">Ontem</h4>
-            <div class="graph-yest">
-              <canvas id="umi-chart-yest" height="75"></canvas>
-
-              <script>
-                var database;
-                var umiYestValues = []; //umidade em %
-
-                var data;
-                var countYest = 0;
-                var lastCountYest = 0;
+                      //console.log(number);
+                      valuesMonth[childKey-1] = childData;
+                      cont=0;
 
 
-                // Create references
-                const dbRefObjectYest = firebase.database().ref('Sensors').child('Humidity').child('Yesterday');
-
-                // Syn objects
-                dbRefObjectYest.on('value', snap => {
-                  console.log(snap.val());
-                });
-
-                do {
-                  lastCountYest = countYest;
-
-                  dbRefObjectYest.once('value', function(snapshot) {
-                    snapshot.forEach(function(childSnapshot) {
-                      console.log(childSnapshot.keys);
-                      var childKey = childSnapshot.key;
-                      var childData = childSnapshot.val();
-
-                      umiYestValues[countYest] = childData;
-
-                      countYest++;
-
-
-                      var umiYest = document.getElementById('umi-chart-yest');
-
-                      var yestUmiChart = new Chart(umiYest, {
-                        type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
-                        data: {
-                          labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
-                            '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
-                            '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
-                            '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
-                            '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
-                            '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
-                          ],
-                          datasets: [{
-                            label: "Umidade (%)",
-                            data: umiYestValues,
-                            borderWidth: 3,
-                            borderColor: 'rgba(20,255,20,0.85)',
-                            backgroundColor: 'transparent',
-                            fill: false,
-                          }]
-                        },
-                        options: {}
-                      });
-                    })
-                  })
-                } while (countYest != lastCountYest)
-              </script>
-            </div>
-          </div>
-        </div>
-        <!-- Gráfico mensal -->
-        <div class="col-12 col-lg-12">
-          <div class="alazea-service-area mb-100">
-            <h4 class="text-center">Mês atual</h4>
-            <div class="graph-month">
-              <canvas id="umi-chart-month" height="75"></canvas>
-
-              <script>
-                var database;
-                var umiMonthValues = [];//umidade em %
-
-                var data;
-                var countMonth = 0;
-                var lastCountMonth = 0;
-
-
-                // Create references
-                const dbRefObjectMonth = firebase.database().ref('Sensors').child('Humidity').child('Month');
-
-                // Syn objects
-                dbRefObjectMonth.on('value', snap => {
-                  console.log(snap.val());
-                });
-
-                do {
-                  lastCountMonth = countMonth;
-
-                  dbRefObjectMonth.once('value', function(snapshot) {
-                    snapshot.forEach(function(childSnapshot) {
-                      console.log(childSnapshot.keys);
-                      var childKey = childSnapshot.key;
-                      var childData = childSnapshot.val();
-
-                      umiMonthValues[countMonth] = childData;
-                      countMonth++;
-
-
-                      var umiMonth = document.getElementById('umi-chart-month');
-
-                      var monthUmiChart = new Chart(umiMonth, {
+                      var sensor = document.getElementById('chart-month');
+                      var sensorChart = new Chart(sensor, {
                         type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
                         data: {
                           labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
@@ -457,82 +461,91 @@
                           ],
                           datasets: [{
                             label: "Umidade (%)",
-                            data: umiMonthValues,
+                            data: valuesMonth,
                             borderWidth: 3,
                             borderColor: 'rgba(20,255,20,0.85)',
                             backgroundColor: 'transparent',
                             fill: false,
-                          }]
+                          },
+                        ]
                         },
                         options: {}
                       });
                     })
                   })
-                } while (countMonth != lastCountMonth)
+                }
               </script>
+              </div>
             </div>
-          </div>
-        </div>
-        <!-- Gráfico anual -->
-        <div class="col-12 col-lg-12">
-          <div class="alazea-service-area mb-100">
+          <!-- Gráfico ano -->
+          <div class="col-12 col-lg-12">
             <h4 class="text-center">Anual</h4>
-            <div class="graph-years">
-              <canvas id="umi-chart-years" height="75"></canvas>
+            <div class="graph-sensor">
+              <canvas id="chart-year" height="70"></canvas>
 
               <script>
                 var database;
-                var umiYearValues = []; //umidade em %
+                var valuesYear = [];
                 var data;
-                var countYear = 0;
-                var lastCountYear = 0;
+                var cont=0;
 
                 // Create references
-                const dbRefObjectYear = firebase.database().ref('Sensors').child('Humidity').child('Years');
-
+                const dbRefObjectSensorYear = firebase.database().ref('Sensors').child('Humidity').child('Years');
                 // Syn objects
-                dbRefObjectYear.on('value', snap => {
-                  console.log(snap.val());
+                dbRefObjectSensorYear.on('value', snap => {
+                  //console.log(snap.val());
                 });
+                if(cont==0){
+                  cont=1;
 
-                do {
 
-                  dbRefObjectYear.once('value', function(snapshot) {
+                  dbRefObjectSensorYear.once('value', function(snapshot) {
                     snapshot.forEach(function(childSnapshot) {
-                      console.log(childSnapshot.keys);
                       var childKey = childSnapshot.key;
                       var childData = childSnapshot.val();
+                      var weekYear = childKey[9];
+                      console.log(weekYear);
+                      valuesYear[weekYear-1] = childData;
+                      cont=0;
 
-                      umiYearValues[countYear] = childData;
-
-                      countYear++;
-
-
-                      var umiYear = document.getElementById('umi-chart-years');
-
-                      var yearUmiChart = new Chart(umiYear, {
+                      var sensor = document.getElementById('chart-year');
+                      var sensorChart = new Chart(sensor, {
                         type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
                         data: {
-                          labels: ['2018-dez1', '2018-jan2', '2018-jan3', '2018-jan4',
-                            '2018-fev1', '2018-fev2', '2018-fev3', '2018-fev4'
+                          labels: ["2019-jan-1","2019-jan-2","2019-jan-3","2019-jan-4",
+                                  "2019-fev-1","2019-fev-2","2019-fev-3","2019-fev-4",
+                                  "2019-mar-1","2019-mar-2","2019-mar-3","2019-mar-4",
+                                  "2019-abr-1","2019-abr-2","2019-abr-3","2019-abr-4","2019-abr-5",
+                                  "2019-mai-1","2019-mai-2","2019-mai-3","2019-mai-4",
+                                  "2019-jun-1","2019-jun-2","2019-jun-3","2019-jun-4",
+                                  "2019-jul-1","2019-jul-2","2019-jul-3","2019-jul-4","2019-jul-5",
+                                  "2019-ago-1","2019-ago-2","2019-ago-3","2019-ago-4",
+                                  "2019-set-1","2019-set-2","2019-set-3","2019-set-4","2019-set-5",
+                                  "2019-out-1","2019-out-2","2019-out-3","2019-out-4",
+                                  "2019-nov-1","2019-nov-2","2019-nov-3","2019-nov-4",
+                                  "2019-dez-1","2019-dez-2","2019-dez-3","2019-dez-4","2019-dez-5"
                           ],
                           datasets: [{
                             label: "Umidade (%)",
-                            data: umiYearValues,
+                            data: valuesYear,
                             borderWidth: 3,
                             borderColor: 'rgba(20,255,20,0.85)',
                             backgroundColor: 'transparent',
                             fill: false,
-                          }]
+                          },
+                        ]
                         },
                         options: {}
                       });
                     })
                   })
-                } while (countYear != lastCountYear)
+
+
+                }
               </script>
+              </div>
             </div>
-          </div>
+
         </div>
       </div>
     </div>
@@ -571,18 +584,18 @@
   </section>
   <!-- ##### Humidity Area End ##### -->
 
-  <!-- ##### Testimonial Area Start ##### -->
+  <!-- ##### Testimonial Area Start #####
   <section class="testimonial-area section-padding-100">
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <!-- Section Heading -->
+          <!-- Section Heading
           <div class="section-heading text-center">
             <h2>Utilização nas aula</h2>
           </div>
           <div class="testimonials-slides owl-carousel">
 
-            <!-- Single Testimonial Slide -->
+            <!-- Single Testimonial Slide
             <div class="single-testimonial-slide">
               <div class="row align-items-center">
                 <div class="col-12 col-md-4">
@@ -592,7 +605,7 @@
                 </div>
                 <div class="col-12 col-md-8">
                   <div class="testimonial-content">
-                    <!-- Section Heading -->
+                    <!-- Section Heading
                     <div class="section-heading">
                       <h4>Variação anual</h4>
                     </div>
@@ -605,7 +618,7 @@
               </div>
             </div>
 
-            <!-- Single Testimonial Slide -->
+            <!-- Single Testimonial Slide
             <div class="single-testimonial-slide">
               <div class="row align-items-center">
                 <div class="col-12 col-md-4">
@@ -615,7 +628,7 @@
                 </div>
                 <div class="col-12 col-md-8">
                   <div class="testimonial-content">
-                    <!-- Section Heading -->
+                    <!-- Section Heading --
                     <div class="section-heading">
                       <h4>Variação diária</h4>
                     </div>
@@ -627,7 +640,7 @@
                 </div>
               </div>
             </div>
-            <!-- Single Testimonial Slide -->
+            <!-- Single Testimonial Slide --
             <div class="single-testimonial-slide">
               <div class="row align-items-center">
                 <div class="col-12 col-md-4">
@@ -637,7 +650,7 @@
                 </div>
                 <div class="col-12 col-md-8">
                   <div class="testimonial-content">
-                    <!-- Section Heading -->
+                    <!-- Section Heading --
                     <div class="section-heading">
                       <h4>Temperatura em estufas</h4>
                     </div>
@@ -671,14 +684,14 @@
               <div class="footer-logo mb-30">
                 <a href="#"><img src="img/core-img/logo.png" alt=""></a>
               </div>
-              <p>Entre em contato e acompanhe nosso trabalho pelas redes sociais!</p>
+              <!--<p>Entre em contato e acompanhe nosso trabalho pelas redes sociais!</p>
               <div class="social-info">
                 <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-              </div>
+              </div>-->
             </div>
           </div>
 
@@ -755,7 +768,7 @@
             <div class="footer-nav">
               <nav>
                 <ul>
-                  <li><a href="inicio.html">Início</a></li>
+                  <li><a href="index.html">Início</a></li>
                   <li><a href="apresentacao.html">O projeto</a></li>
                   <li><a href="noticias.html">Notícias</a></li>
                   <li><a href="monitore.html">Monitore</a></li>

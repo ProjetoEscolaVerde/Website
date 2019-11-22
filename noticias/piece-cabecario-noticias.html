@@ -1,0 +1,188 @@
+<html>
+<head>
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <!-- ##### CABEÇARIO INICIO ##### -->
+  <header class="header-area">
+      <!-- ***** Top Header Area ***** -->
+      <div class="top-header-area">
+          <div class="container">
+              <div class="row">
+                  <div class="col-12">
+                      <div class="top-header-content d-flex align-items-center justify-content-between">
+                          <!-- Top Header Content -->
+                          <div class="top-header-meta">
+                              <a href="#" data-toggle="tooltip" data-placement="bottom" title="escolaverdeportinari@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email: escolaverdeportinari@gmail.com</span></a>
+                          </div>
+
+                          <!-- Top Header Content -->
+                          <div class="top-header-meta d-flex">
+                              <!-- Language Dropdown -->
+                              <div class="language-dropdown">
+                                  <div class="dropdown">
+                                      <button class="btn btn-secondary dropdown-toggle mr-30" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Língua</button>
+                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="../index.html">Português</a>
+                                          <a class="dropdown-item" href="../EN/inicioEN.html">English</a>
+                                      </div>
+                                  </div>
+                              </div>
+                              <!-- Login -->
+                              <div class="NoUserLogin">
+                                <a href="#" onclick="callGoogleSignIn()"><i class="fa fa-user"  aria-hidden="true"></i>  Login</a>
+
+                              <script>
+                                function callGoogleSignIn(){
+                                    var provider = new firebase.auth.GoogleAuthProvider();
+                                    firebase.auth().signInWithRedirect(provider);
+                                  }
+                              </script>
+                              </div>
+                              <!-- User -->
+                              <div class="YesUserLogin">
+                                <img src="" id="UserPhoto" style="width:30px" alt=""></img>
+
+                                <span onclick="callGoogleSignOut()"><a id="UserName"></a></span>
+                                  <script>
+                                    function callGoogleSignOut(){
+                                      firebase.auth().signOut()
+                                        .then(function() {
+                                          // Sign-out successful.
+                                        })
+                                        .catch(function(error) {
+                                          // An error happened
+                                        });
+                                      }
+                                  </script>
+                              </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      <!-- ***** Navbar Area ***** -->
+      <div class="alazea-main-menu">
+          <div class="classy-nav-container breakpoint-off">
+              <div class="container">
+                  <!-- Menu -->
+                  <nav class="classy-navbar justify-content-between" id="alazeaNav">
+
+                      <!-- Nav Brand -->
+                      <a href="../index.html" class="nav-brand"><img src="img/core-img/logo-80px.png" alt=""></a>
+
+                      <!-- Navbar Toggler -->
+                      <div class="classy-navbar-toggler">
+                          <span class="navbarToggler"><span></span><span></span><span></span></span>
+                      </div>
+
+                      <!-- Menu -->
+                      <div class="classy-menu">
+
+                          <!-- Close Button -->
+                          <div class="classycloseIcon">
+                              <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                          </div>
+
+                          <!-- Navbar Start -->
+                          <div class="classynav">
+                              <ul>
+                                  <li><a href="../index.html">Início</a></li>
+                                  <li><a href="#">O projeto</a>
+                                      <ul class="dropdown">
+                                          <li><a href="../apresentacao.html">Apresentação</a></li>
+                                          <li><a href="../geracoes.html">Gerações</a></li>
+                                          <li><a href="#">A Estufa</a>
+                                              <ul class="dropdown">
+                                                  <li><a href="../estrutura.html">Estrutura</a></li>
+                                                  <li><a href="../automacao.html">Automação</a></li>
+                                              </ul>
+                                          <li><a href="../galeria.html">Galeria</a></li>
+                                          <li><a href="../atualizações.html">Atualizações</a></li>
+                                      </ul>
+                                  </li>
+
+                                  <li><a href="../noticias/noticias.html">Notícias</a></li>
+                                  <li><a href="../monitore.html">Monitore</a>
+                                      <ul class="dropdown">
+                                          <li><a href="../plantacao.html">Plantação</a></li>
+                                          <li><a href="../solo.html">Solo</a>
+                                                  <ul class="dropdown">
+                                                  <li><a href="../umidade-do-solo.html">Umidade</a></li>
+                                              </ul>
+                                          </li>
+                                          <li><a href="../atmosfera.html">Atmosfera</a>
+                                                  <ul class="dropdown">
+                                                  <li><a href="../temperatura.html">Temperatura</a></li>
+                                                  <li><a href="../umidade.html">Umidade</a></li>
+                                                  <li><a href="../luminosidade.html">Luminosidade</a></li>
+                                                  <li><a href="../o2.html">O2</a></li>
+                                                  <li><a href="../co2.html">CO2</a></li>
+                                                  <li><a href="../co.html">CO</a></li>
+                                                  <li><a href="../ph.html">pH da chuva</a></li>
+                                              </ul>
+                                          </li>
+                                          <li><a href="../reservatorios-de-agua.html">Reservatórios de água</a>
+                                                  <ul class="dropdown">
+                                                  <li><a href="../reservatorios-principais.html">Principais</a></li>
+                                                  <li><a href="../reservatorios-secundarios.html">Secundários</a></li>
+                                              </ul>
+                                          </li>
+                                          <li><a href="../energia.html">Energia</a>
+                                              <ul class="dropdown">
+                                                  <li><a href="../bateria.html">Bateria</a></li>
+                                                  <li><a href="../painel-solar.html">Painel solar</a></li>
+                                              </ul>
+                                          </li>
+                                      </ul>
+                                  </li>
+                                  <li><a href="../contato.html">Contato</a></li>
+                                  <li ><a class="SeeAdm" href="#" style="display:none">Administrador</a>
+                                    <ul class="dropdown">
+                                      <li><a href="../ADMmensagens.html">Mensagens</a></li>
+                                      <li><a href="../ADMconfigPlantacao.html">Config. Plantação</a></li>
+                                    </ul>
+                                  </li>
+                              </ul>
+
+                              <!-- Search Icon -->
+                              <div id="searchIcon">
+                                  <i class="fa fa-search" aria-hidden="true"></i>
+                              </div>
+
+                          </div>
+                          <!-- Navbar End -->
+                      </div>
+                  </nav>
+
+                  <!-- Search Form -->
+                  <div class="search-form">
+                      <form action="#" method="get">
+                          <input type="search" name="search" id="search" placeholder="Type keywords &amp; press enter...">
+                          <button type="submit" class="d-none"></button>
+                      </form>
+                      <!-- Close Icon -->
+                      <div class="closeIcon"><i class="fa fa-times" aria-hidden="true"></i></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </header>
+  <!-- ##### CABEÇARIO FINAL ##### -->
+  </body>
+  <!-- ##### LOGIN INICIO ##### -->
+
+  <!-- ##### LOGIN FINAL ##### -->
+  <!-- Popper js -->
+  <script src="../js/bootstrap/popper.min.js"></script>
+  <!-- Bootstrap js -->
+  <script src="../js/bootstrap/bootstrap.min.js"></script>
+  <!-- All Plugins js -->
+  <script src="../js/plugins/plugins.js"></script>
+  <!-- Active js -->
+  <script src="../js/active.js"></script>
+
+</html>

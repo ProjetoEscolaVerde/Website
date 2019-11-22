@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <!-- Title -->
+  <title>Escol@Verde - (ADM)Mensagens</title>
+  <!-- Favicon -->
+  <link rel="icon" href="img/core-img/logo.png">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- jQuery-3.3.1 js-->
+  <script src="js/jquery/jquery-3.3.1.js"></script>
+  <script src="js/jquery/initializeJquery.js"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBeTQnufXiBSfgHhFOiSLeT-RSI9NQUzEY",
+      authDomain: "escolaverde-portinari.firebaseapp.com",
+      databaseURL: "https://escolaverde-portinari.firebaseio.com",
+      projectId: "escolaverde-portinari",
+      storageBucket: "escolaverde-portinari.appspot.com",
+      messagingSenderId: "787796894461"
+    };
+    firebase.initializeApp(config);
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {//----- USER CONNECTED -----//
+          user.providerData.forEach(function (profile) {
+          document.getElementById("bemVindoADM").innerHTML = 'Bem vindo administrador ' + profile.displayName + '.';
+        });
+      }
+      });
+
+    </script>
+    <!-- LoginBar -->
+    <script src="loginBar.js"></script>
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div class="preloader d-flex align-items-center justify-content-center">
+    <div class="preloader-circle"></div>
+    <div class="preloader-img">
+      <img src="img/core-img/logo.png" alt="">
+    </div>
+  </div>
+
+  <!-- ##### CABEÇARIO INICIO + PreLoader + AbaLogin ##### -->
+  <div id="cabecario"></div>
+  <!-- ##### CABEÇARIO FINAL ##### -->
+
+  <!-- ##### Breadcrumb Area Start ##### -->
+  <div class="breadcrumb-area SeeAdm">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+      <h2>Mensagens(ADM)</h2>
+    </div>
+
+    <div class="container SeeAdm">
+      <div class="row">
+        <div class="col-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i> Início</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Administrador</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Mensagens</a></li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ##### Breadcrumb Area End ##### -->
+
+  <!-- ##### Contact Area Start ##### -->
+
+      <div class="container" >
+        <div class="SeeAdm" style="display:none">
+          <div class="row align-items-center justify-content-between">
+              <div class="col-12">
+                  <!-- Section Heading -->
+                  <div class="section-heading text-center">
+                      <h2>Mensagens para o Escol@Verde</h2>
+                      <p id="bemVindoADM">Bem vindo</p>
+                  </div>
+                  <div class="comment_area clearfix">
+                    <h4 class="headline" id="numComments">0 Mensagens</h4>
+                      <ol id="pastComments">
+                          <!-- Comentarios -->
+
+                      </ol>
+                  </div>
+                  <form id="newcomment">
+                  </form>
+
+                  <script>
+                  var countComments=0;
+
+                    function showpastcomments() {
+                      var comments = document.getElementById('pastComments');
+                      var numberComments = document.getElementById('numComments');
+                      comments.innerHTML="";
+
+                      countComments=0;
+
+                      //Get comments whose from page equals this page's pathname.
+                      var commentsRef = firebase.database().ref("Contact/").orderByChild('frompage');
+                      commentsRef.once('value', function (snapshot) {
+                        snapshot.forEach(function (itemSnapshot) {
+                          countComments++;
+                          //Get the object for one snapshot
+                          var itemData = itemSnapshot.val();
+                          var email = itemData.Email;
+                          var name = itemData.Name;
+                          var subject = itemData.Subject;
+                          var message = itemData.Message;
+                          var time = new Date(itemData.Time).toLocaleDateString("pt-br");
+
+                            comments.innerHTML += "<li class='single_comment_area'>"+
+                                                      "<div class='comment-wrapper d-flex'>"+
+                                                      "<!-- Comment Meta -->"+
+                                                      "<div class='comment-author'>"+
+                                                            "<img src='img/icons/iconFala.png' alt=''>"+
+                                                        "</div>"+
+                                                      "<!-- Comment Content -->"+
+                                                      "<div class='comment-content'>"+
+                                                          "<div class='d-flex align-items-center justify-content-between'>"+
+                                                              "<h5>"+name+"</h5>"+
+                                                              "<span class='comment-date'>"+time+"</span>"+
+                                                          "</div>"+
+                                                          "<p>Email: "+email+"</p>"+
+                                                          "<p> </p>"+
+                                                          "<p>Assunto: "+subject+"</p>"+
+                                                          "<p> </p>"+
+                                                          "<p>Mensagem: "+message+"</p>"+
+                                                      "</div>"+
+                                                  "</div>"+
+                                              "</li>";
+                          numberComments.innerHTML=countComments+" Mensagens";
+
+                          })
+                        })
+                       }
+                   showpastcomments();
+                  </script>
+
+                </div>
+              </div>
+          </div>
+      </div>
+
+  <!-- ##### Contact Area End ##### -->
+
+
+  <!-- ##### RODAPÉ INICIO ##### -->
+  <div id="rodape"></div>
+  <!-- ##### RODAPÉ FINAL ##### -->
+
+  <!-- ##### All Javascript Files ##### -->
+  <!-- Popper js -->
+  <script src="js/bootstrap/popper.min.js"></script>
+  <!-- Bootstrap js -->
+  <script src="js/bootstrap/bootstrap.min.js"></script>
+  <!-- All Plugins js -->
+  <script src="js/plugins/plugins.js"></script>
+  <!-- Active js -->
+  <script src="js/active.js"></script>
+
+</body>
+
+</html>

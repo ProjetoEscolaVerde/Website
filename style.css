@@ -64,6 +64,31 @@ img {
   height: auto;
   max-width: 100%; }
 
+/* Escol@Verde Style */
+    .NoUserLogin{
+      display:none;
+      text-align: center;
+    }
+    .YesUserLogin{
+      display:none;
+      text-align: center;
+    }
+    .SeeAdm{
+      display:none;
+    }
+    .contactAlert{
+      text-align: center;
+      padding: 10px;
+      background:	#A6D895;
+      color:#fff;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      display: none;
+    }
+    .updatedSector1 .updatedSector2 .updatedSector3 .updatedSector4 .updatedSector5 .updatedSector6 .updatedSector7{
+      display: none;
+    }
+
 /* :: 3.1.0 Spacing */
 .mt-15 {
   margin-top: 15px !important; }
@@ -1606,6 +1631,7 @@ text-transform: uppercase;
     border-radius: 6px; }
   .alazea-video-area img {
     position: relative;
+
     z-index: -21;
     border-radius: 6px; }
   .alazea-video-area .video-icon {

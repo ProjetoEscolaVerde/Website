@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Escol@Verde-Gerações</title>
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/logo.png">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- jQuery-3.3.1 js-->
+    <script src="js/jquery/jquery-3.3.1.js"></script>
+    <script src="js/jquery/initializeJquery.js"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBeTQnufXiBSfgHhFOiSLeT-RSI9NQUzEY",
+        authDomain: "escolaverde-portinari.firebaseapp.com",
+        databaseURL: "https://escolaverde-portinari.firebaseio.com",
+        projectId: "escolaverde-portinari",
+        storageBucket: "escolaverde-portinari.appspot.com",
+        messagingSenderId: "787796894461"
+      };
+      firebase.initializeApp(config);
+
+      </script>
+      <!-- LoginBar -->
+      <script src="loginBar.js"></script>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-circle"></div>
+        <div class="preloader-img">
+            <img src="img/core-img/logo.png" alt="">
+        </div>
+    </div>
+
+    <!-- ##### CABEÇARIO INICIO + PreLoader + AbaLogin ##### -->
+    <div id="cabecario"></div>
+    <!-- ##### CABEÇARIO FINAL ##### -->
+
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="breadcrumb-area">
+        <!-- Top Breadcrumb Area -->
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+            <h2>Gerações</h2>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Início</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Apresentação</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Portfolio Detaila Area Start ##### -->
+    <section class="portfolio-details-area section-padding-0-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Section Heading -->
+                    <div class="section-heading text-center">
+                        <h2>Gerações Escol@Verde</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-text mb-100">
+                <div class="row">
+                    <div class="col-12">
+                        <h5>Objetivo</h5>
+                        <p>Através das gerações anuais é possível a persistência do projeto Escol@Verde no Colégio Cândido Portinari juntamente com o progresso contínuo através das novas gerações.
+                        Todos os anos novos estudantes podem entrar no projeto para se juntar com aqueles que resolveram participar por mais um ano. É dever dos estudantes do ano anterior transmitir
+                        o que foi aprendido e mostrar o que foi feito nos anos anteriores para os novos integrantes, de forma a garantir que os novos estudantes consigam se inserir nos grupos específicos de pesquisa.</p>
+                    </div>
+                    <div class="col-12">
+                        <p><h5 class="text-center">Possíveis grupos de pesquisa</h5></p>
+                        <br></br>
+                        <div class="row">
+                          <div class="col-12 col-sm-4">
+                            <h6 class="text-center">Automação</h6>
+                            <p>texto aqui</p>
+
+                          </div>
+                          <div class="col-12 col-sm-4">
+                            <h6 class="text-center">Design Vetorial</h6>
+                            <p>texto aqui</p>
+
+                          </div>
+                          <div class="col-12 col-sm-4">
+                            <h6 class="text-center">Design (À mão livre)</h6>
+                            <p>texto aqui</p>
+
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12 col-sm-4">
+                            <h6 class="text-center">IOT (Internet Of Things)</h6>
+                            <p>texto aqui</p>
+
+                          </div>
+                          <div class="col-12 col-sm-4">
+                            <h6 class="text-center">Jardinagem</h6>
+                            <p>texto aqui</p>
+
+                          </div>
+                          <div class="col-12 col-sm-4">
+                            <h6 class="text-center">Publicidade</h6>
+                            <p>texto aqui</p>
+
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <!-- ##### RODAPÉ INICIO ##### -->
+    <div id="rodape"></div>
+    <!-- ##### RODAPÉ FINAL ##### -->
+
+    <!-- ##### All Javascript Files ##### -->
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+</body>
+
+</html>

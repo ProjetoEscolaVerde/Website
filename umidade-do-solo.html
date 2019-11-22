@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <!-- Title -->
+  <title>Escol@Verde - Umidade do Solo</title>
+  <!-- Favicon -->
+  <link rel="icon" href="img/core-img/logo.png">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- jQuery-3.3.1 js-->
+  <script src="js/jquery/jquery-3.3.1.js"></script>
+  <script src="js/jquery/initializeJquery.js"></script>
+  <!-- Chart.js -->
+  <script src="js/Chart.min.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBeTQnufXiBSfgHhFOiSLeT-RSI9NQUzEY",
+      authDomain: "escolaverde-portinari.firebaseapp.com",
+      databaseURL: "https://escolaverde-portinari.firebaseio.com",
+      projectId: "escolaverde-portinari",
+      storageBucket: "escolaverde-portinari.appspot.com",
+      messagingSenderId: "787796894461"
+    };
+    firebase.initializeApp(config);
+
+    </script>
+    <!-- LoginBar -->
+    <script src="loginBar.js"></script>
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div class="preloader d-flex align-items-center justify-content-center">
+    <div class="preloader-circle"></div>
+    <div class="preloader-img">
+      <img src="img/core-img/logo.png" alt="">
+    </div>
+  </div>
+
+  <!-- ##### CABEÇARIO INICIO + PreLoader + AbaLogin ##### -->
+  <div id="cabecario"></div>
+  <!-- ##### CABEÇARIO FINAL ##### -->
+
+  <!-- ##### Breadcrumb Area Start ##### -->
+  <div class="breadcrumb-area">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+      <h2>Umidade do Solo</h2>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i> Início</a></li>
+              <li class="breadcrumb-item ">Solo</li>
+              <li class="breadcrumb-item active" aria-current="page">Umidade</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ##### Breadcrumb Area End ##### -->
+
+  <!-- ##### Types do graph Start ##### -->
+  <section class="about-us-area">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-12 col-lg-9">
+          <!-- Section Heading -->
+          <div class="section-heading ">
+            <h2 class="text-center">O sensor</h2><br>
+            <p>Todos os dados sobre a umidade do solo foram coletados diretamente do solo de cada setor. O sensor que estamos utilizando é o sensor <a href="http://blog.baudaeletronica.com.br/sensor-de-umidade-de-solo/" target="_blank">de umidade do solo resistivo</a>.
+            Em cada setor dois estão posicionados dois sensores de umidade do solo, totalizando 14 sensores.</p>
+          </div>
+          <div class="row ">
+            <!-- Single Graph Description Area -->
+            <div class="col-12 ">
+                <img src="img/solo-umidade/Setores-umidade.png" style="display:block;margin-right:auto;margin-left:auto;"></img>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-12 col-lg-3">
+          <img src="img/monitore-solo/.jpg" alt="">
+        </div>
+      </div>
+
+    </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="border-line"></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- ##### Types do graph End ##### -->
+
+  <!-- ##### Temperature Area Start ##### -->
+  <section class="our-services-area bg-gray section-padding-100-0">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-12">
+          <!-- Section Heading -->
+          <div class="section-heading text-center">
+            <h2><i class="fa fa-line-chart"></i>&nbsp; GRÁFICOS</h2>
+            <p>Todos os dados apresentados são de hoje.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row align-items-center justify-content-between">
+
+        <!-- Gráfico setor 1 -->
+        <div class="col-12 col-lg-12">
+          <h4 class="text-center">Setor 1</h4>
+          <div class="graph-sensor">
+            <canvas id="chart-setor1" height="60"></canvas>
+
+            <script>
+              var database;
+              var values1 = [];
+              var values2 = [];
+              var data;
+              var cont=0;
+
+
+
+              // Create references
+              const dbRefObjectSensor1 = firebase.database().ref('Sensors').child('SoilHumidity').child('Sensor1');
+              const dbRefObjectSensor2 = firebase.database().ref('Sensors').child('SoilHumidity').child('Sensor2');
+              // Syn objects
+              dbRefObjectSensor1.on('value', snap => {
+                //console.log(snap.val());
+              });
+              dbRefObjectSensor2.on('value', snap => {
+                //console.log(snap.val());
+              });
+              if(cont==0){
+                cont=1;
+
+
+                dbRefObjectSensor1.once('value', function(snapshot) {
+                  snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    var childData = childSnapshot.val();
+                    var hour = childKey[0]+childKey[1];
+                    var min = childKey[3]+childKey[4];
+                    var number=hour*2+(min/30);
+                    //console.log(number);
+                    values1[number] = childData;
+                    cont=0;
+
+
+                    var sensor = document.getElementById('chart-setor1');
+                    var sensorChart = new Chart(sensor, {
+                      type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                      data: {
+                        labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                          '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                          '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                          '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                          '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                          '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                        ],
+                        datasets: [{
+                          label: "Sensor1 - Umidade (%)",
+                          data: values1,
+                          borderWidth: 3,
+                          borderColor: 'rgba(20,255,20,0.85)',
+                          backgroundColor: 'transparent',
+                          fill: false,
+                        },
+                        {
+                          label: "Sensor2 - Umidade (%)",
+                          data: values2,
+                          borderWidth: 3,
+                          borderColor: 'rgba(20,20,255,0.85)',
+                          backgroundColor: 'transparent',
+                          fill: false,
+                        },
+                      ]
+                      },
+                      options: {}
+                    });
+                  })
+                })
+
+                dbRefObjectSensor2.once('value', function(snapshot) {
+                  snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    var childData = childSnapshot.val();
+                    var hour = childKey[0]+childKey[1];
+                    var min = childKey[3]+childKey[4];
+                    var number=hour*2+(min/30);
+                    //console.log(number);
+                    values2[number] = childData;
+                    cont=0;
+
+                    var sensor = document.getElementById('chart-setor1');
+                    var sensorChart = new Chart(sensor, {
+                      type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                      data: {
+                        labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                          '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                          '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                          '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                          '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                          '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                        ],
+                        datasets: [{
+                          label: "Sensor1 - Umidade (%)",
+                          data: values1,
+                          borderWidth: 3,
+                          borderColor: 'rgba(20,255,20,0.85)',
+                          backgroundColor: 'transparent',
+                          fill: false,
+                        },
+                        {
+                          label: "Sensor2 - Umidade (%)",
+                          data: values2,
+                          borderWidth: 3,
+                          borderColor: 'rgba(20,20,255,0.85)',
+                          backgroundColor: 'transparent',
+                          fill: false,
+                        },
+                      ]
+                      },
+                      options: {}
+                    });
+                  })
+                })
+              }
+            </script>
+
+          </div>
+      </div>
+
+      <!-- Gráfico setor 2 -->
+      <div class="col-12 col-lg-12">
+        <h4 class="text-center">Setor 2</h4>
+        <div class="graph-setor">
+          <canvas id="chart-setor2" height="60"></canvas>
+
+          <script>
+            var database;
+            var values3 = [];
+            var values4 = [];
+            var data;
+            var cont=0;
+
+
+            // Create references
+            const dbRefObjectSensor3 = firebase.database().ref('Sensors').child('SoilHumidity').child('Sensor3');
+            const dbRefObjectSensor4 = firebase.database().ref('Sensors').child('SoilHumidity').child('Sensor4');
+            // Syn objects
+            dbRefObjectSensor3.on('value', snap => {
+              //console.log(snap.val());
+            });
+            dbRefObjectSensor4.on('value', snap => {
+              //console.log(snap.val());
+            });
+            if(cont==0){
+              cont=1;
+
+
+              dbRefObjectSensor3.once('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                  var childKey = childSnapshot.key;
+                  var childData = childSnapshot.val();
+                  var hour = childKey[0]+childKey[1];
+                  var min = childKey[3]+childKey[4];
+                  var number=hour*2+(min/30);
+                  //console.log(number);
+                  values3[number] = childData;
+                  cont=0;
+
+
+                  var sensor = document.getElementById('chart-setor2');
+                  var sensorChart = new Chart(sensor, {
+                    type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                    data: {
+                      labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                        '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                        '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                        '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                        '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                        '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                      ],
+                      datasets: [{
+                        label: "Sensor3 - Umidade (%)",
+                        data: values3,
+                        borderWidth: 3,
+                        borderColor: 'rgba(20,255,20,0.85)',
+                        backgroundColor: 'transparent',
+                        fill: false,
+                      },
+                      {
+                        label: "Sensor4 - Umidade (%)",
+                        data: values4,
+                        borderWidth: 3,
+                        borderColor: 'rgba(20,20,255,0.85)',
+                        backgroundColor: 'transparent',
+                        fill: false,
+                      },
+                    ]
+                    },
+                    options: {}
+                  });
+                })
+              })
+
+              dbRefObjectSensor4.once('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                  var childKey = childSnapshot.key;
+                  var childData = childSnapshot.val();
+                  var hour = childKey[0]+childKey[1];
+                  var min = childKey[3]+childKey[4];
+                  var number=hour*2+(min/30);
+                  //console.log(number);
+                  values4[number] = childData;
+                  cont=0;
+
+                  var sensor = document.getElementById('chart-setor2');
+                  var sensorChart = new Chart(sensor, {
+                    type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                    data: {
+                      labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                        '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                        '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                        '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                        '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                        '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                      ],
+                      datasets: [{
+                        label: "Sensor3 - Umidade (%)",
+                        data: values3,
+                        borderWidth: 3,
+                        borderColor: 'rgba(20,255,20,0.85)',
+                        backgroundColor: 'transparent',
+                        fill: false,
+                      },
+                      {
+                        label: "Sensor4 - Umidade (%)",
+                        data: values4,
+                        borderWidth: 3,
+                        borderColor: 'rgba(20,20,255,0.85)',
+                        backgroundColor: 'transparent',
+                        fill: false,
+                      },
+                    ]
+                    },
+                    options: {}
+                  });
+                })
+              })
+            }
+          </script>
+
+        </div>
+      </div>
+
+      <!-- Gráfico setor 3 -->
+      <div class="col-12 col-lg-12">
+        <h4 class="text-center">Setor 3</h4>
+        <div class="graph-sensor">
+          <canvas id="chart-setor3" height="60"></canvas>
+
+          <script>
+            var database;
+            var values5 = [];
+            var values6 = [];
+            var data;
+            var cont=0;
+
+
+
+            // Create references
+            const dbRefObjectSensor5 = firebase.database().ref('Sensors').child('SoilHumidity').child('Sensor5');
+            const dbRefObjectSensor6 = firebase.database().ref('Sensors').child('SoilHumidity').child('Sensor6');
+            // Syn objects
+            dbRefObjectSensor5.on('value', snap => {
+              //console.log(snap.val());
+            });
+            dbRefObjectSensor6.on('value', snap => {
+              //console.log(snap.val());
+            });
+            if(cont==0){
+              cont=1;
+
+
+              dbRefObjectSensor5.once('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                  var childKey = childSnapshot.key;
+                  var childData = childSnapshot.val();
+                  var hour = childKey[0]+childKey[1];
+                  var min = childKey[3]+childKey[4];
+                  var number=hour*2+(min/30);
+                  //console.log(number);
+                  values5[number] = childData;
+                  cont=0;
+
+
+                  var sensor = document.getElementById('chart-setor3');
+                  var sensorChart = new Chart(sensor, {
+                    type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                    data: {
+                      labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                        '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                        '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                        '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                        '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                        '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                      ],
+                      datasets: [{
+                        label: "Sensor5 - Umidade (%)",
+                        data: values5,
+                        borderWidth: 3,
+                        borderColor: 'rgba(20,255,20,0.85)',
+                        backgroundColor: 'transparent',
+                        fill: false,
+                      },
+                      {
+                        label: "Sensor6 - Umidade (%)",
+                        data: values6,
+                        borderWidth: 3,
+                        borderColor: 'rgba(20,20,255,0.85)',
+                        backgroundColor: 'transparent',
+                        fill: false,
+                      },
+                    ]
+                    },
+                    options: {}
+                  });
+                })
+              })
+
+              dbRefObjectSensor6.once('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                  var childKey = childSnapshot.key;
+                  var childData = childSnapshot.val();
+                  var hour = childKey[0]+childKey[1];
+                  var min = childKey[3]+childKey[4];
+                  var number=hour*2+(min/30);
+                  //console.log(number);
+                  values6[number] = childData;
+                  cont=0;
+
+                  var sensor = document.getElementById('chart-setor3');
+                  var sensorChart = new Chart(sensor, {
+                    type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                    data: {
+                      labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                        '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                        '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                        '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                        '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                        '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                      ],
+                      datasets: [{
+                        label: "Sensor5 - Umidade (%)",
+                        data: values5,
+                        borderWidth: 3,
+                        borderColor: 'rgba(20,255,20,0.85)',
+                        backgroundColor: 'transparent',
+                        fill: false,
+                      },
+                      {
+                        label: "Sensor6 - Umidade (%)",
+                        data: values6,
+                        borderWidth: 3,
+                        borderColor: 'rgba(20,20,255,0.85)',
+                        backgroundColor: 'transparent',
+                        fill: false,
+                      },
+                    ]
+                    },
+                    options: {}
+                  });
+                })
+              })
+            }
+          </script>
+
+        </div>
+    </div>
+
+    <!-- Gráfico setor 4 -->
+    <div class="col-12 col-lg-12">
+      <h4 class="text-center">Setor 4</h4>
+      <div class="graph-sensor">
+        <canvas id="chart-setor4" height="60"></canvas>
+
+        <script>
+          var database;
+          var values7 = [];
+          var values8 = [];
+          var data;
+          var cont=0;
+
+
+
+          // Create references
+          const dbRefObjectSensor7 = firebase.database().ref('Sensors').child('SoilHumidity').child('Sensor7');
+          const dbRefObjectSensor8 = firebase.database().ref('Sensors').child('SoilHumidity').child('Sensor8');
+          // Syn objects
+          dbRefObjectSensor7.on('value', snap => {
+            //console.log(snap.val());
+          });
+          dbRefObjectSensor8.on('value', snap => {
+            //console.log(snap.val());
+          });
+          if(cont==0){
+            cont=1;
+
+
+            dbRefObjectSensor7.once('value', function(snapshot) {
+              snapshot.forEach(function(childSnapshot) {
+                var childKey = childSnapshot.key;
+                var childData = childSnapshot.val();
+                var hour = childKey[0]+childKey[1];
+                var min = childKey[3]+childKey[4];
+                var number=hour*2+(min/30);
+                //console.log(number);
+                values7[number] = childData;
+                cont=0;
+
+
+                var sensor = document.getElementById('chart-setor4');
+                var sensorChart = new Chart(sensor, {
+                  type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                  data: {
+                    labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                      '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                      '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                      '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                      '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                      '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                    ],
+                    datasets: [{
+                      label: "Sensor7 - Umidade (%)",
+                      data: values7,
+                      borderWidth: 3,
+                      borderColor: 'rgba(20,255,20,0.85)',
+                      backgroundColor: 'transparent',
+                      fill: false,
+                    },
+                    {
+                      label: "Sensor8 - Umidade (%)",
+                      data: values8,
+                      borderWidth: 3,
+                      borderColor: 'rgba(20,20,255,0.85)',
+                      backgroundColor: 'transparent',
+                      fill: false,
+                    },
+                  ]
+                  },
+                  options: {}
+                });
+              })
+            })
+
+            dbRefObjectSensor8.once('value', function(snapshot) {
+              snapshot.forEach(function(childSnapshot) {
+                var childKey = childSnapshot.key;
+                var childData = childSnapshot.val();
+                var hour = childKey[0]+childKey[1];
+                var min = childKey[3]+childKey[4];
+                var number=hour*2+(min/30);
+                //console.log(number);
+                values8[number] = childData;
+                cont=0;
+
+                var sensor = document.getElementById('chart-setor4');
+                var sensorChart = new Chart(sensor, {
+                  type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                  data: {
+                    labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                      '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                      '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                      '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                      '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                      '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                    ],
+                    datasets: [{
+                      label: "Sensor7 - Umidade (%)",
+                      data: values7,
+                      borderWidth: 3,
+                      borderColor: 'rgba(20,255,20,0.85)',
+                      backgroundColor: 'transparent',
+                      fill: false,
+                    },
+                    {
+                      label: "Sensor8 - Umidade (%)",
+                      data: values8,
+                      borderWidth: 3,
+                      borderColor: 'rgba(20,20,255,0.85)',
+                      backgroundColor: 'transparent',
+                      fill: false,
+                    },
+                  ]
+                  },
+                  options: {}
+                });
+              })
+            })
+          }
+        </script>
+
+      </div>
+  </div>
+
+  <!-- Gráfico setor 5 -->
+  <div class="col-12 col-lg-12">
+    <h4 class="text-center">Setor 5</h4>
+    <div class="graph-sensor">
+      <canvas id="chart-setor5" height="60"></canvas>
+
+      <script>
+        var database;
+        var values9 = [];
+        var values10 = [];
+        var data;
+        var cont=0;
+
+
+
+        // Create references
+        const dbRefObjectSensor9 = firebase.database().ref('Sensors').child('SoilHumidity').child('Sensor9');
+        const dbRefObjectSensor10 = firebase.database().ref('Sensors').child('SoilHumidity').child('Sensor10');
+        // Syn objects
+        dbRefObjectSensor9.on('value', snap => {
+          //console.log(snap.val());
+        });
+        dbRefObjectSensor10.on('value', snap => {
+          //console.log(snap.val());
+        });
+        if(cont==0){
+          cont=1;
+
+
+          dbRefObjectSensor9.once('value', function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+              var childKey = childSnapshot.key;
+              var childData = childSnapshot.val();
+              var hour = childKey[0]+childKey[1];
+              var min = childKey[3]+childKey[4];
+              var number=hour*2+(min/30);
+              //console.log(number);
+              values9[number] = childData;
+              cont=0;
+
+
+              var sensor = document.getElementById('chart-setor5');
+              var sensorChart = new Chart(sensor, {
+                type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                data: {
+                  labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                    '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                    '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                    '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                    '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                    '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                  ],
+                  datasets: [{
+                    label: "Sensor9 - Umidade (%)",
+                    data: values9,
+                    borderWidth: 3,
+                    borderColor: 'rgba(20,255,20,0.85)',
+                    backgroundColor: 'transparent',
+                    fill: false,
+                  },
+                  {
+                    label: "Sensor10 - Umidade (%)",
+                    data: values10,
+                    borderWidth: 3,
+                    borderColor: 'rgba(20,20,255,0.85)',
+                    backgroundColor: 'transparent',
+                    fill: false,
+                  },
+                ]
+                },
+                options: {}
+              });
+            })
+          })
+
+          dbRefObjectSensor10.once('value', function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+              var childKey = childSnapshot.key;
+              var childData = childSnapshot.val();
+              var hour = childKey[0]+childKey[1];
+              var min = childKey[3]+childKey[4];
+              var number=hour*2+(min/30);
+              //console.log(number);
+              values10[number] = childData;
+              cont=0;
+
+              var sensor = document.getElementById('chart-setor5');
+              var sensorChart = new Chart(sensor, {
+                type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+                data: {
+                  labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                    '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                    '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                    '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                    '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                    '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                  ],
+                  datasets: [{
+                    label: "Sensor9 - Umidade (%)",
+                    data: values9,
+                    borderWidth: 3,
+                    borderColor: 'rgba(20,255,20,0.85)',
+                    backgroundColor: 'transparent',
+                    fill: false,
+                  },
+                  {
+                    label: "Sensor10 - Umidade (%)",
+                    data: values10,
+                    borderWidth: 3,
+                    borderColor: 'rgba(20,20,255,0.85)',
+                    backgroundColor: 'transparent',
+                    fill: false,
+                  },
+                ]
+                },
+                options: {}
+              });
+            })
+          })
+        }
+      </script>
+
+    </div>
+</div>
+
+<!-- Gráfico setor 6 -->
+<div class="col-12 col-lg-12">
+  <h4 class="text-center">Setor 6</h4>
+  <div class="graph-sensor">
+    <canvas id="chart-setor6" height="60"></canvas>
+
+    <script>
+      var database;
+      var values11 = [];
+      var values12 = [];
+      var data;
+      var cont=0;
+
+
+
+      // Create references
+      const dbRefObjectSensor11 = firebase.database().ref('Sensors').child('SoilHumidity').child('Sensor11');
+      const dbRefObjectSensor12 = firebase.database().ref('Sensors').child('SoilHumidity').child('Sensor12');
+      // Syn objects
+      dbRefObjectSensor11.on('value', snap => {
+        //console.log(snap.val());
+      });
+      dbRefObjectSensor12.on('value', snap => {
+        //console.log(snap.val());
+      });
+      if(cont==0){
+        cont=1;
+
+
+        dbRefObjectSensor11.once('value', function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+            var childKey = childSnapshot.key;
+            var childData = childSnapshot.val();
+            var hour = childKey[0]+childKey[1];
+            var min = childKey[3]+childKey[4];
+            var number=hour*2+(min/30);
+            //console.log(number);
+            values11[number] = childData;
+            cont=0;
+
+
+            var sensor = document.getElementById('chart-setor6');
+            var sensorChart = new Chart(sensor, {
+              type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+              data: {
+                labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                  '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                  '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                  '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                  '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                  '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                ],
+                datasets: [{
+                  label: "Sensor11 - Umidade (%)",
+                  data: values11,
+                  borderWidth: 3,
+                  borderColor: 'rgba(20,255,20,0.85)',
+                  backgroundColor: 'transparent',
+                  fill: false,
+                },
+                {
+                  label: "Sensor12 - Umidade (%)",
+                  data: values12,
+                  borderWidth: 3,
+                  borderColor: 'rgba(20,20,255,0.85)',
+                  backgroundColor: 'transparent',
+                  fill: false,
+                },
+              ]
+              },
+              options: {}
+            });
+          })
+        })
+
+        dbRefObjectSensor12.once('value', function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+            var childKey = childSnapshot.key;
+            var childData = childSnapshot.val();
+            var hour = childKey[0]+childKey[1];
+            var min = childKey[3]+childKey[4];
+            var number=hour*2+(min/30);
+            //console.log(number);
+            values12[number] = childData;
+            cont=0;
+
+            var sensor = document.getElementById('chart-setor6');
+            var sensorChart = new Chart(sensor, {
+              type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+              data: {
+                labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                  '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                  '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                  '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                  '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                  '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                ],
+                datasets: [{
+                  label: "Sensor11 - Umidade (%)",
+                  data: values11,
+                  borderWidth: 3,
+                  borderColor: 'rgba(20,255,20,0.85)',
+                  backgroundColor: 'transparent',
+                  fill: false,
+                },
+                {
+                  label: "Sensor12 - Umidade (%)",
+                  data: values12,
+                  borderWidth: 3,
+                  borderColor: 'rgba(20,20,255,0.85)',
+                  backgroundColor: 'transparent',
+                  fill: false,
+                },
+              ]
+              },
+              options: {}
+            });
+          })
+        })
+      }
+    </script>
+
+  </div>
+</div>
+
+<!-- Gráfico setor 7 -->
+<div class="col-12 col-lg-12">
+  <h4 class="text-center">Setor 7</h4>
+  <div class="graph-sensor">
+    <canvas id="chart-setor7" height="60"></canvas>
+
+    <script>
+      var database;
+      var values13 = [];
+      var values14 = [];
+      var data;
+      var cont=0;
+
+
+
+      // Create references
+      const dbRefObjectSensor13 = firebase.database().ref('Sensors').child('SoilHumidity').child('Sensor13');
+      const dbRefObjectSensor14 = firebase.database().ref('Sensors').child('SoilHumidity').child('Sensor14');
+      // Syn objects
+      dbRefObjectSensor13.on('value', snap => {
+        //console.log(snap.val());
+      });
+      dbRefObjectSensor14.on('value', snap => {
+        //console.log(snap.val());
+      });
+      if(cont==0){
+        cont=1;
+
+
+        dbRefObjectSensor13.once('value', function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+            var childKey = childSnapshot.key;
+            var childData = childSnapshot.val();
+            var hour = childKey[0]+childKey[1];
+            var min = childKey[3]+childKey[4];
+            var number=hour*2+(min/30);
+            //console.log(number);
+            values13[number] = childData;
+            cont=0;
+
+
+            var sensor = document.getElementById('chart-setor7');
+            var sensorChart = new Chart(sensor, {
+              type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+              data: {
+                labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                  '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                  '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                  '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                  '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                  '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                ],
+                datasets: [{
+                  label: "Sensor13 - Umidade (%)",
+                  data: values13,
+                  borderWidth: 3,
+                  borderColor: 'rgba(20,255,20,0.85)',
+                  backgroundColor: 'transparent',
+                  fill: false,
+                },
+                {
+                  label: "Sensor14 - Umidade (%)",
+                  data: values14,
+                  borderWidth: 3,
+                  borderColor: 'rgba(20,20,255,0.85)',
+                  backgroundColor: 'transparent',
+                  fill: false,
+                },
+              ]
+              },
+              options: {}
+            });
+          })
+        })
+
+        dbRefObjectSensor14.once('value', function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+            var childKey = childSnapshot.key;
+            var childData = childSnapshot.val();
+            var hour = childKey[0]+childKey[1];
+            var min = childKey[3]+childKey[4];
+            var number=hour*2+(min/30);
+            //console.log(number);
+            values14[number] = childData;
+            cont=0;
+
+            var sensor = document.getElementById('chart-setor7');
+            var sensorChart = new Chart(sensor, {
+              type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
+              data: {
+                labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
+                  '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
+                  '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
+                  '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
+                  '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
+                  '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
+                ],
+                datasets: [{
+                  label: "Sensor13 - Umidade (%)",
+                  data: values13,
+                  borderWidth: 3,
+                  borderColor: 'rgba(20,255,20,0.85)',
+                  backgroundColor: 'transparent',
+                  fill: false,
+                },
+                {
+                  label: "Sensor14 - Umidade (%)",
+                  data: values14,
+                  borderWidth: 3,
+                  borderColor: 'rgba(20,20,255,0.85)',
+                  backgroundColor: 'transparent',
+                  fill: false,
+                },
+              ]
+              },
+              options: {}
+            });
+          })
+        })
+      }
+    </script>
+
+  </div>
+</div>
+
+          </div>
+        </div>
+      </div>
+
+  </section>
+  <!-- ##### Temperature Area End ##### -->
+  <!-- ##### Humidity Area Start ##### -->
+  <section class="our-services-area section-padding-100-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <!-- Section Heading -->
+          <div class="section-heading text-center">
+            <h2>Observações</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="row align-items-center justify-content-between">
+        <div class="col-12 col-lg-12">
+          <div class="alazea-service-area mb-100">
+            <p>Sem observações no momento... </p>
+          </div>
+        </div>
+    </div>
+  </section>
+  <!-- ##### Humidity Area End ##### -->
+
+  <!-- ##### Testimonial Area Start #####
+  <section class="testimonial-area section-padding-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <!-- Section Heading
+          <div class="section-heading text-center">
+            <h2>Utilização nas aula</h2>
+          </div>
+          <div class="testimonials-slides owl-carousel">
+
+            <!-- Single Testimonial Slide
+            <div class="single-testimonial-slide">
+              <div class="row align-items-center">
+                <div class="col-12 col-md-4">
+                  <div class="testimonial-thumb">
+                    <img src="img/monitore-atmosfera/temperatura-aula1.jpg" alt="">
+                  </div>
+                </div>
+                <div class="col-12 col-md-8">
+                  <div class="testimonial-content">
+                    <!-- Section Heading
+                    <div class="section-heading">
+                      <h4>Variação anual</h4>
+                    </div>
+                    <p>A partir do gráfico anual de variação anual da temperatura é possível observar como a temperatura média diminui e aumenta no decorrer
+                      do ano. A partir desta análise é possível discutir como as diferentes estações do ano afeta a temperatura média. Além disso,
+                      é possível correlacionar com o movimento de translação da Terra ao redor do Sol e os diferentes ângulos de inclinação do raios
+                      luminosos sobre a superfície terrestre.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Single Testimonial Slide
+            <div class="single-testimonial-slide">
+              <div class="row align-items-center">
+                <div class="col-12 col-md-4">
+                  <div class="testimonial-thumb">
+                    <img src="img/monitore-atmosfera/temperatura-aula2.jpg" alt="">
+                  </div>
+                </div>
+                <div class="col-12 col-md-8">
+                  <div class="testimonial-content">
+                    <!-- Section Heading --
+                    <div class="section-heading">
+                      <h4>Variação diária</h4>
+                    </div>
+                    <p>A partir do gráfico "Ontem" e "Hoje" é possível analisar a variação da temperatura no período de um dia. Este fenômeno
+                      pode iniciar discussões sobre o movimento de rotação da terra e o grau de inclinação dos raios solares. Além disso,
+                     é possível discutir o fenômeno de transporte de energia por irradiação do Sol até a Terra e sua conversão à energia térmica
+                     ao atingir a superfícia terrestre.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Single Testimonial Slide --
+            <div class="single-testimonial-slide">
+              <div class="row align-items-center">
+                <div class="col-12 col-md-4">
+                  <div class="testimonial-thumb">
+                    <img src="img/monitore-atmosfera/temperatura-aula3.png" alt="">
+                  </div>
+                </div>
+                <div class="col-12 col-md-8">
+                  <div class="testimonial-content">
+                    <!-- Section Heading --
+                    <div class="section-heading">
+                      <h4>Temperatura em estufas</h4>
+                    </div>
+                    <p>A partir da apresentação da temperatura em uma estufa, é possível discutir sobre a aumento do comprimento de onda
+                    quando os raios eletromagnéticos atingem o solo e são refletidos como luz infravermelha, o que impede que alguns raios saiam
+                  da estufa e como consequência torne o ambiente no interior da estufa com maior temperatura que o exterior. É importante destacar
+                que o mesmo efeito de aumento de temperatura ocorre em escala global naturalmente pelo "efeito estufa", mas é agravado pela
+                liberação principalmente de CO2 e CH4 (que impede que ondas eletromagnética menos energéticas escapem da terra).</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ##### Testimonial Area End ##### -->
+
+
+  <!-- ##### RODAPÉ INICIO ##### -->
+  <div id="rodape"></div>
+  <!-- ##### RODAPÉ FINAL ##### -->
+
+  <!-- ##### All Javascript Files ##### -->
+  <!-- Popper js -->
+  <script src="js/bootstrap/popper.min.js"></script>
+  <!-- Bootstrap js -->
+  <script src="js/bootstrap/bootstrap.min.js"></script>
+  <!-- All Plugins js -->
+  <script src="js/plugins/plugins.js"></script>
+  <!-- Active js -->
+  <script src="js/active.js"></script>
+
+</body>
+
+</html>

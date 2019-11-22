@@ -10,19 +10,36 @@
 
   <!-- Title -->
   <title>Escol@Verde - Temperatura</title>
-
   <!-- Favicon -->
   <link rel="icon" href="img/core-img/logo.png">
 
   <!-- Core Stylesheet -->
   <link rel="stylesheet" href="style.css">
-
+  <!-- jQuery-3.3.1 js-->
+  <script src="js/jquery/jquery-3.3.1.js"></script>
+  <script src="js/jquery/initializeJquery.js"></script>
   <!-- Chart.js -->
   <script src="js/Chart.min.js"></script>
+  <script src="drawGraph.js"></script>  <!-- drawGraph.js made by Escol@Verde -->
   <!-- Firebase -->
-  <script src="js/firebase.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBeTQnufXiBSfgHhFOiSLeT-RSI9NQUzEY",
+      authDomain: "escolaverde-portinari.firebaseapp.com",
+      databaseURL: "https://escolaverde-portinari.firebaseio.com",
+      projectId: "escolaverde-portinari",
+      storageBucket: "escolaverde-portinari.appspot.com",
+      messagingSenderId: "787796894461"
+    };
+    firebase.initializeApp(config);
 
+    </script>
+    <!-- LoginBar -->
+    <script src="loginBar.js"></script>
 </head>
 
 <body>
@@ -34,145 +51,8 @@
     </div>
   </div>
 
-  <!-- ##### CABEÇARIO INICIO ##### -->
-  <header class="header-area">
-
-    <!-- ***** Top Header Area ***** -->
-    <div class="top-header-area">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="top-header-content d-flex align-items-center justify-content-between">
-              <!-- Top Header Content -->
-              <div class="top-header-meta">
-                <a href="#" data-toggle="tooltip" data-placement="bottom" title="escolaverdeportinari@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email: escolaverdeportinari@gmail.com</span></a>
-              </div>
-
-              <!-- Top Header Content -->
-              <div class="top-header-meta d-flex">
-                <!-- Language Dropdown -->
-                <div class="language-dropdown">
-                  <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle mr-30" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Língua</button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="temperatura.html">Português</a>
-                      <a class="dropdown-item" href="en/temperaturaEN.html">English</a>
-                    </div>
-                  </div>
-                </div>
-                <!-- Login -->
-                <div class="login">
-                  <a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ***** Navbar Area ***** -->
-    <div class="alazea-main-menu">
-      <div class="classy-nav-container breakpoint-off">
-        <div class="container">
-          <!-- Menu -->
-          <nav class="classy-navbar justify-content-between" id="alazeaNav">
-
-            <!-- Nav Brand -->
-            <a href="inicio.html" class="nav-brand"><img src="img/core-img/logo-80px.png" alt=""></a>
-
-            <!-- Navbar Toggler -->
-            <div class="classy-navbar-toggler">
-              <span class="navbarToggler"><span></span><span></span><span></span></span>
-            </div>
-
-            <!-- Menu -->
-            <div class="classy-menu">
-
-              <!-- Close Button -->
-              <div class="classycloseIcon">
-                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-              </div>
-
-              <!-- Navbar Start -->
-              <div class="classynav">
-                <ul>
-                  <li><a href="inicio.html">Início</a></li>
-                  <li><a href="#">O projeto</a>
-                    <ul class="dropdown">
-                      <li><a href="apresentacao.html">Apresentação</a></li>
-                      <li><a href="geracoes.html">Gerações</a></li>
-                      <li><a href="#">A Estufa</a>
-                        <ul class="dropdown">
-                          <li><a href="estrutura.html">Estrutura</a></li>
-                          <li><a href="automacao.html">Automação</a></li>
-                        </ul>
-                      <li><a href="galeria.html">Galeria</a></li>
-                      <li><a href="atualizações.html">Atualizações</a></li>
-                    </ul>
-                  </li>
-
-                  <li><a href="noticias/noticias.html">Notícias</a></li>
-                  <li><a href="monitore.html">Monitore</a>
-                    <ul class="dropdown">
-                      <li><a href="plantacao.html">Plantação</a></li>
-                      <li><a href="solo.html">Solo</a>
-                        <ul class="dropdown">
-                          <li><a href="umidade.html">Umidade</a></li>
-                        </ul>
-                      </li>
-                      <li><a href="atmosfera.html">Atmosfera</a>
-                        <ul class="dropdown">
-                          <li><a href="temperatura.html">Temperatura</a></li>
-                          <li><a href="umidade.html">Umidade</a></li>
-                          <li><a href="luminosidade.html">Luminosidade</a></li>
-                          <li><a href="o2.html">O2</a></li>
-                          <li><a href="co2.html">CO2</a></li>
-                          <li><a href="co.html">CO</a></li>
-                          <li><a href="ph.html">pH da chuva</a></li>
-                        </ul>
-                      </li>
-                      <li><a href="reservatorios-de-agua.html">Reservatórios de água</a>
-                        <ul class="dropdown">
-                          <li><a href="reservatorios-principais.html">Principais</a></li>
-                          <li><a href="reservatorios-secundarios.html">Secundários</a></li>
-                        </ul>
-                      </li>
-                      <li><a href="energia.html">Energia</a>
-                        <ul class="dropdown">
-                          <li><a href="bateria.html">Bateria</a></li>
-                          <li><a href="painel-solar.html">Painel solar</a></li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a href="agradecimentos.html">Agradecimentos</a></li>
-                  <li><a href="contato.html">Contato</a></li>
-                </ul>
-
-                <!-- Search Icon -->
-                <div id="searchIcon">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </div>
-
-              </div>
-              <!-- Navbar End -->
-            </div>
-          </nav>
-
-          <!-- Search Form -->
-          <div class="search-form">
-            <form action="#" method="get">
-              <input type="search" name="search" id="search" placeholder="Type keywords &amp; press enter...">
-              <button type="submit" class="d-none"></button>
-            </form>
-            <!-- Close Icon -->
-            <div class="closeIcon"><i class="fa fa-times" aria-hidden="true"></i></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+  <!-- ##### CABEÇARIO INICIO + PreLoader + AbaLogin ##### -->
+  <div id="cabecario"></div>
   <!-- ##### CABEÇARIO FINAL ##### -->
 
   <!-- ##### Breadcrumb Area Start ##### -->
@@ -187,7 +67,7 @@
         <div class="col-12">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="inicio.html"><i class="fa fa-home"></i> Início</a></li>
+              <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i> Início</a></li>
               <li class="breadcrumb-item "><a href="atmosfera.html">Atmosfera</a></li>
               <li class="breadcrumb-item active" aria-current="page">Temperatura</li>
             </ol>
@@ -269,343 +149,122 @@
 
       <div class="row align-items-center justify-content-between">
 
-          <!-- Gráfico hoje -->
-          <div class="col-12 col-lg-12">
-          <div class="alazea-service-area mb-100">
-            <h4 class="text-center">Hoje</h4>
-            <div class="graph-day">
-              <canvas id="temp-chart-day" height="75"></canvas>
-
-              <script>
-                var database;
-                var tempDayValuesC = [10, 10, 10]; //temperature in celcius
-                var tempDayValuesF = [10, 10, 10]; //temperature in fahrenheit
-                var tempDayValuesK = [10, 10, 10]; //temperature in kelvin
-                var data;
-                var count = 0;
-                var lastCount = 0;
-
-                var config = {
-                  apiKey: "AIzaSyBeTQnufXiBSfgHhFOiSLeT-RSI9NQUzEY",
-                  authDomain: "escolaverde-portinari.firebaseapp.com",
-                  databaseURL: "https://escolaverde-portinari.firebaseio.com",
-                  projectId: "escolaverde-portinari",
-                  storageBucket: "escolaverde-portinari.appspot.com",
-                  messagingSenderId: "787796894461"
-                };
-                firebase.initializeApp(config);
-
-                // Create references
-                const dbRefObjectDay = firebase.database().ref('Sensors').child('Temperature').child('Day');
-
-                // Syn objects
-                dbRefObjectDay.on('value', snap => {
-                  //console.log(snap.val());
-                });
-
-                do {
-
-                  dbRefObjectDay.once('value', function(snapshot) {
-                    snapshot.forEach(function(childSnapshot) {
-                      var childKey = childSnapshot.key;
-                      var childData = childSnapshot.val();
-
-                      tempDayValuesC[count] = childData;
-                      tempDayValuesF[count] = (childData * 1.8 + 32);
-                      tempDayValuesK[count] = childData + 273;
-                      count++;
-
-
-
-                      var tempDay = document.getElementById('temp-chart-day');
-
-                      var dayTempChart = new Chart(tempDay, {
-                        type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
-                        data: {
-                          labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
-                            '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
-                            '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
-                            '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
-                            '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
-                            '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
-                          ],
-                          datasets: [{
-                            label: "Celcius",
-                            data: tempDayValuesC,
-                            borderWidth: 3,
-                            borderColor: 'rgba(20,255,20,0.85)',
-                            backgroundColor: 'transparent',
-                            fill: false,
-                          }, {
-                            label: "Fahrenheit",
-                            data: tempDayValuesF,
-                            borderWidth: 3,
-                            borderColor: 'rgba(255,20,20,0.85)',
-                            backgroundColor: 'transparent',
-                            fill: false,
-                          }, {
-                            label: "Kelvin",
-                            data: tempDayValuesK,
-                            borderWidth: 3,
-                            borderColor: 'rgba(20,20,255,0.85)',
-                            backgroundColor: 'transparent',
-                            fill: false,
-                          }]
-                        },
-                        options: {}
-                      });
-                    })
-                  })
-                } while (count != lastCount)
-              </script>
-            </div>
-          </div>
-        </div>
-        <!-- Gráfico ontem -->
+        <!-- Gráfico diário-->
         <div class="col-12 col-lg-12">
-          <div class="alazea-service-area mb-100">
-            <h4 class="text-center">Ontem</h4>
-            <div class="graph-yest">
-              <canvas id="temp-chart-yest" height="75"></canvas>
-
-              <script>
-                var database;
-                var tempYestValuesC = []; //temperature in celcius
-                var tempYestValuesF = []; //temperature in fahrenheit
-                var tempYestValuesK = []; //temperature in kelvin
-                var data;
-                var countYest = 0;
-                var lastCountYest = 0;
-
-
-                // Create references
-                const dbRefObjectYest = firebase.database().ref('Sensors').child('Temperature').child('Yesterday');
-
-                // Syn objects
-                dbRefObjectYest.on('value', snap => {
-                  console.log(snap.val());
-                });
-
-                do {
-                  lastCountYest = countYest;
-
-                  dbRefObjectYest.once('value', function(snapshot) {
-                    snapshot.forEach(function(childSnapshot) {
-                      console.log(childSnapshot.keys);
-                      var childKey = childSnapshot.key;
-                      var childData = childSnapshot.val();
-
-                      tempYestValuesC[countYest] = childData;
-                      tempYestValuesF[countYest] = (childData * 1.8 + 32);
-                      tempYestValuesK[countYest] = childData + 273;
-
-                      countYest++;
-
-
-                      var tempYest = document.getElementById('temp-chart-yest');
-
-                      var yestTempChart = new Chart(tempYest, {
-                        type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
-                        data: {
-                          labels: ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30',
-                            '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30',
-                            '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30',
-                            '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30',
-                            '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30',
-                            '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30',
-                          ],
-                          datasets: [{
-                            label: "Celcius",
-                            data: tempYestValuesC,
-                            borderWidth: 3,
-                            borderColor: 'rgba(20,255,20,0.85)',
-                            backgroundColor: 'transparent',
-                            fill: false,
-                          }, {
-                            label: "Fahrenheit",
-                            data: tempYestValuesF,
-                            borderWidth: 3,
-                            borderColor: 'rgba(255,20,20,0.85)',
-                            backgroundColor: 'transparent',
-                            fill: false,
-                          }, {
-                            label: "Kelvin",
-                            data: tempYestValuesK,
-                            borderWidth: 3,
-                            borderColor: 'rgba(20,20,255,0.85)',
-                            backgroundColor: 'transparent',
-                            fill: false,
-                          }]
-                        },
-                        options: {}
-                      });
-                    })
-                  })
-                } while (countYest != lastCountYest)
-              </script>
-            </div>
-          </div>
+          <h4 class="text-center">Hoje</h4>
+          <div id='graphToday'></div>
         </div>
-        <!-- Gráfico mensal -->
+        <script>
+        let graphToday = new DrawGraph({
+          nameGraph:   'graphToday',
+          heightGraph: 80,
+          labelGraph:  'hours',  //'hours','days','weeks'
+          data:[
+            {
+              name:             'Celcius',
+              addressFirebase:  'Sensors/Temperature/Today',
+              color:            'rgba(20,255,20,0.85)'
+            },{
+              name:             'Fahrenheit',
+              addressFirebase:  'Sensors/Temperature/Today',
+              color:            'rgba(255,20,20,0.85)',
+              transform:        'toFahrenheit'
+            },{
+              name:             'Kelvin',
+              addressFirebase:  'Sensors/Temperature/Today',
+              color:            'rgba(20,20,255,0.85)',
+              transform:        'toKelvin'
+            }
+        ]});
+        </script>
+
+        <!-- Gráfico diário-->
         <div class="col-12 col-lg-12">
-          <div class="alazea-service-area mb-100">
-            <h4 class="text-center">Mês atual</h4>
-            <div class="graph-month">
-              <canvas id="temp-chart-month" height="75"></canvas>
-
-              <script>
-                var database;
-                var tempMonthValuesC = []; //temperature in celcius
-                var tempMonthValuesF = []; //temperature in fahrenheit
-                var tempMonthValuesK = []; //temperature in kelvin
-                var data;
-                var countMonth = 0;
-                var lastCountMonth = 0;
-
-
-                // Create references
-                const dbRefObjectMonth = firebase.database().ref('Sensors').child('Temperature').child('Month');
-
-                // Syn objects
-                dbRefObjectMonth.on('value', snap => {
-                  console.log(snap.val());
-                });
-
-                do {
-                  lastCountMonth = countMonth;
-
-                  dbRefObjectMonth.once('value', function(snapshot) {
-                    snapshot.forEach(function(childSnapshot) {
-                      console.log(childSnapshot.keys);
-                      var childKey = childSnapshot.key;
-                      var childData = childSnapshot.val();
-
-                      tempMonthValuesC[countMonth] = childData;
-                      tempMonthValuesF[countMonth] = (childData * 1.8 + 32);
-                      tempMonthValuesK[countMonth] = childData + 273;
-
-                      countMonth++;
-
-
-                      var tempMonth = document.getElementById('temp-chart-month');
-
-                      var monthTempChart = new Chart(tempMonth, {
-                        type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
-                        data: {
-                          labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-                            '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
-                            '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'
-                          ],
-                          datasets: [{
-                            label: "Celcius",
-                            data: tempMonthValuesC,
-                            borderWidth: 3,
-                            borderColor: 'rgba(20,255,20,0.85)',
-                            backgroundColor: 'transparent',
-                            fill: false,
-                          }, {
-                            label: "Fahrenheit",
-                            data: tempMonthValuesF,
-                            borderWidth: 3,
-                            borderColor: 'rgba(255,20,20,0.85)',
-                            backgroundColor: 'transparent',
-                            fill: false,
-                          }, {
-                            label: "Kelvin",
-                            data: tempMonthValuesK,
-                            borderWidth: 3,
-                            borderColor: 'rgba(20,20,255,0.85)',
-                            backgroundColor: 'transparent',
-                            fill: false,
-                          }]
-                        },
-                        options: {}
-                      });
-                    })
-                  })
-                } while (countMonth != lastCountMonth)
-              </script>
-            </div>
-          </div>
+          <h4 class="text-center">Ontem</h4>
+          <div id='graphYesterday'></div>
         </div>
-        <!-- Gráfico anual -->
+        <script>
+        let graphYesterday = new DrawGraph({
+          nameGraph:   'graphYesterday',
+          heightGraph: 80,
+          labelGraph:  'hours',  //'hours','days','weeks'
+          data:[
+            {
+              name:             'Celcius',
+              addressFirebase:  'Sensors/Temperature/Yesterday',
+              color:            'rgba(20,255,20,0.85)'
+            },{
+              name:             'Fahrenheit',
+              addressFirebase:  'Sensors/Temperature/Yesterday',
+              color:            'rgba(255,20,20,0.85)',
+              transform:        'toFahrenheit'
+            },{
+              name:             'Kelvin',
+              addressFirebase:  'Sensors/Temperature/Yesterday',
+              color:            'rgba(20,20,255,0.85)',
+              transform:        'toKelvin'
+            }
+        ]});
+        </script>
+
+        <!-- Gráfico mês-->
         <div class="col-12 col-lg-12">
-          <div class="alazea-service-area mb-100">
-            <h4 class="text-center">Anual</h4>
-            <div class="graph-years">
-              <canvas id="temp-chart-years" height="75"></canvas>
+          <h4 class="text-center">Mês</h4>
+          <div id='graphMonth'></div>
+        </div>
+        <script>
+        let graphMonth = new DrawGraph({
+          nameGraph:   'graphMonth',
+          heightGraph: 80,
+          labelGraph:  'days',  //'hours','days','weeks'
+          data:[
+            {
+              name:             'Celcius',
+              addressFirebase:  'Sensors/Temperature/Month',
+              color:            'rgba(20,255,20,0.85)'
+            },{
+              name:             'Fahrenheit',
+              addressFirebase:  'Sensors/Temperature/Month',
+              color:            'rgba(255,20,20,0.85)',
+              transform:        'toFahrenheit'
+            },{
+              name:             'Kelvin',
+              addressFirebase:  'Sensors/Temperature/Month',
+              color:            'rgba(20,20,255,0.85)',
+              transform:        'toKelvin'
+            }
+        ]});
+        </script>
 
-              <script>
-                var database;
-                var tempYearValuesC = []; //temperature in celcius
-                var tempYearValuesF = []; //temperature in fahrenheit
-                var tempYearValuesK = []; //temperature in kelvin
-                var data;
-                var countYear = 0;
-                var lastCountYear = 0;
+        <!-- Gráfico anual-->
+        <div class="col-12 col-lg-12">
+          <h4 class="text-center">Anual</h4>
+          <div id='graphYear'></div>
+        </div>
+        <script>
+        let graphYear = new DrawGraph({
+          nameGraph:   'graphYear',
+          heightGraph: 80,
+          labelGraph:  'weeks',  //'hours','days','weeks'
+          data:[
+            {
+              name:             'Celcius',
+              addressFirebase:  'Sensors/Temperature/Years',
+              color:            'rgba(20,255,20,0.85)'
+            },{
+              name:             'Fahrenheit',
+              addressFirebase:  'Sensors/Temperature/Years',
+              color:            'rgba(255,20,20,0.85)',
+              transform:        'toFahrenheit'
+            },{
+              name:             'Kelvin',
+              addressFirebase:  'Sensors/Temperature/Years',
+              color:            'rgba(20,20,255,0.85)',
+              transform:        'toKelvin'
+            }
+        ]});
+        </script>
 
-                // Create references
-                const dbRefObjectYear = firebase.database().ref('Sensors').child('Temperature').child('Years');
-
-                // Syn objects
-                dbRefObjectYear.on('value', snap => {
-                  console.log(snap.val());
-                });
-
-                do {
-
-                  dbRefObjectYear.once('value', function(snapshot) {
-                    snapshot.forEach(function(childSnapshot) {
-                      console.log(childSnapshot.keys);
-                      var childKey = childSnapshot.key;
-                      var childData = childSnapshot.val();
-
-                      tempYearValuesC[countYear] = childData;
-                      tempYearValuesF[countYear] = (childData * 1.8 + 32);
-                      tempYearValuesK[countYear] = childData + 273;
-
-                      countYear++;
-
-
-                      var tempYear = document.getElementById('temp-chart-years');
-
-                      var yearTempChart = new Chart(tempYear, {
-                        type: 'line', // bar,horizontalBar,pie,line,doughnut,radar,polarArea
-                        data: {
-                          labels: ['2018-dez1', '2018-jan2', '2018-jan3', '2018-jan4',
-                            '2018-fev1', '2018-fev2', '2018-fev3', '2018-fev4'
-                          ],
-                          datasets: [{
-                            label: "Celcius",
-                            data: tempYearValuesC,
-                            borderWidth: 3,
-                            borderColor: 'rgba(20,255,20,0.85)',
-                            backgroundColor: 'transparent',
-                            fill: false,
-                          }, {
-                            label: "Fahrenheit",
-                            data: tempYearValuesF,
-                            borderWidth: 3,
-                            borderColor: 'rgba(255,20,20,0.85)',
-                            backgroundColor: 'transparent',
-                            fill: false,
-                          }, {
-                            label: "Kelvin",
-                            data: tempYearValuesK,
-                            borderWidth: 3,
-                            borderColor: 'rgba(20,20,255,0.85)',
-                            backgroundColor: 'transparent',
-                            fill: false,
-                          }]
-                        },
-                        options: {}
-                      });
-                    })
-                  })
-                } while (countYear != lastCountYear)
-              </script>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -646,18 +305,18 @@
     </div>
   </section>
   <!-- ##### Humidity Area End ##### -->
-  <!-- ##### Testimonial Area Start ##### -->
+  <!-- ##### Testimonial Area Start #####
   <section class="testimonial-area section-padding-100">
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <!-- Section Heading -->
+          <!-- Section Heading --
           <div class="section-heading text-center">
             <h2>Utilização nas aula</h2>
           </div>
           <div class="testimonials-slides owl-carousel">
 
-            <!-- Single Testimonial Slide -->
+            <!-- Single Testimonial Slide --
             <div class="single-testimonial-slide">
               <div class="row align-items-center">
                 <div class="col-12 col-md-4">
@@ -667,7 +326,7 @@
                 </div>
                 <div class="col-12 col-md-8">
                   <div class="testimonial-content">
-                    <!-- Section Heading -->
+                    <!-- Section Heading --
                     <div class="section-heading">
                       <h4>Variação anual</h4>
                     </div>
@@ -680,7 +339,7 @@
               </div>
             </div>
 
-            <!-- Single Testimonial Slide -->
+            <!-- Single Testimonial Slide --
             <div class="single-testimonial-slide">
               <div class="row align-items-center">
                 <div class="col-12 col-md-4">
@@ -690,7 +349,7 @@
                 </div>
                 <div class="col-12 col-md-8">
                   <div class="testimonial-content">
-                    <!-- Section Heading -->
+                    <!-- Section Heading --
                     <div class="section-heading">
                       <h4>Variação diária</h4>
                     </div>
@@ -702,7 +361,7 @@
                 </div>
               </div>
             </div>
-            <!-- Single Testimonial Slide -->
+            <!-- Single Testimonial Slide --
             <div class="single-testimonial-slide">
               <div class="row align-items-center">
                 <div class="col-12 col-md-4">
@@ -712,7 +371,7 @@
                 </div>
                 <div class="col-12 col-md-8">
                   <div class="testimonial-content">
-                    <!-- Section Heading -->
+                    <!-- Section Heading --
                     <div class="section-heading">
                       <h4>Temperatura em estufas</h4>
                     </div>
@@ -735,120 +394,10 @@
 
 
   <!-- ##### RODAPÉ INICIO ##### -->
-  <footer class="footer-area bg-img" style="background-image: url(img/bg-img/3.jpg);">
-    <!-- Main Footer Area -->
-    <div class="main-footer-area">
-      <div class="container">
-        <div class="row">
-          <!-- Single Footer Widget -->
-          <div class="col-12 col-sm-6 col-lg-4">
-            <div class="single-footer-widget">
-              <div class="footer-logo mb-30">
-                <a href="#"><img src="img/core-img/logo.png" alt=""></a>
-              </div>
-              <p>Entre em contato e acompanhe nosso trabalho pelas redes sociais!</p>
-              <div class="social-info">
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Single Footer Widget -->
-          <div class="col-12 col-sm-6 col-lg-4">
-            <div class="single-footer-widget">
-              <div class="widget-title">
-                <h5>APOIO</h5>
-              </div>
-
-              <!-- Single Best Seller Products -->
-              <div class="single-best-seller-product d-flex align-items-center">
-                <div class="product-thumbnail">
-                  <a href="shop-details.html"><img src="img/icons/CIC-100px.png" alt=""></a>
-                </div>
-                <div class="product-info">
-                  <a href="shop-details.html">CIC Robotics</a>
-                  <p><i class="fa fa-heart-o" aria-hidden="true"></i></p>
-                </div>
-              </div>
-
-              <!-- Single Best Seller Products -->
-              <div class="single-best-seller-product d-flex align-items-center">
-                <div class="product-thumbnail">
-                  <a href="shop-details.html"><img src="img/icons/Portinari-100px.png" alt=""></a>
-                </div>
-                <div class="product-info">
-                  <a href="shop-details.html">Cândido Porinari</a>
-                  <p><i class="fa fa-heart-o" aria-hidden="true"></i></p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Single Footer Widget -->
-          <div class="col-12 col-sm-6 col-lg-4">
-            <div class="single-footer-widget">
-              <div class="widget-title">
-                <h5>Contato</h5>
-              </div>
-
-              <div class="contact-information">
-                <p><span>Endereço:</span> R. Adelaíde Fernandes da Costa 487, Salvador</p>
-                <p><span>Email:</span> escolaverdeportinari@gmail.com</p>
-                <p><span>Visita:</span> Seg-Sex: 10h-11h</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer Bottom Area -->
-    <div class="footer-bottom-area">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="border-line"></div>
-          </div>
-          <!-- Copywrite Text -->
-          <div class="col-12 col-md-6">
-            <div class="copywrite-text">
-              <p>&copy;
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Copyright &copy;<script>
-                  document.write(new Date().getFullYear());
-                </script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-              </p>
-            </div>
-          </div>
-          <!-- Footer Nav -->
-          <div class="col-12 col-md-6">
-            <div class="footer-nav">
-              <nav>
-                <ul>
-                  <li><a href="inicio.html">Início</a></li>
-                  <li><a href="apresentacao.html">O projeto</a></li>
-                  <li><a href="noticias.html">Notícias</a></li>
-                  <li><a href="monitore.html">Monitore</a></li>
-                  <li><a href="agradecimentos.html">Agradecimentos</a></li>
-                  <li><a href="contato.html">Contato</a></li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <div id="rodape"></div>
   <!-- ##### RODAPÉ FINAL ##### -->
 
   <!-- ##### All Javascript Files ##### -->
-  <!-- jQuery-2.2.4 js -->
-  <script src="js/jquery/jquery-2.2.4.min.js"></script>
   <!-- Popper js -->
   <script src="js/bootstrap/popper.min.js"></script>
   <!-- Bootstrap js -->
